@@ -66,4 +66,4 @@ fromEvent(window, "beforeunload").subscribe(() => {
 });
 ```
 
-<iframe src="./root/rxjs/broadcast_demo.html" width="100%" height="400"></iframe>
+<iframe src="./root/rxjs/broadcast_demo.html" width="100%" height="50"></iframe>
