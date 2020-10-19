@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创建随机字符串</title>
+  </head>
+  <body>
+    <button id="button" onclick="run()">跑起来</button>
+    <div id="app"></div>
+  </body>
+  <script>
+    const appDiv = document.getElementById("app");
+    const button = document.getElementById("button");
+
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    /**
+     * 创建随机字符
+     */
+    function randomChar() {
+      const i = Math.floor(Math.random() * chars.length);
+      return chars[i];
+    }
+
+    /**
+     * 创建随机字符串
+     * @param length 字符串长度
+     */
+    function randomString(length = 6) {
+      return Array.from({ length }, () => randomChar()).join("");
+    }
+
+    const arr = [];
+    const rp = [];
+    const num = 100000;
+
+    let count = 0;
+
+    function run() {
+      if (count === 0) {
+        button.setAttribute("disabled", "disabled");
+        rp.splice(0);
+        arr.splice(0);
+      }
+      const str = randomString();
+      appDiv.innerText = str;
+
+      if (arr.indexOf(str) > -1) {
+        rp.push(str);
+      } else {
+        arr.push(str);
+      }
+
+      if (num > ++count) {
+        // 分解繁重的任务
+        setTimeout(run);
+      } else {
+        appDiv.innerText =
+          num +
+          "次中出现重复的次数为：" +
+          rp.length +
+          "  概率为： " +
+          (rp.length / num) * 100 +
+          "%\n" +
+          rp;
+        button.removeAttribute("disabled");
+        count = 0;
+      }
+    }
+  </script>
+</html>

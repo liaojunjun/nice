@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用rxjs广播状态</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+  <script>
+    ///////////////////////
+    ////////service////////
+    ///////////////////////
+
+    const { Observable, ReplaySubject, of } = rxjs;
+    const { switchMap } = rxjs.operators;
+
+    class AppService {
+      userSubject = new ReplaySubject(1);
+
+      userState = this.userSubject
+        .asObservable()
+        .pipe(switchMap((user) => (user ? of(user) : this.fetchUser())));
+
+      updateUser(user) {
+        this.userSubject.next(user);
+      }
+      unsubscribe() {
+        this.userSubject.unsubscribe();
+      }
+      fetchUser() {
+        return Observable.create((observer) => {
+          setTimeout(() => {
+            observer.next({
+              name: "user name",
+              age: Math.random(),
+              sex: "男",
+            });
+            observer.complete();
+          }, 0);
+        });
+      }
+    }
+    // 单例
+    const appService = new AppService();
+
+    ///////////////////////
+    ////////use////////
+    ///////////////////////
+
+    const { interval, fromEvent } = rxjs;
+    const content = document.getElementById("content");
+
+    // 赋初始值，不是必须的
+    appService.updateUser({ name: "first", age: 11, sex: "女" });
+
+    // 广播出去
+    appService.userState.subscribe((state) => {
+      content.textContent = JSON.stringify(state);
+    });
+
+    // 更新值
+    const interval$ = interval(3000).subscribe(() => {
+      appService.updateUser();
+    });
+
+    fromEvent(window, "beforeunload").subscribe(() => {
+      appService.unsubscribe();
+      interval$.unsubscribe();
+    });
+  </script>
+</html>

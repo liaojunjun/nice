@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+    <title>手写签名</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myPics" width="500" height="300"></canvas>
+    <button onclick="clearCanvas()">擦除</button>
+    <button onclick="save()">保存</button>
+  </body>
+  <script>
+    const myPics = document.getElementById("myPics");
+    const context = myPics.getContext("2d");
+
+    const { fromEvent } = rxjs;
+
+    const { switchMap, takeUntil, pairwise, map, startWith } = rxjs.operators;
+
+    const mousedown = fromEvent(myPics, "mousedown");
+    const mousemove = fromEvent(myPics, "mousemove");
+    const mouseup = fromEvent(window, "mouseup");
+
+    mousedown
+      .pipe(
+        switchMap((e) =>
+          mousemove.pipe(
+            takeUntil(mouseup),
+            startWith({
+              x: e.offsetX,
+              y: e.offsetY,
+            })
+          )
+        ),
+        map((e) => ({
+          x: e.offsetX,
+          y: e.offsetY,
+        })),
+        pairwise()
+      )
+      .subscribe(([a, b]) => {
+        drawLine(context, a.x, a.y, b.x, b.y);
+      });
+
+    function drawLine(ctx, x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 1;
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    function save() {
+      myPics.toBlob(function (blob) {
+        const link = document.createElement("a");
+        link.download = "签名.png";
+
+        link.href = URL.createObjectURL(blob);
+
+        link.click();
+
+        URL.revokeObjectURL(link.href); // 内部映射中移除引用,释放内存
+      });
+    }
+    function clearCanvas() {
+      context.clearRect(0, 0, myPics.width, myPics.height);
+    }
+  </script>
+</html>

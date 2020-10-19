@@ -1,0 +1,67 @@
+<ol>
+<li>创建 ReplaySubject 服务</li>
+<li>可以加入初始值</li>
+<li>节点订阅服务，每个节点都可更新值，更新后广播到全部订阅节点</li>
+<li>页面/模块卸载后，取消订阅</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-comment">///////////////////////</span>
+<span class="hljs-comment">////////service////////</span>
+<span class="hljs-comment">///////////////////////</span>
+
+<span class="hljs-keyword">const</span> { Observable, ReplaySubject, <span class="hljs-keyword">of</span> } = rxjs;
+<span class="hljs-keyword">const</span> { switchMap } = rxjs.operators;
+
+<span class="hljs-keyword">class</span> AppService {
+  userSubject = <span class="hljs-keyword">new</span> ReplaySubject(<span class="hljs-number">1</span>);
+
+  userState = <span class="hljs-built_in">this</span>.userSubject
+    .asObservable()
+    .pipe(switchMap(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> (user ? <span class="hljs-keyword">of</span>(user) : <span class="hljs-built_in">this</span>.fetchUser())));
+
+  updateUser(user) {
+    <span class="hljs-built_in">this</span>.userSubject.next(user);
+  }
+  unsubscribe() {
+    <span class="hljs-built_in">this</span>.userSubject.unsubscribe();
+  }
+  fetchUser() {
+    <span class="hljs-keyword">return</span> Observable.create(<span class="hljs-function">(<span class="hljs-params">observer</span>) =&gt;</span> {
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        observer.next({
+          name: <span class="hljs-string">&quot;user name&quot;</span>,
+          age: <span class="hljs-built_in">Math</span>.random(),
+          sex: <span class="hljs-string">&quot;男&quot;</span>,
+        });
+        observer.complete();
+      }, <span class="hljs-number">0</span>);
+    });
+  }
+}
+<span class="hljs-comment">// 单例</span>
+<span class="hljs-keyword">const</span> appService = <span class="hljs-keyword">new</span> AppService();
+
+<span class="hljs-comment">///////////////////////</span>
+<span class="hljs-comment">////////use////////</span>
+<span class="hljs-comment">///////////////////////</span>
+
+<span class="hljs-keyword">const</span> { interval, fromEvent } = rxjs;
+<span class="hljs-keyword">const</span> content = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;content&quot;</span>);
+
+<span class="hljs-comment">// 赋初始值，不是必须的</span>
+appService.updateUser({ name: <span class="hljs-string">&quot;first&quot;</span>, age: <span class="hljs-number">11</span>, sex: <span class="hljs-string">&quot;女&quot;</span> });
+
+<span class="hljs-comment">// 广播出去</span>
+appService.userState.subscribe(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> {
+  content.textContent = <span class="hljs-built_in">JSON</span>.stringify(state);
+});
+
+<span class="hljs-comment">// 更新值</span>
+<span class="hljs-keyword">const</span> interval$ = interval(<span class="hljs-number">3000</span>).subscribe(<span class="hljs-function">() =&gt;</span> {
+  appService.updateUser();
+});
+
+fromEvent(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;beforeunload&quot;</span>).subscribe(<span class="hljs-function">() =&gt;</span> {
+  appService.unsubscribe();
+  interval$.unsubscribe();
+});</code></pre>
+<iframe src="./root/rxjs/broadcast_demo.html" width="100%" height="400"></iframe>

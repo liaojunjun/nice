@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>复制</title>
+  </head>
+  <body>
+    <input type="text" id="input" placeholder="请输入..." />
+    <button onclick="copy()">复制内容</button>
+  </body>
+  <script>
+    function copyToClipboard(str) {
+      const el = document.createElement("textarea");
+      el.value = str;
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+
+    const input = document.getElementById("input");
+
+    window.copy = function () {
+      copyToClipboard(input.value);
+    };
+  </script>
+</html>

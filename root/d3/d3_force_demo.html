@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>d3 力导图</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="./d3-force.data.js"></script>
+  </head>
+  <body></body>
+  <script>
+    const {
+      drag,
+      forceCenter,
+      forceLink,
+      forceManyBody,
+      forceSimulation,
+      scaleOrdinal,
+      schemeCategory10,
+      select,
+      zoom,
+    } = d3;
+
+    const width = 600;
+    const height = 600;
+    const nodes = forceData.nodes;
+    const links = forceData.links;
+
+    const color = function () {
+      const scale = scaleOrdinal(schemeCategory10);
+      return (d) => scale(d.size);
+    };
+
+    const callDrag = function (simulation) {
+      function dragStarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+
+      function dragEeded(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      return drag()
+        .on("start", dragStarted)
+        .on("drag", dragged)
+        .on("end", dragEeded);
+    };
+
+    const simulation = forceSimulation(nodes)
+      .force(
+        "link",
+        forceLink(links).id((d) => d.id)
+      )
+      .force("charge", forceManyBody())
+      .force("center", forceCenter(width / 2, height / 2));
+
+    const svg = select(document.body)
+      .append("svg")
+      .attr("viewBox", `0, 0, ${width}, ${height}`);
+
+    svg.call(
+      zoom().on("zoom", (event) => {
+        svg.selectAll("g").attr("transform", event.transform);
+      })
+    );
+
+    const line = svg
+      .append("g")
+      .attr("stroke", "#999")
+      .selectAll("line")
+      .data(links)
+      .join("line")
+      .attr("stroke-width", 1)
+      .attr(
+        "marker-start",
+        (link) => "url(#" + "marker-" + link.source.id + ")"
+      );
+
+    const arrow = svg
+      .append("svg:defs")
+      .selectAll("marker")
+      .data(links)
+      .join("marker")
+      .attr("id", (link) => "marker-" + link.source.id)
+      .attr("markerUnits", "userSpaceOnUse")
+      .attr("viewBox", "0 0 10 10")
+      .attr("refX", 13)
+      .attr("refY", 5)
+      .attr("markerWidth", 10)
+      .attr("markerHeight", 10)
+      .attr("orient", "auto-start-reverse")
+      .append("path")
+      .attr("d", "M2,2 L2,8 L8,5 L2,2")
+      .attr("fill", "#999");
+
+    const node = svg
+      .append("g")
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 1.5)
+      .selectAll("circle")
+      .data(nodes)
+      .join("circle")
+      .attr("r", (d) => 5 + d["size"])
+      .attr("fill", color())
+      .call(callDrag(simulation))
+      .on("click", hightLight.bind(this));
+
+    const text = svg
+      .append("g")
+      .selectAll("text")
+      .data(nodes)
+      .join("text")
+      .attr("fill", "#999")
+      .attr("font-size", "5px")
+      .attr("text-anchor", "middle")
+      .text((d) => d.name);
+
+    simulation.on("tick", () => {
+      line
+        .attr("x1", (d) => d.source.x)
+        .attr("y1", (d) => d.source.y)
+        .attr("x2", (d) => d.target.x)
+        .attr("y2", (d) => d.target.y);
+
+      node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+      text.attr("x", (d) => d.x).attr("y", (d) => d.y - 7);
+    });
+    function hightLight(e, node) {
+      line.attr("opacity", (d) => {
+        if (node.id == d.source.id || node.id == d.target.id) {
+          return 1;
+        } else {
+          return 0.1;
+        }
+      });
+    }
+  </script>
+</html>

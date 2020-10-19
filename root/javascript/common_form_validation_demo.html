@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基础校验</title>
+    <style>
+      body {
+        padding: 100px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin: 15px;
+        cursor: pointer;
+      }
+      input[type="text"] {
+        padding: 0 5px;
+        font-size: 18px;
+        font-weight: bold;
+        width: 500px;
+      }
+      button,
+      input[type="text"] {
+        height: 35px;
+        box-sizing: border-box;
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="types">
+      <label for="tel"
+        >固定电话： <input type="radio" name="radio" id="tel" value="tel"
+      /></label>
+      <label for="phone"
+        >手机号码： <input type="radio" name="radio" id="phone" value="phone"
+      /></label>
+      <label for="smsCode"
+        >短信验证码：
+        <input type="radio" name="radio" id="smsCode" value="smsCode"
+      /></label>
+      <label for="goodPass"
+        >一般强度密码：
+        <input type="radio" name="radio" id="goodPass" value="goodPass"
+      /></label>
+      <label for="integerNum"
+        >年纪：
+        <input type="radio" name="radio" id="integerNum" value="integerNum"
+      /></label>
+      <label for="carNo"
+        >车牌号： <input type="radio" name="radio" id="carNo" value="carNo"
+      /></label>
+      <label for="date"
+        >出生日期：<input type="radio" name="radio" id="date" value="date"
+      /></label>
+      <label for="email"
+        >邮箱地址：<input type="radio" name="radio" id="email" value="email"
+      /></label>
+      <label for="url"
+        >个人网站：<input type="radio" name="radio" id="url" value="url"
+      /></label>
+    </div>
+    <input type="text" id="input" /><button onclick="test()">校验</button>
+    <div id="log"></div>
+  </body>
+  <script>
+    const input = document.getElementById("input");
+    const types = document.getElementsByName("radio");
+    const log = document.getElementById("log");
+
+    const checkMap = {
+      tel: /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/,
+      phone: /^1[3456789]\d{9}$/,
+      smsCode: /^\d{6}$/,
+      goodPass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/,
+      integerNum: /^-?\d+$/,
+      carNo: /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/,
+      email: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
+      url: /^(https?|ftp|file):\/\//,
+    };
+    function checkValid(type, value) {
+      return checkMap[type].test(value);
+    }
+    function test() {
+      const curType = Array.from(types).find((type) => type.checked);
+      const type = curType && curType.value;
+      const value = input.value;
+      const p = document.createElement("p");
+      if (type && value && type in checkMap) {
+        p.textContent = `${checkMap[type]}·········${checkValid(type, value)}`;
+      } else if (type === "date") {
+        p.textContent = `${type}·········${!isNaN(new Date(value).getTime())}`;
+      }
+      log.appendChild(p);
+    }
+  </script>
+</html>

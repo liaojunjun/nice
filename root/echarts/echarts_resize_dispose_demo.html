@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>echarts 图表的resize和销毁</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.js"></script>
+    <style>
+      #app {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <button onclick="cancel()">销毁</button>
+    <script>
+      const appDiv = document.getElementById("app");
+
+      const option = {
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: "line",
+          },
+        ],
+      };
+
+      const chart = echarts.init(appDiv);
+
+      chart.setOption(option);
+
+      /**
+       * 去抖动
+       *
+       * @param {*} fn
+       * @param {number} [ms=300]
+       * @returns
+       */
+      function debounce(fn, ms = 300) {
+        let timeoutId;
+        return function (...args) {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(fn.bind(this, args), ms);
+        };
+      }
+
+      /**
+       * 绑定和取消绑定E-charts图表的resize事件
+       */
+      function chartsResize(chartsInstance, opts) {
+        const resize = debounce(chartsInstance.resize.bind(null, opts));
+
+        window.addEventListener("resize", resize, false);
+
+        return () => {
+          window.removeEventListener("resize", resize);
+          chartsInstance.dispose();
+        };
+      }
+
+      window.cancel = chartsResize(chart);
+    </script>
+  </body>
+</html>

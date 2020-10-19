@@ -1,0 +1,710 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create for ggdoc , @author sunyi</title>
+    <style>
+        .octicon{display:inline-block;fill:currentColor;vertical-align:text-bottom}
+        .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}
+        .anchor:focus{outline:0}
+        h1 .octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6 .octicon-link{color:#1b1f23;vertical-align:middle;visibility:hidden}
+        h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover .anchor,h5:hover .anchor,h6:hover .anchor{text-decoration:none}
+        h1:hover .anchor .octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover .anchor .octicon-link,h6:hover .anchor .octicon-link{visibility:visible}
+        h1:hover .anchor .octicon-link:before,h2:hover .anchor .octicon-link:before,h3:hover .anchor .octicon-link:before,h4:hover .anchor .octicon-link:before,h5:hover .anchor .octicon-link:before,h6:hover .anchor .octicon-link:before{width:16px;height:16px;content:" ";display:inline-block;background-image:url("data:image/svg+xml,%3Csvgxmlns='http://www.w3.org/2000/svg'viewBox='001616'version='1.1'width='16'height='16'aria-hidden='true'%3E%3Cpathfill-rule='evenodd'd='M49h1v1H4c-1.50-3-1.69-3-3.5S2.55343h4c1.45031.6933.501.41-.912.72-23.25V8.59c.58-.451-1.271-2.09C105.228.98484H4c-.980-21.22-22.5S3949zm9-3h-1v1h1c1021.2222.5S13.98121312H9c-.980-2-1.22-2-2.50-.83.42-1.641-2.09V6.25c-1.09.53-21.84-23.25C611.317.5513913h4c1.4503-1.693-3.5S14.56136z'%3E%3C/path%3E%3C/svg%3E")}
+        body{-webkit-text-size-adjust:100%;line-height:1.5;color:#24292e;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;font-size:16px;line-height:1.5;word-wrap:break-word;background-color:#e3e3ef;height:100%;width:100%;margin:0;padding:20px}
+        details{display:block}
+        summary{display:list-item}
+        a{background-color:initial}
+        a:active,a:hover{outline-width:0}
+        strong{font-weight:inherit;font-weight:bolder}
+        h1{font-size:2em;margin:.67em 0}
+        img{border-style:none}
+        code,kbd,pre{font-family:monospace,monospace;font-size:1em}
+        hr{box-sizing:initial;height:0;overflow:visible}
+        input{font:inherit;margin:0}
+        input{overflow:visible}
+        [type="checkbox"]{box-sizing:border-box;padding:0}
+        *{box-sizing:border-box}
+        input{font-family:inherit;font-size:inherit;line-height:inherit}
+        a{color:#0366d6;text-decoration:none}
+        a:hover{text-decoration:underline}
+        strong{font-weight:600}
+        hr{height:0;margin:15px 0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid #dfe2e5}
+        hr:after,hr:before{display:table;content:""}
+        hr:after{clear:both}
+        table{border-spacing:0;border-collapse:collapse}
+        td,th{padding:0}
+        details summary{cursor:pointer}
+        kbd{display:inline-block;padding:3px 5px;font:11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;line-height:10px;color:#444d56;vertical-align:middle;background-color:#fafbfc;border:1px solid #d1d5da;border-radius:3px;box-shadow:inset 0 -1px 0 #d1d5da}
+        h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:0}
+        h1{font-size:32px}
+        h1,h2{font-weight:600}
+        h2{font-size:24px}
+        h3{font-size:20px}
+        h3,h4{font-weight:600}
+        h4{font-size:16px}
+        h5{font-size:14px}
+        h5,h6{font-weight:600}
+        h6{font-size:12px}
+        p{margin-top:0;margin-bottom:10px}
+        blockquote{margin:0}
+        ol,ul{padding-left:0;margin-top:0;margin-bottom:0}
+        ol ol,ul ol{list-style-type:lower-roman}
+        ol ol ol,ol ul ol,ul ol ol,ul ul ol{list-style-type:lower-alpha}
+        dd{margin-left:0}
+        code,pre{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:12px}
+        pre{margin-top:0;margin-bottom:0}
+        input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{margin:0;-webkit-appearance:none;appearance:none}
+        :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}
+        .border{border:1px solid #e1e4e8!important}
+        .border-0{border:0!important}
+        .border-bottom{border-bottom:1px solid #e1e4e8!important}
+        .rounded-1{border-radius:3px!important}
+        .bg-white{background-color:#fff!important}
+        .bg-gray-light{background-color:#fafbfc!important}
+        .text-gray-light{color:#6a737d!important}
+        .mb-0{margin-bottom:0!important}
+        .my-2{margin-top:8px!important;margin-bottom:8px!important}
+        .pl-0{padding-left:0!important}
+        .py-0{padding-top:0!important;padding-bottom:0!important}
+        .pl-1{padding-left:4px!important}
+        .pl-2{padding-left:8px!important}
+        .py-2{padding-top:8px!important;padding-bottom:8px!important}
+        .pl-3,.px-3{padding-left:16px!important}
+        .px-3{padding-right:16px!important}
+        .pl-4{padding-left:24px!important}
+        .pl-5{padding-left:32px!important}
+        .pl-6{padding-left:40px!important}
+        .f6{font-size:12px!important}
+        .lh-condensed{line-height:1.25!important}
+        .text-bold{font-weight:600!important}
+        .pl-c{color:#6a737d}
+        .pl-c1,.pl-s .pl-v{color:#005cc5}
+        .pl-e,.pl-en{color:#6f42c1}
+        .pl-s .pl-s1,.pl-smi{color:#24292e}
+        .pl-ent{color:#22863a}
+        .pl-k{color:#d73a49}
+        .pl-pds,.pl-s,.pl-s .pl-pse .pl-s1,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre{color:#032f62}
+        .pl-smw,.pl-v{color:#e36209}
+        .pl-bu{color:#b31d28}
+        .pl-ii{color:#fafbfc;background-color:#b31d28}
+        .pl-c2{color:#fafbfc;background-color:#d73a49}
+        .pl-c2:before{content:"^M"}
+        .pl-sr .pl-cce{font-weight:700;color:#22863a}
+        .pl-ml{color:#735c0f}
+        .pl-mh,.pl-mh .pl-en,.pl-ms{font-weight:700;color:#005cc5}
+        .pl-mi{font-style:italic;color:#24292e}
+        .pl-mb{font-weight:700;color:#24292e}
+        .pl-md{color:#b31d28;background-color:#ffeef0}
+        .pl-mi1{color:#22863a;background-color:#f0fff4}
+        .pl-mc{color:#e36209;background-color:#ffebda}
+        .pl-mi2{color:#f6f8fa;background-color:#005cc5}
+        .pl-mdr{font-weight:700;color:#6f42c1}
+        .pl-ba{color:#586069}
+        .pl-sg{color:#959da5}
+        .pl-corl{text-decoration:underline;color:#032f62}
+        .mb-0{margin-bottom:0!important}
+        .my-2{margin-bottom:8px!important}
+        .my-2{margin-top:8px!important}
+        .pl-0{padding-left:0!important}
+        .py-0{padding-top:0!important;padding-bottom:0!important}
+        .pl-1{padding-left:4px!important}
+        .pl-2{padding-left:8px!important}
+        .py-2{padding-top:8px!important;padding-bottom:8px!important}
+        .pl-3{padding-left:16px!important}
+        .pl-4{padding-left:24px!important}
+        .pl-5{padding-left:32px!important}
+        .pl-6{padding-left:40px!important}
+        .pl-7{padding-left:48px!important}
+        .pl-8{padding-left:64px!important}
+        .pl-9{padding-left:80px!important}
+        .pl-10{padding-left:96px!important}
+        .pl-11{padding-left:112px!important}
+        .pl-12{padding-left:128px!important}
+        hr{border-bottom-color:#eee}
+        kbd{display:inline-block;padding:3px 5px;font:11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;line-height:10px;color:#444d56;vertical-align:middle;background-color:#fafbfc;border:1px solid #d1d5da;border-radius:3px;box-shadow:inset 0 -1px 0 #d1d5da}
+        .markdown-body:after,.markdown-body:before{display:table;content:""}
+        .markdown-body:after{clear:both}
+        .markdown-body>:first-child{margin-top:0!important}
+        .markdown-body>:last-child{margin-bottom:0!important}
+        a:not([href]){color:inherit;text-decoration:none}
+        blockquote,details,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}
+        hr{height:.25em;padding:0;margin:24px 0;background-color:#e1e4e8;border:0}
+        blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}
+        blockquote>:first-child{margin-top:0}
+        blockquote>:last-child{margin-bottom:0}
+        h1,h2,h3,h4,h5,h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}
+        h1{font-size:2em}
+        h1,h2{padding-bottom:.3em;border-bottom:1px solid #eaecef}
+        h2{font-size:1.5em}
+        h3{font-size:1.25em}
+        h4{font-size:1em}
+        h5{font-size:.875em}
+        h6{font-size:.85em;color:#6a737d}
+        ol,ul{padding-left:2em}
+        ol ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}
+        li{word-wrap:break-all}
+        li>p{margin-top:16px}
+        li+li{margin-top:.25em}
+        dl{padding:0}
+        dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}
+        dl dd{padding:0 16px;margin-bottom:16px}
+        table{display:block;width:100%;overflow:auto}
+        table th{font-weight:600}
+        table td,table th{padding:6px 13px;border:1px solid #dfe2e5}
+        table tr{background-color:#fff;border-top:1px solid #c6cbd1}
+        table tr:nth-child(2n){background-color:#f6f8fa}
+        img{max-width:100%;box-sizing:initial;background-color:#fff}
+        img[align="right"]{padding-left:20px}
+        img[align="left"]{padding-right:20px}
+        code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,0.05);border-radius:3px}
+        pre{word-wrap:normal}
+        pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}
+        .highlight{margin-bottom:16px}
+        .highlight pre{margin-bottom:0;word-break:normal}
+        .highlight pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}
+        pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0}
+        .commit-tease-sha{display:inline-block;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:90%;color:#444d56}
+        .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}
+        .blob-wrapper{overflow-x:auto;overflow-y:hidden}
+        .blob-wrapper-embedded{max-height:240px;overflow-y:auto}
+        .blob-num{width:1%;min-width:50px;padding-right:10px;padding-left:10px;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:12px;line-height:20px;color:rgba(27,31,35,0.3);text-align:right;white-space:nowrap;vertical-align:top;cursor:pointer;user-select:none}
+        .blob-num:hover{color:rgba(27,31,35,0.6)}
+        .blob-num:before{content:attr(data-line-number)}
+        .blob-code{position:relative;padding-right:10px;padding-left:10px;line-height:20px;vertical-align:top}
+        .blob-code-inner{overflow:visible;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:12px;color:#24292e;word-wrap:normal;white-space:pre}
+        .pl-token.active,.pl-token:hover{cursor:pointer;background:#ffea7f}
+        .tab-size[data-tab-size="1"]{-moz-tab-size:1;tab-size:1}
+        .tab-size[data-tab-size="2"]{-moz-tab-size:2;tab-size:2}
+        .tab-size[data-tab-size="3"]{-moz-tab-size:3;tab-size:3}
+        .tab-size[data-tab-size="4"]{-moz-tab-size:4;tab-size:4}
+        .tab-size[data-tab-size="5"]{-moz-tab-size:5;tab-size:5}
+        .tab-size[data-tab-size="6"]{-moz-tab-size:6;tab-size:6}
+        .tab-size[data-tab-size="7"]{-moz-tab-size:7;tab-size:7}
+        .tab-size[data-tab-size="8"]{-moz-tab-size:8;tab-size:8}
+        .tab-size[data-tab-size="9"]{-moz-tab-size:9;tab-size:9}
+        .tab-size[data-tab-size="10"]{-moz-tab-size:10;tab-size:10}
+        .tab-size[data-tab-size="11"]{-moz-tab-size:11;tab-size:11}
+        .tab-size[data-tab-size="12"]{-moz-tab-size:12;tab-size:12}
+        .task-list-item{list-style-type:none}
+        .task-list-item+.task-list-item{margin-top:3px}
+        .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}
+        #page{width:calc(100% - 300px);margin-left:300px}
+        fieldset{display:none;background-color:#fff;border:0;overflow:hidden;box-shadow:2px 2px 10px rgba(128,128,128,0.2);margin-bottom:20px;padding:20px}
+        fieldset legend{font-weight:bold;color:green;height:3.5em;margin-left:-20px;padding:0}
+        #nav{background:rgb(255 255 255 / .6);padding:40px;position:fixed;top:0;left:0;bottom:0;width:300px;overflow-y:auto}
+        ::-webkit-scrollbar{width:5px}
+        ::-webkit-scrollbar-thumb{background-color:#79a5e8}
+        @media print,(max-width:900px){
+          #nav{display:none!important}
+          #page{width:100%!important;margin-left:0!important}
+          fieldset{display:block!important;box-shadow:none!important}
+          .toggle-hash-btn {display: none !important;}
+        }
+        .hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}
+        .hljs-comment,.hljs-quote{color:#998;font-style:italic}
+        .hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:bold}
+        .hljs-number,.hljs-literal,.hljs-variable,.hljs-template-variable,.hljs-tag .hljs-attr{color:#008080}
+        .hljs-string,.hljs-doctag{color:#d14}
+        .hljs-title,.hljs-section,.hljs-selector-id{color:#900;font-weight:bold}
+        .hljs-subst{font-weight:normal}
+        .hljs-type,.hljs-class .hljs-title{color:#458;font-weight:bold}
+        .hljs-tag,.hljs-name,.hljs-attribute{color:#000080;font-weight:normal}
+        .hljs-regexp,.hljs-link{color:#009926}
+        .hljs-symbol,.hljs-bullet{color:#990073}
+        .hljs-built_in,.hljs-builtin-name{color:#0086b3}
+        .hljs-meta{color:#999;font-weight:bold}
+        .hljs-deletion{background:#fdd}
+        .hljs-addition{background:#dfd}
+        .hljs-emphasis{font-style:italic}
+        .hljs-strong{font-weight:bold}
+        .toggle-hash-btn {position: fixed;bottom: 10px;left:10px;z-index: 1000; display: flex; justify-content: space-between;  width: 270px;}
+    </style>
+    <script>
+          const $ = selector => document.querySelector(selector);
+          const $$ = selector => document.querySelectorAll(selector);
+          const decode = s => decodeURIComponent(s);
+          const domInfo = dom => ({
+            offsetParent: dom.offsetParent.className,
+            offsetLeft: dom.offsetLeft,
+            offsetTop: dom.offsetTop,
+            clientWidth: dom.clientWidth,
+            offsetWidth: dom.offsetWidth,
+            BoundingClientRect: dom.getBoundingClientRect(),
+          });
+          let openHash = false;
+          function viewFieldset() {
+            const hash = decode(location.hash);
+            if(openHash && hash &&$(`fieldset${hash}`)) {
+              Array.from($$('fieldset')).forEach(dom  =>dom.style.display = 'none');
+              $(`fieldset${hash}`).style.display = 'block';
+            }else {
+              Array.from($$('fieldset')).forEach(dom  =>dom.style.display = 'block');
+            }
+          }
+          window.onhashchange = viewFieldset;
+          window.onload  = ()=>{
+            viewFieldset();
+            setATarget();
+          };
+          
+          function toggleHash() {
+            openHash = !openHash;
+            viewFieldset();
+            $('.toggle-hash-btn button').innerText = openHash ? '关闭专注模式' : '开启专注模式';
+          }
+          function setATarget() {
+            $$('#page a').forEach(a=>a.target = '_blank');
+          }
+    </script>
+</head>
+
+<body>
+  <div class="toggle-hash-btn">
+    <button  onclick="toggleHash()">开启专注模式</button>
+     <a target='_blank' href="https://github.com/liaojunjun/ggdoc"><svg class="octicon octicon-mark-github v-align-middle" height="25" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+  </div><div id="page">
+      <fieldset id='_idPhfW'>
+      <legend>copy_to_clipboard</legend>
+      <pre><code class="language-ts">el.select();
+<span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&quot;copy&quot;</span>);</code></pre>
+<iframe src="./root/javascript/copy_to_clipboard_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_O66r8M'>
+      <legend>scroll_load_pictures</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_H81AGa'>
+      <legend>generate_random_string</legend>
+      <p>setTimeout 分解繁重的循环任务</p>
+<iframe src="./root/javascript/generate_random_string_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_7FpQTD'>
+      <legend>file_upload_download</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_O0l8HE'>
+      <legend>dynamic_font_size</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_1YEIj4'>
+      <legend>element_in_viewport</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_4I09eK'>
+      <legend>limit_input</legend>
+      <ol>
+<li>考虑中文输入</li>
+<li>模板中传正则表达式字符串</li>
+</ol>
+<iframe src="./root/javascript/limit_input_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_j3hx5G'>
+      <legend>slide_unlock</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_sLsgEN'>
+      <legend>common_form_validation</legend>
+      <pre><code class="language-ts"><span class="hljs-keyword">const</span> checkMap = {
+  tel: <span class="hljs-regexp">/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/</span>,
+  phone: <span class="hljs-regexp">/^1[3456789]\d{9}$/</span>,
+  smsCode: <span class="hljs-regexp">/^\d{6}$/</span>,
+  goodPass: <span class="hljs-regexp">/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/</span>,
+  integerNum: <span class="hljs-regexp">/^-?\d+$/</span>,
+  carNo: <span class="hljs-regexp">/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/</span>,
+  email: <span class="hljs-regexp">/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/</span>,
+  url: <span class="hljs-regexp">/^(https?|ftp|file):\/\//</span>,
+};</code></pre>
+<iframe src="./root/javascript/common_form_validation_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_WFzQ3P'>
+      <legend>ul_proxy_li</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_jwjiD2'>
+      <legend>drag_drop_swap</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_Cy42Eo'>
+      <legend>product_specification_combination</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_M3rzpH'>
+      <legend>rotation_effect</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_QQ1ylS'>
+      <legend>3d_rotation_effect</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_16IolX'>
+      <legend>signature</legend>
+      <ol>
+<li>监听 canvas 的 mousedown、mousemove</li>
+<li>监听 window 的 mouseup</li>
+<li>组合前后点坐标</li>
+</ol>
+<pre><code class="language-ts">mousedown.pipe(
+  switchMap(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span>
+    mousemove.pipe(
+      takeUntil(mouseup),
+      startWith({
+        x: e.offsetX,
+        y: e.offsetY,
+      })
+    )
+  ),
+  map(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> ({
+    x: e.offsetX,
+    y: e.offsetY,
+  })),
+  pairwise()
+);</code></pre>
+<iframe src="./root/canvas/signature_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_Owh8XB'>
+      <legend>svg_curve</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_hoAXzc'>
+      <legend>svg_column_chart</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_lOqDkP'>
+      <legend>svg_line_graph</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_aznxF3'>
+      <legend>svg_pie_chart</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_cgTkge'>
+      <legend>svg_radar_chart</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_FHFNQR'>
+      <legend>svg_ring_graph</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_ynw7fN'>
+      <legend>svg_polygon</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_WU2Icx'>
+      <legend>echarts_resize_dispose</legend>
+      <ol>
+<li>去抖动</li>
+<li>图表 init、resize、dispose</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">fn, ms = 300</span>) </span>{
+  <span class="hljs-keyword">let</span> timeoutId;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args</span>) </span>{
+    <span class="hljs-built_in">clearTimeout</span>(timeoutId);
+    timeoutId = <span class="hljs-built_in">setTimeout</span>(fn.bind(<span class="hljs-built_in">this</span>, args), ms);
+  };
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">chartsResize</span>(<span class="hljs-params">chartsInstance, opts</span>) </span>{
+  <span class="hljs-keyword">const</span> resize = debounce(chartsInstance.resize.bind(<span class="hljs-literal">null</span>, opts));
+
+  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;resize&quot;</span>, resize, <span class="hljs-literal">false</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">window</span>.removeEventListener(<span class="hljs-string">&quot;resize&quot;</span>, resize);
+    chartsInstance.dispose();
+  };
+}
+
+<span class="hljs-built_in">window</span>.cancel = chartsResize(chart);</code></pre>
+<iframe src="./root/echarts/echarts_resize_dispose_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_PCOFi0'>
+      <legend>annotation_use</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_5AfZwa'>
+      <legend>responsive_form</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_FX7IIr'>
+      <legend>time_picker</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_rfAkob'>
+      <legend>block_loading_container</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_YREm4l'>
+      <legend>countdown</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_kLGr2Y'>
+      <legend>permission_panel</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_yzQW7F'>
+      <legend>piping</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_cic4Q7'>
+      <legend>create_component</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_QMa9N7'>
+      <legend>create_component</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_Eimnnz'>
+      <legend>create_directive</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_O57upI'>
+      <legend>create_service</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_aCAwiq'>
+      <legend>flex_layout</legend>
+      <pre><code class="language-scss"><span class="hljs-selector-class">.flex</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  &amp;<span class="hljs-selector-class">.inline</span> {
+    <span class="hljs-attribute">display</span>: inline-flex;
+  }
+  &amp;<span class="hljs-selector-class">.start</span> {
+    <span class="hljs-attribute">justify-content</span>: flex-start;
+  }
+  &amp;<span class="hljs-selector-class">._start</span> {
+    <span class="hljs-attribute">align-items</span>: flex-start;
+  }
+  &amp;<span class="hljs-selector-class">.center</span> {
+    <span class="hljs-attribute">justify-content</span>: center;
+  }
+  &amp;<span class="hljs-selector-class">._center</span> {
+    <span class="hljs-attribute">align-items</span>: center;
+  }
+  &amp;<span class="hljs-selector-class">.end</span> {
+    <span class="hljs-attribute">justify-content</span>: flex-end;
+  }
+  &amp;<span class="hljs-selector-class">._end</span> {
+    <span class="hljs-attribute">align-items</span>: flex-end;
+  }
+  &amp;<span class="hljs-selector-class">.between</span> {
+    <span class="hljs-attribute">justify-content</span>: space-between;
+  }
+  &amp;<span class="hljs-selector-class">.around</span> {
+    <span class="hljs-attribute">justify-content</span>: space-around;
+  }
+  &amp;<span class="hljs-selector-class">.baseline</span> {
+    <span class="hljs-attribute">align-items</span>: baseline;
+  }
+  &amp;<span class="hljs-selector-class">.stretch</span> {
+    <span class="hljs-attribute">align-items</span>: stretch;
+  }
+  &amp;<span class="hljs-selector-class">.row</span> {
+    <span class="hljs-attribute">flex-direction</span>: row;
+  }
+  &amp;<span class="hljs-selector-class">.row_reverse</span> {
+    <span class="hljs-attribute">flex-direction</span>: row-reverse;
+    -webkit-box-pack: end;
+  }
+  &amp;<span class="hljs-selector-class">.column</span> {
+    <span class="hljs-attribute">flex-direction</span>: column;
+  }
+  &amp;<span class="hljs-selector-class">.column_reverse</span> {
+    <span class="hljs-attribute">flex-direction</span>: column-reverse;
+    -webkit-box-pack: end;
+  }
+  &amp;<span class="hljs-selector-class">.wrap</span> {
+    -ms-<span class="hljs-attribute">flex-wrap</span>: wrap;
+    <span class="hljs-attribute">flex-wrap</span>: wrap;
+  }
+  <span class="hljs-selector-class">.child_0</span> {
+    <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">flex-shrink</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">display</span>: block;
+  }
+
+  <span class="hljs-selector-class">.child_1</span> {
+    <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;
+    <span class="hljs-attribute">flex-shrink</span>: <span class="hljs-number">1</span>;
+    <span class="hljs-attribute">display</span>: block;
+  }
+  &amp;<span class="hljs-selector-class">.dir_row</span>,
+  &amp;<span class="hljs-selector-class">.dir_row_reverse</span> {
+    &gt; <span class="hljs-selector-class">.child_0</span> {
+      <span class="hljs-attribute">width</span>: auto;
+    }
+
+    &gt; <span class="hljs-selector-class">.child_1</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">0%</span>;
+      <span class="hljs-attribute">height</span>: auto;
+    }
+  }
+  &amp;<span class="hljs-selector-class">.dir_column</span>,
+  &amp;<span class="hljs-selector-class">.dir_column_reverse</span> {
+    &gt; <span class="hljs-selector-class">.child_0</span> {
+      <span class="hljs-attribute">height</span>: auto;
+    }
+
+    &gt; <span class="hljs-selector-class">.child_1</span> {
+      <span class="hljs-attribute">width</span>: auto;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;
+    }
+  }
+}</code></pre>
+
+      </fieldset>
+      
+      <fieldset id='_hb1pHn'>
+      <legend>loading</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_1FnTYW'>
+      <legend>user_offline</legend>
+      <ol>
+<li>debounceTime 节流操作信号</li>
+<li>switchMapTo 转 of(0) 并延时 time 分钟,信号发出时间在 time 内阻止发出 0,否则将发出 0</li>
+<li>如果最后发出 0，则用户下线了</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">userOffline</span>(<span class="hljs-params">time = 15</span>) </span>{
+  <span class="hljs-keyword">return</span> merge(
+    fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&quot;mousemove&quot;</span>),
+    fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&quot;click&quot;</span>),
+    fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&quot;keydown&quot;</span>)
+  ).pipe(debounceTime(<span class="hljs-number">1000</span>), switchMapTo(<span class="hljs-keyword">of</span>(<span class="hljs-number">0</span>).pipe(delay(time * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>))));
+}</code></pre>
+<iframe src="./root/rxjs/user_offline_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_CfLzH7'>
+      <legend>send_phone_code</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_yh2Dpo'>
+      <legend>keyword_search</legend>
+      
+      </fieldset>
+      
+      <fieldset id='_UEEyXH'>
+      <legend>broadcast</legend>
+      <ol>
+<li>创建 ReplaySubject 服务</li>
+<li>可以加入初始值</li>
+<li>节点订阅服务，每个节点都可更新值，更新后广播到全部订阅节点</li>
+<li>页面/模块卸载后，取消订阅</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-comment">///////////////////////</span>
+<span class="hljs-comment">////////service////////</span>
+<span class="hljs-comment">///////////////////////</span>
+
+<span class="hljs-keyword">const</span> { Observable, ReplaySubject, <span class="hljs-keyword">of</span> } = rxjs;
+<span class="hljs-keyword">const</span> { switchMap } = rxjs.operators;
+
+<span class="hljs-keyword">class</span> AppService {
+  userSubject = <span class="hljs-keyword">new</span> ReplaySubject(<span class="hljs-number">1</span>);
+
+  userState = <span class="hljs-built_in">this</span>.userSubject
+    .asObservable()
+    .pipe(switchMap(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> (user ? <span class="hljs-keyword">of</span>(user) : <span class="hljs-built_in">this</span>.fetchUser())));
+
+  updateUser(user) {
+    <span class="hljs-built_in">this</span>.userSubject.next(user);
+  }
+  unsubscribe() {
+    <span class="hljs-built_in">this</span>.userSubject.unsubscribe();
+  }
+  fetchUser() {
+    <span class="hljs-keyword">return</span> Observable.create(<span class="hljs-function">(<span class="hljs-params">observer</span>) =&gt;</span> {
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        observer.next({
+          name: <span class="hljs-string">&quot;user name&quot;</span>,
+          age: <span class="hljs-built_in">Math</span>.random(),
+          sex: <span class="hljs-string">&quot;男&quot;</span>,
+        });
+        observer.complete();
+      }, <span class="hljs-number">0</span>);
+    });
+  }
+}
+<span class="hljs-comment">// 单例</span>
+<span class="hljs-keyword">const</span> appService = <span class="hljs-keyword">new</span> AppService();
+
+<span class="hljs-comment">///////////////////////</span>
+<span class="hljs-comment">////////use////////</span>
+<span class="hljs-comment">///////////////////////</span>
+
+<span class="hljs-keyword">const</span> { interval, fromEvent } = rxjs;
+<span class="hljs-keyword">const</span> content = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;content&quot;</span>);
+
+<span class="hljs-comment">// 赋初始值，不是必须的</span>
+appService.updateUser({ name: <span class="hljs-string">&quot;first&quot;</span>, age: <span class="hljs-number">11</span>, sex: <span class="hljs-string">&quot;女&quot;</span> });
+
+<span class="hljs-comment">// 广播出去</span>
+appService.userState.subscribe(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> {
+  content.textContent = <span class="hljs-built_in">JSON</span>.stringify(state);
+});
+
+<span class="hljs-comment">// 更新值</span>
+<span class="hljs-keyword">const</span> interval$ = interval(<span class="hljs-number">3000</span>).subscribe(<span class="hljs-function">() =&gt;</span> {
+  appService.updateUser();
+});
+
+fromEvent(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;beforeunload&quot;</span>).subscribe(<span class="hljs-function">() =&gt;</span> {
+  appService.unsubscribe();
+  interval$.unsubscribe();
+});</code></pre>
+<iframe src="./root/rxjs/broadcast_demo.html" width="100%" height="400"></iframe>
+
+      </fieldset>
+      
+      <fieldset id='_LYOrRG'>
+      <legend>d3_force</legend>
+      <p><a href="https://observablehq.com/@d3/d3v6-migration-guide">d3.v6 迁移指南</a></p>
+<iframe src="./root/d3/d3_force_demo.html" width="100%" height="1000"></iframe>
+
+      </fieldset>
+      </div><div id="nav"><div style="margin-left:0em"><strong>javascript</strong><br/></div><div style="margin-left:2em"><a href="#_idPhfW">copy_to_clipboard</a><br/></div><div style="margin-left:2em"><a href="#_O66r8M">scroll_load_pictures</a><br/></div><div style="margin-left:2em"><a href="#_H81AGa">generate_random_string</a><br/></div><div style="margin-left:2em"><a href="#_7FpQTD">file_upload_download</a><br/></div><div style="margin-left:2em"><a href="#_O0l8HE">dynamic_font_size</a><br/></div><div style="margin-left:2em"><a href="#_1YEIj4">element_in_viewport</a><br/></div><div style="margin-left:2em"><a href="#_4I09eK">limit_input</a><br/></div><div style="margin-left:2em"><a href="#_j3hx5G">slide_unlock</a><br/></div><div style="margin-left:2em"><a href="#_sLsgEN">common_form_validation</a><br/></div><div style="margin-left:2em"><a href="#_WFzQ3P">ul_proxy_li</a><br/></div><div style="margin-left:2em"><a href="#_jwjiD2">drag_drop_swap</a><br/></div><div style="margin-left:2em"><a href="#_Cy42Eo">product_specification_combination</a><br/></div><div style="margin-left:0em"><strong>effect</strong><br/></div><div style="margin-left:2em"><a href="#_M3rzpH">rotation_effect</a><br/></div><div style="margin-left:2em"><a href="#_QQ1ylS">3d_rotation_effect</a><br/></div><div style="margin-left:0em"><strong>canvas</strong><br/></div><div style="margin-left:2em"><a href="#_16IolX">signature</a><br/></div><div style="margin-left:0em"><strong>svg</strong><br/></div><div style="margin-left:2em"><a href="#_Owh8XB">svg_curve</a><br/></div><div style="margin-left:2em"><a href="#_hoAXzc">svg_column_chart</a><br/></div><div style="margin-left:2em"><a href="#_lOqDkP">svg_line_graph</a><br/></div><div style="margin-left:2em"><a href="#_aznxF3">svg_pie_chart</a><br/></div><div style="margin-left:2em"><a href="#_cgTkge">svg_radar_chart</a><br/></div><div style="margin-left:2em"><a href="#_FHFNQR">svg_ring_graph</a><br/></div><div style="margin-left:2em"><a href="#_ynw7fN">svg_polygon</a><br/></div><div style="margin-left:0em"><strong>echarts</strong><br/></div><div style="margin-left:2em"><a href="#_WU2Icx">echarts_resize_dispose</a><br/></div><div style="margin-left:0em"><strong>ng</strong><br/></div><div style="margin-left:2em"><a href="#_PCOFi0">annotation_use</a><br/></div><div style="margin-left:2em"><a href="#_5AfZwa">responsive_form</a><br/></div><div style="margin-left:2em"><a href="#_FX7IIr">time_picker</a><br/></div><div style="margin-left:2em"><a href="#_rfAkob">block_loading_container</a><br/></div><div style="margin-left:2em"><a href="#_YREm4l">countdown</a><br/></div><div style="margin-left:2em"><a href="#_kLGr2Y">permission_panel</a><br/></div><div style="margin-left:2em"><a href="#_yzQW7F">piping</a><br/></div><div style="margin-left:0em"><strong>vue</strong><br/></div><div style="margin-left:2em"><a href="#_cic4Q7">create_component</a><br/></div><div style="margin-left:2em"><a href="#_QMa9N7">create_component</a><br/></div><div style="margin-left:2em"><a href="#_Eimnnz">create_directive</a><br/></div><div style="margin-left:2em"><a href="#_O57upI">create_service</a><br/></div><div style="margin-left:0em"><strong>css</strong><br/></div><div style="margin-left:2em"><a href="#_aCAwiq">flex_layout</a><br/></div><div style="margin-left:2em"><a href="#_hb1pHn">loading</a><br/></div><div style="margin-left:0em"><strong>rxjs</strong><br/></div><div style="margin-left:2em"><a href="#_1FnTYW">user_offline</a><br/></div><div style="margin-left:2em"><a href="#_CfLzH7">send_phone_code</a><br/></div><div style="margin-left:2em"><a href="#_yh2Dpo">keyword_search</a><br/></div><div style="margin-left:2em"><a href="#_UEEyXH">broadcast</a><br/></div><div style="margin-left:0em"><strong>d3</strong><br/></div><div style="margin-left:2em"><a href="#_LYOrRG">d3_force</a><br/></div></div>
+</body></html>

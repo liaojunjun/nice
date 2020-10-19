@@ -1,0 +1,87 @@
+<pre><code class="language-scss"><span class="hljs-selector-class">.flex</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  &amp;<span class="hljs-selector-class">.inline</span> {
+    <span class="hljs-attribute">display</span>: inline-flex;
+  }
+  &amp;<span class="hljs-selector-class">.start</span> {
+    <span class="hljs-attribute">justify-content</span>: flex-start;
+  }
+  &amp;<span class="hljs-selector-class">._start</span> {
+    <span class="hljs-attribute">align-items</span>: flex-start;
+  }
+  &amp;<span class="hljs-selector-class">.center</span> {
+    <span class="hljs-attribute">justify-content</span>: center;
+  }
+  &amp;<span class="hljs-selector-class">._center</span> {
+    <span class="hljs-attribute">align-items</span>: center;
+  }
+  &amp;<span class="hljs-selector-class">.end</span> {
+    <span class="hljs-attribute">justify-content</span>: flex-end;
+  }
+  &amp;<span class="hljs-selector-class">._end</span> {
+    <span class="hljs-attribute">align-items</span>: flex-end;
+  }
+  &amp;<span class="hljs-selector-class">.between</span> {
+    <span class="hljs-attribute">justify-content</span>: space-between;
+  }
+  &amp;<span class="hljs-selector-class">.around</span> {
+    <span class="hljs-attribute">justify-content</span>: space-around;
+  }
+  &amp;<span class="hljs-selector-class">.baseline</span> {
+    <span class="hljs-attribute">align-items</span>: baseline;
+  }
+  &amp;<span class="hljs-selector-class">.stretch</span> {
+    <span class="hljs-attribute">align-items</span>: stretch;
+  }
+  &amp;<span class="hljs-selector-class">.row</span> {
+    <span class="hljs-attribute">flex-direction</span>: row;
+  }
+  &amp;<span class="hljs-selector-class">.row_reverse</span> {
+    <span class="hljs-attribute">flex-direction</span>: row-reverse;
+    -webkit-box-pack: end;
+  }
+  &amp;<span class="hljs-selector-class">.column</span> {
+    <span class="hljs-attribute">flex-direction</span>: column;
+  }
+  &amp;<span class="hljs-selector-class">.column_reverse</span> {
+    <span class="hljs-attribute">flex-direction</span>: column-reverse;
+    -webkit-box-pack: end;
+  }
+  &amp;<span class="hljs-selector-class">.wrap</span> {
+    -ms-<span class="hljs-attribute">flex-wrap</span>: wrap;
+    <span class="hljs-attribute">flex-wrap</span>: wrap;
+  }
+  <span class="hljs-selector-class">.child_0</span> {
+    <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">flex-shrink</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">display</span>: block;
+  }
+
+  <span class="hljs-selector-class">.child_1</span> {
+    <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;
+    <span class="hljs-attribute">flex-shrink</span>: <span class="hljs-number">1</span>;
+    <span class="hljs-attribute">display</span>: block;
+  }
+  &amp;<span class="hljs-selector-class">.dir_row</span>,
+  &amp;<span class="hljs-selector-class">.dir_row_reverse</span> {
+    &gt; <span class="hljs-selector-class">.child_0</span> {
+      <span class="hljs-attribute">width</span>: auto;
+    }
+
+    &gt; <span class="hljs-selector-class">.child_1</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">0%</span>;
+      <span class="hljs-attribute">height</span>: auto;
+    }
+  }
+  &amp;<span class="hljs-selector-class">.dir_column</span>,
+  &amp;<span class="hljs-selector-class">.dir_column_reverse</span> {
+    &gt; <span class="hljs-selector-class">.child_0</span> {
+      <span class="hljs-attribute">height</span>: auto;
+    }
+
+    &gt; <span class="hljs-selector-class">.child_1</span> {
+      <span class="hljs-attribute">width</span>: auto;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;
+    }
+  }
+}</code></pre>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+    <title>当用户离开15分钟后。。。</title>
+    <style>
+      #log {
+        font-size: 12px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#/home">home</a>
+    <div id="log"></div>
+  </body>
+  <script>
+    const log = document.getElementById("log");
+
+    function writeLog(content) {
+      const p = document.createElement("p");
+      p.textContent = `${content}  ${new Date()}`;
+      log.appendChild(p);
+    }
+
+    const { merge, fromEvent, of } = rxjs;
+
+    const {
+      throttleTime,
+      switchMapTo,
+      delay,
+      filter,
+      debounceTime,
+    } = rxjs.operators;
+
+    const startUrl = "";
+
+    /**
+     * 判断用户time分钟内是否还在操作网页
+     */
+    function userOffline(time = 15) {
+      return merge(
+        fromEvent(document, "mousemove"),
+        fromEvent(document, "click"),
+        fromEvent(document, "keydown")
+      ).pipe(
+        debounceTime(1000),
+        switchMapTo(of(0).pipe(delay(time * 60 * 1000)))
+      );
+    }
+    userOffline(1)
+      .pipe(filter(() => location.hash !== startUrl))
+      .subscribe(() => {
+        writeLog("离开了！接下来收尾工作开始。");
+        history.back();
+      });
+  </script>
+</html>

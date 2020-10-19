@@ -1,0 +1,25 @@
+<ol>
+<li>去抖动</li>
+<li>图表 init、resize、dispose</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">fn, ms = 300</span>) </span>{
+  <span class="hljs-keyword">let</span> timeoutId;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args</span>) </span>{
+    <span class="hljs-built_in">clearTimeout</span>(timeoutId);
+    timeoutId = <span class="hljs-built_in">setTimeout</span>(fn.bind(<span class="hljs-built_in">this</span>, args), ms);
+  };
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">chartsResize</span>(<span class="hljs-params">chartsInstance, opts</span>) </span>{
+  <span class="hljs-keyword">const</span> resize = debounce(chartsInstance.resize.bind(<span class="hljs-literal">null</span>, opts));
+
+  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;resize&quot;</span>, resize, <span class="hljs-literal">false</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">window</span>.removeEventListener(<span class="hljs-string">&quot;resize&quot;</span>, resize);
+    chartsInstance.dispose();
+  };
+}
+
+<span class="hljs-built_in">window</span>.cancel = chartsResize(chart);</code></pre>
+<iframe src="./root/echarts/echarts_resize_dispose_demo.html" width="100%" height="400"></iframe>
