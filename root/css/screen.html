@@ -1,0 +1,62 @@
+<pre><code class="language-scss"><span class="hljs-comment">/**
+ * USAGE:
+ *    @include screenSize(240)  { }
+ *    @include screenSize(320)  { }
+ *    @include screenSize(480)  { }
+ *    @include screenSize(768)  { }
+ *    @include screenSize(1024) { }
+ *    @include screenSize(1140) { }
+ *    @include screenSize(1280) { }
+ *  @include screenSize(1500) { }
+ *
+ * .header {
+ *       @include screenSize(320)  { display: none; }
+ * }
+ */</span>
+<span class="hljs-keyword">@mixin</span> screenSize(<span class="hljs-variable">$point</span>) {
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">240</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">240px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">320</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">320px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">480</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">480px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">600</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">600px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">768</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">768px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">1024</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1024px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">1140</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1140px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">1280</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1280px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$point</span>==<span class="hljs-number">1500</span> {
+    <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1500px</span>) {
+      <span class="hljs-keyword">@content</span>;
+    }
+  }
+}</code></pre>

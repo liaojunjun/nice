@@ -1,0 +1,5 @@
+1. [组件-注册](https://cn.vuejs.org/v2/guide/components-registration.html)
+2. [组件-props](https://cn.vuejs.org/v2/guide/components-props.html)
+3. [组件-自定义事件](https://cn.vuejs.org/v2/guide/components-custom-events.html)
+4. [插槽](https://cn.vuejs.org/v2/guide/components-slots.html)
+5. [动态组件&异步组件](https://cn.vuejs.org/v2/guide/components-dynamic-async.html)

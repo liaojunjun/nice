@@ -1,0 +1,78 @@
+<ol>
+<li>导入模块</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { TranslateModule, TranslateLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@ngx-translate/core&quot;</span>;
+<span class="hljs-keyword">import</span> { TranslateHttpLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@ngx-translate/http-loader&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">HttpLoaderFactory</span>(<span class="hljs-params">httpClient: HttpClient</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TranslateHttpLoader(httpClient);
+}
+<span class="hljs-meta">@NgModule</span>({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
+  ],
+})
+</code></pre>
+<ol start="2">
+<li>组件中使用</li>
+</ol>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+<span class="hljs-keyword">import</span> { TranslateService } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@ngx-translate/core&quot;</span>;
+
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;app-root&quot;</span>,
+  template: <span class="hljs-string">`
+    &lt;div&gt;
+      &lt;h2&gt;{{ &quot;HOME.TITLE&quot; | translate }}&lt;/h2&gt;
+      &lt;label&gt;
+        {{ &quot;HOME.SELECT&quot; | translate }}
+        &lt;select #langSelect (change)=&quot;translate.use(langSelect.value)&quot;&gt;
+          &lt;option
+            *ngFor=&quot;let lang of translate.getLangs()&quot;
+            [value]=&quot;lang&quot;
+            [selected]=&quot;lang === translate.currentLang&quot;
+          &gt;
+            {{ lang }}
+          &lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  `</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> translate: TranslateService</span>) {
+    translate.addLangs([<span class="hljs-string">&quot;en&quot;</span>, <span class="hljs-string">&quot;zh&quot;</span>]);
+    translate.setDefaultLang(<span class="hljs-string">&quot;en&quot;</span>);
+
+    <span class="hljs-keyword">const</span> browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(<span class="hljs-regexp">/en|zh/</span>) ? browserLang : <span class="hljs-string">&quot;en&quot;</span>);
+  }
+}</code></pre>
+<ol start="3">
+<li>i18n 文件导入</li>
+</ol>
+<p>en.json</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">&quot;HOME&quot;</span>: {
+    <span class="hljs-attr">&quot;TITLE&quot;</span>: <span class="hljs-string">&quot;Hello Angular with ngx-translate!&quot;</span>,
+    <span class="hljs-attr">&quot;SELECT&quot;</span>: <span class="hljs-string">&quot;Change language&quot;</span>
+  }
+}</code></pre>
+<p>zh.json</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">&quot;HOME&quot;</span>: {
+    <span class="hljs-attr">&quot;TITLE&quot;</span>: <span class="hljs-string">&quot;欢迎使用translate!&quot;</span>,
+    <span class="hljs-attr">&quot;SELECT&quot;</span>: <span class="hljs-string">&quot;选择语言&quot;</span>
+  }
+}</code></pre>

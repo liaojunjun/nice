@@ -1,0 +1,32 @@
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { omitBy, isNil } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBaseLocation</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> paths: <span class="hljs-built_in">string</span>[] = location.pathname.split(<span class="hljs-string">&quot;/&quot;</span>).splice(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+  <span class="hljs-keyword">const</span> basePath: <span class="hljs-built_in">string</span> = (paths &amp;&amp; paths[<span class="hljs-number">0</span>]) || <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;/&quot;</span> + basePath;
+}
+<span class="hljs-comment">/**
+ * 去除{}中无用的属性
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">omitByUseless</span>(<span class="hljs-params">obj: <span class="hljs-built_in">object</span>, ...signs: <span class="hljs-built_in">string</span>[]</span>) </span>{
+  <span class="hljs-keyword">return</span> omitBy(
+    obj,
+    <span class="hljs-function">(<span class="hljs-params">v, k</span>) =&gt;</span> v === <span class="hljs-string">&quot;&quot;</span> || isNil(v) || signs.some(<span class="hljs-function">(<span class="hljs-params">s</span>) =&gt;</span> k.startsWith(s))
+  );
+}
+
+<span class="hljs-comment">/**
+ * 压平Form
+ *  flattenControls(this.validateForm).forEach(item =&gt; {
+      item.markAsDirty();
+      item.updateValueAndValidity();
+    });
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flattenControls</span>(<span class="hljs-params">form: AbstractControl</span>): <span class="hljs-title">AbstractControl</span>[] </span>{
+  <span class="hljs-keyword">let</span> extracted: AbstractControl[] = [form];
+  <span class="hljs-keyword">if</span> (form <span class="hljs-keyword">instanceof</span> FormArray || form <span class="hljs-keyword">instanceof</span> FormGroup) {
+    <span class="hljs-keyword">const</span> children = <span class="hljs-built_in">Object</span>.values(form.controls).map(flattenControls);
+    extracted = extracted.concat(...children);
+  }
+  <span class="hljs-keyword">return</span> extracted;
+}</code></pre>

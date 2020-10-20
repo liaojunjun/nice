@@ -1,0 +1,62 @@
+<pre><code class="language-scss"><span class="hljs-comment">/**
+ *
+ * 艺术字
+ * @include font-gradient(rgba(254, 255, 138, 1), rgba(255, 131, 224, 1));
+ */</span>
+
+<span class="hljs-keyword">@mixin</span> font-gradient(<span class="hljs-variable">$from</span>, <span class="hljs-variable">$to</span>) {
+  <span class="hljs-attribute">background</span>: -webkit-linear-gradient(#{<span class="hljs-variable">$from</span>}, #{<span class="hljs-variable">$to</span>});
+  -webkit-<span class="hljs-attribute">background-clip</span>: text;
+  -webkit-text-fill-<span class="hljs-attribute">color</span>: transparent;
+}
+
+<span class="hljs-comment">/**
+   *
+   * 单行与多行截断
+   *
+   */</span>
+
+<span class="hljs-variable">$line-map</span>: (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+
+%text-over {
+  <span class="hljs-attribute">overflow</span>: hidden;
+  <span class="hljs-attribute">text-overflow</span>: ellipsis;
+}
+
+<span class="hljs-keyword">@each</span> <span class="hljs-variable">$k</span> in <span class="hljs-variable">$line-map</span> {
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$k</span> == <span class="hljs-number">1</span> {
+    <span class="hljs-selector-class">.text-over</span> {
+      <span class="hljs-keyword">@extend</span> %text-over;
+      <span class="hljs-attribute">white-space</span>: nowrap;
+    }
+  } <span class="hljs-keyword">@else</span> {
+    <span class="hljs-selector-class">.text-line-</span>#{<span class="hljs-variable">$k</span>} {
+      <span class="hljs-attribute">overflow</span>: hidden;
+      <span class="hljs-attribute">text-overflow</span>: ellipsis;
+      <span class="hljs-attribute">display</span>: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: <span class="hljs-variable">$k</span>;
+    }
+  }
+}
+
+<span class="hljs-comment">/**
+   *
+   * 禁止文本被选择
+   *
+   */</span>
+
+<span class="hljs-keyword">@mixin</span> user-select {
+  user-<span class="hljs-selector-tag">select</span>: none;
+}
+
+<span class="hljs-comment">/**
+   *
+   * px 转rem
+   *
+   */</span>
+
+<span class="hljs-keyword">@function</span> calculateRem(<span class="hljs-variable">$size</span>) {
+  <span class="hljs-variable">$remSize</span>: <span class="hljs-variable">$size</span> / <span class="hljs-number">16px</span>;
+  <span class="hljs-keyword">@return</span> <span class="hljs-variable">$remSize</span> * <span class="hljs-number">1rem</span>;
+}</code></pre>

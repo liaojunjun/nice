@@ -1,0 +1,42 @@
+<pre><code class="language-scss"><span class="hljs-comment">/**
+ *
+ * 美化占位符 placeholder 样式
+ *
+ */</span>
+
+<span class="hljs-keyword">@mixin</span> beauty-placeholder(<span class="hljs-variable">$fz</span>, <span class="hljs-variable">$color</span>: <span class="hljs-number">#999</span>, <span class="hljs-variable">$align</span>: left) {
+  &amp;:-moz-placeholder {
+    font-size: <span class="hljs-variable">$fz</span>;
+    <span class="hljs-attribute">color</span>: <span class="hljs-variable">$color</span>;
+    <span class="hljs-attribute">text-align</span>: <span class="hljs-variable">$align</span>;
+  }
+  &amp;:-ms-input-placeholder {
+    font-size: <span class="hljs-variable">$fz</span>;
+    <span class="hljs-attribute">color</span>: <span class="hljs-variable">$color</span>;
+    <span class="hljs-attribute">text-align</span>: <span class="hljs-variable">$align</span>;
+  }
+  &amp;::-webkit-input-placeholder {
+    font-size: <span class="hljs-variable">$fz</span>;
+    <span class="hljs-attribute">color</span>: <span class="hljs-variable">$color</span>;
+    <span class="hljs-attribute">text-align</span>: <span class="hljs-variable">$align</span>;
+  }
+}
+
+<span class="hljs-comment">/**
+   *
+   * IE
+   *
+   */</span>
+
+<span class="hljs-keyword">@mixin</span> IEInput {
+  ::-ms-clear,
+  ::-ms-reveal {
+    display: none;
+  }
+  <span class="hljs-selector-tag">input</span>::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  }
+}</code></pre>

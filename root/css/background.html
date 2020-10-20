@@ -1,0 +1,38 @@
+<pre><code class="language-scss"><span class="hljs-comment">/**
+ * $name 图片名字
+ * @return url(...)
+ */</span>
+<span class="hljs-keyword">@function</span> bgUrl(<span class="hljs-variable">$name</span>) {
+  <span class="hljs-keyword">@return</span> url(./assets/images/#{<span class="hljs-variable">$name</span>});
+}
+
+<span class="hljs-comment">/**
+   *
+   * 设置背景图片
+   * @example @include background(&quot;xx.png&quot;);
+   */</span>
+
+<span class="hljs-keyword">@mixin</span> background(<span class="hljs-variable">$name</span>, <span class="hljs-variable">$position</span>: center center, <span class="hljs-variable">$size</span>: contain) {
+  <span class="hljs-attribute">background-image</span>: bgUrl(<span class="hljs-variable">$name</span>);
+  <span class="hljs-attribute">background-position</span>: #{<span class="hljs-variable">$position</span>};
+  <span class="hljs-attribute">background-size</span>: #{<span class="hljs-variable">$size</span>};
+  <span class="hljs-attribute">background-repeat</span>: no-repeat;
+}
+
+<span class="hljs-comment">/**
+   * 设置多图背景
+   @example
+  // @include multiple-background(image, [ bgUrl(&quot;1.png&quot;), bgUrl(&quot;2.png&quot;), bgUrl(&quot;3.png&quot;) ]);
+  // @include multiple-background(repeat, [no-repeat, no-repeat, no-repeat]);
+  // @include multiple-background(size, [auto 10px, cover, cover]);
+  // @include multiple-background(position, [20px 20px, center, center]);
+   *
+   */</span>
+
+<span class="hljs-keyword">@mixin</span> multiple-background(<span class="hljs-variable">$key</span>, <span class="hljs-variable">$list</span>) {
+  <span class="hljs-variable">$url_list</span>: ();
+  <span class="hljs-keyword">@each</span> <span class="hljs-variable">$name</span> in <span class="hljs-variable">$list</span> {
+    <span class="hljs-variable">$url_list</span>: append(<span class="hljs-variable">$url_list</span>, <span class="hljs-variable">$name</span>, comma);
+  }
+  <span class="hljs-attribute">background</span>-#{<span class="hljs-variable">$key</span>}: <span class="hljs-variable">$url_list</span>;
+}</code></pre>

@@ -1,0 +1,52 @@
+<pre><code class="language-scss"><span class="hljs-comment">/**
+ *
+ * 实心和空心的三角形
+    $position: top | right | bottom | left; 底边的位置
+    $color:color; 颜色
+    $size:size; 底边长度
+ *
+ */</span>
+
+<span class="hljs-keyword">@mixin</span> triangle(<span class="hljs-variable">$position</span>, <span class="hljs-variable">$color</span>, <span class="hljs-variable">$size</span>) {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">border-color</span>: transparent;
+  <span class="hljs-attribute">border-style</span>: solid;
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-variable">$size</span> * <span class="hljs-number">2</span>;
+  <span class="hljs-attribute">border</span>-#{<span class="hljs-variable">$position</span>}-<span class="hljs-attribute">color</span>: <span class="hljs-variable">$color</span>;
+}
+<span class="hljs-selector-tag">i</span><span class="hljs-selector-class">.icon-triangle</span> {
+  &amp;<span class="hljs-selector-pseudo">::before</span> {
+    <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">@include</span> triangle(bottom, red, <span class="hljs-number">10px</span>);
+  }
+}
+<span class="hljs-keyword">@mixin</span> arrow(<span class="hljs-variable">$position</span>, <span class="hljs-variable">$color</span>, <span class="hljs-variable">$size</span>) {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-variable">$color</span>;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">2px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-variable">$size</span>;
+  <span class="hljs-attribute">display</span>: inline-block;
+
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$position</span> == top {
+    <span class="hljs-attribute">transform</span>: rotate(-<span class="hljs-number">135deg</span>);
+  }
+
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$position</span> == bottom {
+    <span class="hljs-attribute">transform</span>: rotate(<span class="hljs-number">45deg</span>);
+  }
+
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$position</span> == left {
+    <span class="hljs-attribute">transform</span>: rotate(<span class="hljs-number">135deg</span>);
+  }
+
+  <span class="hljs-keyword">@if</span> <span class="hljs-variable">$position</span> == right {
+    <span class="hljs-attribute">transform</span>: rotate(-<span class="hljs-number">45deg</span>);
+  }
+}
+
+<span class="hljs-selector-tag">i</span><span class="hljs-selector-class">.icon-arrow</span> {
+  <span class="hljs-keyword">@include</span> arrow(right, red, <span class="hljs-number">10px</span>);
+}</code></pre>
