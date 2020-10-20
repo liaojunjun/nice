@@ -1,0 +1,140 @@
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">novalidate</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">&quot;form&quot;</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">&quot;onSubmit($event)&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>手机:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;tel&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;tel&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>{{ getErrorMsg(&quot;tel&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      电话:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;phone&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;phone&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>{{ getErrorMsg(&quot;phone&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>短信验证码:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;smsCode&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;smsCode&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>
+        {{ getErrorMsg(&quot;smsCode&quot;) }}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">formGroupName</span>=<span class="hljs-string">&quot;pass&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>密码:
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;goodPass&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;goodPass&#x27;, pass)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>
+          {{ getErrorMsg(&quot;goodPass&quot;, pass) }}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>再次输入密码:
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;twoPassword&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;twoPassword&#x27;, pass)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>
+          {{ getErrorMsg(&quot;twoPassword&quot;, pass) }}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;pass&#x27;)&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>{{ getErrorMsg(&quot;pass&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>年纪:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;integerNum&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;integerNum&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>
+        {{ getErrorMsg(&quot;integerNum&quot;) }}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>车牌号:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;carNo&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;carNo&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>{{ getErrorMsg(&quot;carNo&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>出生日期:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;birthDate&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;birthDate&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>
+        {{ getErrorMsg(&quot;birthDate&quot;) }}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red&quot;</span>&gt;</span>*<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>邮件:
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;email&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;check(&#x27;email&#x27;)&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;has-error&quot;</span>&gt;</span>{{ getErrorMsg(&quot;email&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">&quot;form.invalid&quot;</span>&gt;</span>提交<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></code></pre>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+<span class="hljs-keyword">import</span> { FormControl, FormGroup, Validators } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/forms&quot;</span>;
+
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;use-form&quot;</span>,
+  templateUrl: <span class="hljs-string">&quot;./use-form.component.html&quot;</span>,
+  styles: [
+    <span class="hljs-string">`
+      .has-error {
+        display: inline-block;
+        color: red;
+      }
+      ul {
+        list-style: none;
+      }
+      ul ul {
+        border-left: 2px solid #999;
+        margin-left: 5px;
+      }
+      li {
+        width: 500px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      input {
+        margin: 0 15px;
+        padding: 3px 5px;
+      }
+    `</span>,
+  ],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UseFormComponent {
+  form = <span class="hljs-keyword">new</span> FormGroup({
+    tel: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    phone: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>),
+    smsCode: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    pass: <span class="hljs-keyword">new</span> FormGroup(
+      {
+        goodPass: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+        twoPassword: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+      },
+      <span class="hljs-function">(<span class="hljs-params">group: FormGroup</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> group.get(<span class="hljs-string">&quot;goodPass&quot;</span>).value === group.get(<span class="hljs-string">&quot;twoPassword&quot;</span>).value
+          ? <span class="hljs-literal">null</span>
+          : { pass: <span class="hljs-literal">true</span> };
+      }
+    ),
+    integerNum: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    carNo: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    birthDate: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    email: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+  });
+
+  pass: FormGroup = <span class="hljs-built_in">this</span>.form.get(<span class="hljs-string">&quot;pass&quot;</span>) <span class="hljs-keyword">as</span> FormGroup;
+
+  check(<span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form) {
+    <span class="hljs-keyword">return</span> group.get([<span class="hljs-keyword">type</span>]).touched &amp;&amp; group.get([<span class="hljs-keyword">type</span>]).invalid;
+  }
+  getErrorMsg(<span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form) {
+    <span class="hljs-keyword">if</span> (group.get([<span class="hljs-keyword">type</span>]).hasError(<span class="hljs-string">&quot;required&quot;</span>)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;必填的&quot;</span>;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;格式不正确&quot;</span>;
+    }
+  }
+  onSubmit(e: Event) {
+    e.stopPropagation();
+    e.preventDefault();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.form.value);
+  }
+}</code></pre>

@@ -1,0 +1,103 @@
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+
+<span class="hljs-keyword">const</span> floor = <span class="hljs-built_in">Math</span>.floor;
+<span class="hljs-keyword">const</span> numStr = <span class="hljs-function">(<span class="hljs-params">n: <span class="hljs-built_in">number</span></span>) =&gt;</span> (n &lt; <span class="hljs-number">10</span> ? <span class="hljs-string">`0<span class="hljs-subst">${n}</span>`</span> : <span class="hljs-string">`<span class="hljs-subst">${n}</span>`</span>);
+<span class="hljs-keyword">const</span> hours = <span class="hljs-built_in">Array</span>.from({ length: <span class="hljs-number">24</span> }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i));
+<span class="hljs-keyword">const</span> minutes = <span class="hljs-function">(<span class="hljs-params">step: <span class="hljs-built_in">number</span></span>) =&gt;</span>
+  <span class="hljs-built_in">Array</span>.from({ length: floor(<span class="hljs-number">60</span> / step) }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i * step));
+<span class="hljs-comment">/**
+ * &lt;time-picker [(value)]=&quot;value&quot;&gt;&lt;/time-picker&gt;
+ */</span>
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;time-picker&quot;</span>,
+  template: <span class="hljs-string">`
+    &lt;div class=&quot;time-picker&quot;&gt;
+      &lt;select [(ngModel)]=&quot;a&quot; (change)=&quot;change()&quot;&gt;
+        &lt;option *ngFor=&quot;let h of h1&quot; [value]=&quot;h&quot;&gt;{{ h }}&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;select [(ngModel)]=&quot;b&quot; (change)=&quot;change()&quot;&gt;
+        &lt;option *ngFor=&quot;let m of m1&quot; [value]=&quot;m&quot;&gt;{{ m }}&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;span style=&quot;padding: 0 0.5em;&quot;&gt;-&lt;/span&gt;
+      &lt;select [(ngModel)]=&quot;c&quot; (change)=&quot;change()&quot;&gt;
+        &lt;option *ngFor=&quot;let h of h2&quot; [value]=&quot;h&quot;&gt;{{ h }}&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;select [(ngModel)]=&quot;d&quot; (change)=&quot;change()&quot;&gt;
+        &lt;option *ngFor=&quot;let m of m2&quot; [value]=&quot;m&quot;&gt;{{ m }}&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+  `</span>,
+  styles: [
+    <span class="hljs-string">`
+      .time-picker select {
+        width: 3em;
+        height: 20px;
+        box-sizing: border-box;
+      }
+      .time-picker select + select {
+        margin-left: -1px;
+      }
+    `</span>,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TimePickerComponent {
+  <span class="hljs-meta">@Output</span>() valueChange = <span class="hljs-keyword">new</span> EventEmitter&lt;<span class="hljs-built_in">string</span>&gt;();
+
+  <span class="hljs-meta">@Input</span>()
+  get value() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.a}</span>:<span class="hljs-subst">${<span class="hljs-built_in">this</span>.b}</span>-<span class="hljs-subst">${<span class="hljs-built_in">this</span>.c}</span>:<span class="hljs-subst">${<span class="hljs-built_in">this</span>.d}</span>`</span>;
+  }
+  set value(str: <span class="hljs-built_in">string</span>) {
+    [<span class="hljs-built_in">this</span>.a, <span class="hljs-built_in">this</span>.b, <span class="hljs-built_in">this</span>.c, <span class="hljs-built_in">this</span>.d] = (
+      (str || <span class="hljs-string">&quot;&quot;</span>).match(<span class="hljs-regexp">/^(\d\d):(\d\d)-(\d\d):(\d\d)$/</span>) || []
+    ).slice(<span class="hljs-number">1</span>);
+  }
+
+  <span class="hljs-meta">@Input</span>() step = <span class="hljs-number">10</span>;
+
+  a = <span class="hljs-string">&quot;&quot;</span>;
+  b = <span class="hljs-string">&quot;&quot;</span>;
+  c = <span class="hljs-string">&quot;&quot;</span>;
+  d = <span class="hljs-string">&quot;&quot;</span>;
+
+  get h1() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.c ? hours.slice(<span class="hljs-number">0</span>, +<span class="hljs-built_in">this</span>.c + <span class="hljs-number">1</span>) : hours;
+  }
+  get m1() {
+    <span class="hljs-keyword">return</span> minutes(<span class="hljs-built_in">this</span>.step).slice(
+      <span class="hljs-number">0</span>,
+      <span class="hljs-built_in">this</span>.d &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c ? floor(+<span class="hljs-built_in">this</span>.d / <span class="hljs-built_in">this</span>.step) + <span class="hljs-number">1</span> : <span class="hljs-literal">undefined</span>
+    );
+  }
+  get h2() {
+    <span class="hljs-keyword">return</span> hours.slice(+<span class="hljs-built_in">this</span>.a);
+  }
+  get m2() {
+    <span class="hljs-keyword">return</span> minutes(<span class="hljs-built_in">this</span>.step).slice(
+      <span class="hljs-built_in">this</span>.b &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c ? floor(+<span class="hljs-built_in">this</span>.b / <span class="hljs-built_in">this</span>.step) : <span class="hljs-number">0</span>
+    );
+  }
+
+  change() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.b &amp;&amp; <span class="hljs-built_in">this</span>.d &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c &amp;&amp; <span class="hljs-built_in">this</span>.b &gt; <span class="hljs-built_in">this</span>.d) {
+      <span class="hljs-built_in">this</span>.b = <span class="hljs-built_in">this</span>.d;
+    }
+    <span class="hljs-keyword">if</span> ([<span class="hljs-built_in">this</span>.a, <span class="hljs-built_in">this</span>.b, <span class="hljs-built_in">this</span>.c, <span class="hljs-built_in">this</span>.d].every(<span class="hljs-built_in">Boolean</span>)) {
+      <span class="hljs-built_in">this</span>.valueChange.emit(<span class="hljs-built_in">this</span>.value);
+    }
+  }
+}
+
+<span class="hljs-meta">@Component</span>({
+  template: <span class="hljs-string">`&lt;time-picker [(value)]=&quot;value&quot;&gt;&lt;/time-picker&gt;`</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TimePickerDemoComponent {
+  value = <span class="hljs-string">&quot;10:10-11:20&quot;</span>;
+}</code></pre>

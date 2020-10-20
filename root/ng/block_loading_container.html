@@ -1,0 +1,42 @@
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+
+<span class="hljs-comment">/**
+ * @example
+ * &lt;loader [loading]=&quot;isLoading&quot;&gt;&lt;app-component&gt;&lt;/app-component&gt;&lt;/loader&gt;
+ */</span>
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;loader&quot;</span>,
+  template: <span class="hljs-string">`
+    &lt;ng-content *ngIf=&quot;!loading; else showLoader&quot;&gt;&lt;/ng-content
+    &gt;&lt;ng-template #showLoader&gt;加载中...&lt;/ng-template&gt;
+  `</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LoaderComponent {
+  <span class="hljs-meta">@Input</span>() loading: <span class="hljs-built_in">boolean</span> | <span class="hljs-literal">undefined</span>;
+}
+
+<span class="hljs-comment">/**
+ * @example
+ * &lt;wrapper&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;/wrapper&gt;
+ */</span>
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;wrapper&quot;</span>,
+  template: <span class="hljs-string">`
+    &lt;div class=&quot;wrapper&quot;&gt;
+      &lt;ng-content&gt;&lt;/ng-content&gt;
+    &lt;/div&gt;
+  `</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Wrapper {}
+
+<span class="hljs-meta">@Component</span>({
+  template: <span class="hljs-string">`&lt;loader [loading]=&quot;isLoading&quot;&gt;你好呀&lt;/loader&gt;`</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LoaderDemoComponent {
+  isLoading = <span class="hljs-literal">true</span>;
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-built_in">this</span>.isLoading = <span class="hljs-literal">false</span>;
+    }, <span class="hljs-number">3000</span>);
+  }
+}</code></pre>

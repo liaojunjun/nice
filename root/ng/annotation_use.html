@@ -1,0 +1,43 @@
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component, AfterViewInit, HostListener } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_debounce</span>(<span class="hljs-params">fn, ms = 300</span>) </span>{
+  <span class="hljs-keyword">let</span> timeoutId;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args</span>) </span>{
+    <span class="hljs-built_in">clearTimeout</span>(timeoutId);
+    timeoutId = <span class="hljs-built_in">setTimeout</span>(fn.bind(<span class="hljs-built_in">this</span>, args), ms);
+  };
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">delay: <span class="hljs-built_in">number</span> = 300</span>): <span class="hljs-title">MethodDecorator</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
+    target: <span class="hljs-built_in">any</span>,
+    propertyKey: <span class="hljs-built_in">string</span>,
+    descriptor: PropertyDescriptor
+  </span>) </span>{
+    descriptor.value = _debounce(descriptor.value, delay);
+    <span class="hljs-keyword">return</span> descriptor;
+  };
+}
+
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&quot;use-descriptor&quot;</span>,
+  template: <span class="hljs-string">` &lt;div id=&quot;main&quot; [style.width.px]=&quot;mainWidth&quot;&gt;&lt;/div&gt; `</span>,
+  styles: [
+    <span class="hljs-string">`
+      #main {
+        background-color: red;
+        height: 200px;
+      }
+    `</span>,
+  ],
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UseDescriptorComponent <span class="hljs-keyword">implements</span> AfterViewInit {
+  mainWidth;
+  <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">&quot;window:resize&quot;</span>, [<span class="hljs-string">&quot;$event&quot;</span>])
+  <span class="hljs-meta">@debounce</span>()
+  ngAfterViewInit(event?) {
+    <span class="hljs-built_in">this</span>.mainWidth = <span class="hljs-built_in">document</span>.body.clientWidth - <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">if</span> (event) {
+    }
+  }
+}</code></pre>

@@ -1,0 +1,35 @@
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Pipe, PipeTransform } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
+<span class="hljs-keyword">import</span> { DomSanitizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/platform-browser&quot;</span>;
+<span class="hljs-keyword">import</span> { get } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash&quot;</span>;
+
+<span class="hljs-meta">@Pipe</span>({
+  name: <span class="hljs-string">&quot;get&quot;</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> GetPipe <span class="hljs-keyword">implements</span> PipeTransform {
+  transform(obj: <span class="hljs-built_in">object</span>, path: <span class="hljs-built_in">string</span>, def?): <span class="hljs-built_in">any</span> {
+    <span class="hljs-keyword">return</span> get(obj, path, def);
+  }
+}
+
+<span class="hljs-meta">@Pipe</span>({
+  name: <span class="hljs-string">&quot;json2obj&quot;</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Json2objPipe <span class="hljs-keyword">implements</span> PipeTransform {
+  transform(str: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">object</span> {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(str);
+    } <span class="hljs-keyword">catch</span> (e) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+  }
+}
+
+<span class="hljs-meta">@Pipe</span>({
+  name: <span class="hljs-string">&quot;safeHtml&quot;</span>,
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SafeHtmlPipe <span class="hljs-keyword">implements</span> PipeTransform {
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> sanitized: DomSanitizer</span>) {}
+  transform(value: <span class="hljs-built_in">string</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sanitized.bypassSecurityTrustHtml(value);
+  }
+}</code></pre>

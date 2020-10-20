@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滑动解锁</title>
+    <style>
+      #unlock_slide-unlock .unlock_warp {
+        position: relative;
+        background-color: lightseagreen;
+        width: 1000px;
+        height: 600px;
+      }
+      #unlock_slide-unlock .unlock_slide {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        z-index: 100;
+        background-color: #333;
+      }
+      #unlock_slide-unlock .unlock_gap {
+        position: absolute;
+        top: 200px;
+        left: 800px;
+        z-index: 1;
+        background-color: #fff;
+      }
+      #unlock_slide-unlock .unlock_slide,
+      #unlock_slide-unlock .unlock_gap {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="unlock_slide-unlock">
+      <div class="unlock_warp">
+        <div class="unlock_slide"></div>
+        <div class="unlock_gap"></div>
+      </div>
+    </div>
+    <script>
+      const $ = (selector) => document.querySelector(selector);
+      const $$ = (selector) => document.querySelectorAll(selector);
+
+      const unlock_warp = $(".unlock_warp");
+      const unlock_slide = $(".unlock_slide");
+      const unlock_gap = $(".unlock_gap");
+      let x, y;
+      const originalLeft = unlock_slide.offsetLeft,
+        originalTop = unlock_slide.offsetTop,
+        warpLeft = unlock_warp.offsetLeft,
+        warpTop = unlock_warp.offsetTop,
+        gapLeft = unlock_gap.offsetLeft,
+        gapTop = unlock_gap.offsetTop;
+      const setCursor = (v) => (unlock_slide.style.cursor = v);
+      function setSlide(left, top) {
+        unlock_slide.style.left = left + "px";
+        unlock_slide.style.top = top + "px";
+      }
+      function mousemove(e) {
+        const { pageX, pageY } = e;
+        setSlide(pageX - x - warpLeft, pageY - y - warpTop);
+      }
+      function mouseup(e) {
+        setCursor("auto");
+        unlock_slide.removeEventListener("mousemove", mousemove);
+        if (
+          Math.abs(unlock_slide.offsetLeft - gapLeft) < 5 &&
+          Math.abs(unlock_slide.offsetTop - gapTop) < 5
+        ) {
+          console.log("解锁成功");
+          setSlide(gapLeft, gapTop);
+          window.removeEventListener("mouseup", mouseup);
+          unlock_slide.removeEventListener("mousedown", mousedown);
+        } else {
+          setSlide(originalLeft, originalTop);
+        }
+      }
+      function mousedown(e) {
+        setCursor("move");
+        const { pageX, pageY } = e;
+        x = pageX - unlock_slide.offsetLeft - warpLeft;
+        y = pageY - unlock_slide.offsetTop - warpTop;
+        unlock_slide.addEventListener("mousemove", mousemove, false);
+      }
+      window.addEventListener("mouseup", mouseup, false);
+      unlock_slide.addEventListener("mousedown", mousedown, false);
+    </script>
+  </body>
+</html>
