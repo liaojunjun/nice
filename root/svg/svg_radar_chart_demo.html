@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>svg 画雷达图</title>
+    <style>
+      text {
+        font-size: 15px;
+        dominant-baseline: middle;
+        text-anchor: middle;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <svg xmlns="http://www.w3.org/2000/svg" :viewBox="conf.viewBox" :height="height" :width="width">
+            <g stroke="none" fill="rgba(68,68,68,0.4)">
+              <path v-for="item in polarData" :d="item.d"></path>
+            </g>
+            <g stroke="rgba(68,68,68,0.4)" fill="none">
+              <path stroke-dasharray="5,5" v-for="item in lineData" :d="item.d"></path>
+            </g>
+
+            <g stroke="none" fill="#444">
+              <text v-for="item in textData" :x="item.x" :y="item.y">
+                {{ item.name }}
+              </text>
+            </g>
+          </svg>
+      </main>
+    </script>
+    <script>
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          render() {
+            this.conf.viewBox = `${-this.width / 2},${-this.height / 2},${
+              this.width
+            },${this.height}`;
+
+            const length = this.data.length;
+
+            const deg = 360 / length;
+
+            const rad = deg * (Math.PI / 180);
+
+            let startRad = 0;
+            let textRad = 0;
+
+            const fx = (rad, r) => Number((Math.sin(rad) * r).toFixed(3));
+            const fy = (rad, r) => -Number((Math.cos(rad) * r).toFixed(3));
+
+            const max = this.width / 3;
+
+            this.textData = this.data.map((item, index) => {
+              const endRad = textRad + rad;
+              const x = fx(textRad, max + 30);
+              const y = fy(textRad, max + (index === 0 ? 20 : 30));
+              textRad = endRad;
+              return { ...item, x, y };
+            });
+
+            this.lineData = this.data.map((item) => {
+              const endRad = startRad + rad;
+              const x1 = fx(startRad, max);
+              const y1 = fy(startRad, max);
+              const x2 = fx(endRad, max);
+              const y2 = fy(endRad, max);
+              startRad = endRad;
+              const d = `M0,0L${x1},${y1}L${x2},${y2}L0,0`;
+              return { ...item, d };
+            });
+
+            this.polarData = this.data.map((item, index) => {
+              const endRad = startRad + rad;
+              const startValue = max * (item.value / item.max);
+
+              const i = index + 1 === length ? 0 : index + 1;
+
+              const endValue = max * (this.data[i].value / this.data[i].max);
+
+              const x1 = fx(startRad, startValue);
+              const y1 = fy(startRad, startValue);
+              const x2 = fx(endRad, endValue);
+              const y2 = fy(endRad, endValue);
+              startRad = endRad;
+              const d = `M0,0L${x1},${y1}L${x2},${y2}L0,0`;
+              return { ...item, d };
+            });
+          },
+        },
+        created: function () {
+          this.render();
+        },
+        data: {
+          conf: {
+            viewBox: undefined,
+          },
+          height: 500,
+          width: 300,
+          data: [
+            { value: 90, max: 100, name: "生命" },
+            { value: 160, max: 200, name: "力量" },
+            { value: 100, max: 200, name: "攻击" },
+            { value: 30, max: 200, name: "法力" },
+            { value: 100, max: 200, name: "伤害" },
+          ],
+          polarData: [],
+          lineData: [],
+          textData: [],
+        },
+      });
+    </script>
+  </body>
+</html>

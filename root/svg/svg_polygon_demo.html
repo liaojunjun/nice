@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg 画多边形</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    function regularPolygonPos(num, r) {
+      return Array.from({ length: num }, (_, i) => {
+        const deg = (360 / num) * i;
+        const rad = (deg * Math.PI) / 180;
+        const x = Number((Math.sin(rad) * r).toFixed(3));
+        const y = -Number((Math.cos(rad) * r).toFixed(3));
+        return { x, y };
+      });
+    }
+
+    function sum(arr) {
+      return arr.reduce((acc, cur) => (acc += cur), 0);
+    }
+
+    function scanNumber(arr) {
+      return arr.map((_, index) => sum(arr.slice(0, index + 1)));
+    }
+
+    function polygonPos(arr, r) {
+      return scanNumber(arr.map((item) => (item / sum(arr)) * 360))
+        .map((deg) => (deg * Math.PI) / 180)
+        .map((rad) => {
+          const x = Number((Math.sin(rad) * r).toFixed(3));
+          const y = -Number((Math.cos(rad) * r).toFixed(3));
+          return { x, y };
+        });
+    }
+
+    const app = document.getElementById("app");
+    const xmlns = "http://www.w3.org/2000/svg";
+    const r = 100;
+    const num = 5;
+    const data = [10, 20, 30, 40, 50];
+
+    function draw(posList) {
+      const svg = createSvg();
+      const path = document.createElementNS(xmlns, "path");
+      path.setAttributeNS(null, "fill", "none");
+      path.setAttributeNS(null, "stroke", "#333");
+      path.setAttributeNS(
+        null,
+        "d",
+        posList.reduce(
+          (acc, cur, index) =>
+            (acc += (index === 0 ? "M" : "L") + `${cur.x},${cur.y}`),
+          ""
+        ) + "Z"
+      );
+      svg.appendChild(path);
+    }
+    function createSvg() {
+      const svg = document.createElementNS(xmlns, "svg");
+      svg.setAttributeNS(null, "viewBox", "-150 -150 300 300");
+      svg.setAttributeNS(null, "width", "300");
+      svg.setAttributeNS(null, "height", "300");
+      app.appendChild(svg);
+      const circle = document.createElementNS(xmlns, "circle");
+      circle.setAttributeNS(null, "cx", "0");
+      circle.setAttributeNS(null, "cy", "0");
+      circle.setAttributeNS(null, "r", String(r));
+      circle.setAttributeNS(null, "fill", "none");
+      circle.setAttributeNS(null, "stroke", "#999");
+      svg.appendChild(circle);
+      return svg;
+    }
+
+    draw(regularPolygonPos(num, r));
+    draw(polygonPos(data, r));
+  </script>
+</html>

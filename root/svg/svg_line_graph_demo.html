@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>svg 画折线</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <svg xmlns="http://www.w3.org/2000/svg" :viewBox="conf.viewBox" :height="height" :width="width">
+            <g fill="none" stroke="#000" stroke-width="5">
+                <line v-for="item in lineData" :x1="item.x1" :x2="item.x2" :y1="item.y1" :y2="item.y2"></line>
+            </g>
+          </svg>
+      </main>
+    </script>
+    <script>
+      function pairwise(arr) {
+        const newArr = [];
+        for (let i = 0; i < arr.length - 1; i++) {
+          newArr.push([arr[i], arr[i + 1]]);
+        }
+        return newArr;
+      }
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          render() {
+            const len = this.data.length;
+            const max = Math.max(...this.data.map((item) => item.value));
+            const width = len * this.conf.width;
+
+            this.conf.viewBox = `0,0,${width},${max}`;
+
+            this.lineData = pairwise(
+              this.data.map((item, index) => {
+                const x = index * this.conf.width;
+                const y = max - item.value;
+                return { x, y };
+              })
+            ).map(([prev, cur], index) => {
+              return {
+                x1: prev.x,
+                y1: prev.y,
+                x2: cur.x,
+                y2: cur.y,
+                index,
+              };
+            });
+          },
+        },
+        created: function () {
+          this.render();
+        },
+        data: {
+          conf: {
+            width: 50,
+            viewBox: undefined,
+          },
+          height: 500,
+          width: 300,
+          data: [
+            { value: 100 },
+            { value: 400 },
+            { value: 800 },
+            { value: 200 },
+            { value: 300 },
+            { value: 100 },
+          ],
+          lineData: [],
+        },
+      });
+    </script>
+  </body>
+</html>

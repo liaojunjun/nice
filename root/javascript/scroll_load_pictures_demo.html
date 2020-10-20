@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>懒加载图片</title>
+    <style>
+      #app {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 300px;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #666;
+        background-color: #eee;
+      }
+
+      img {
+        height: 400px;
+        width: 200px;
+        margin: 10px;
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    const images = [
+      "https://img.alic.com/tfs/TB1d3xKQeL2gK0jSZPhXXahvXXa-209-75.png",
+      "https://img.alicdn.com/tfs/TB1ZjFPQeH2gK0jSZJnXXaT1FXa-209-75.png",
+      "https://img.alicdn.com/tfs/TB1JY7IcyDsXe8jSZR0XXXK6FXa-209-75.png",
+      "https://img.alicdn.com/tfs/TB14IiRgDM11u4jSZPxXXahcXXa-209-75.png",
+      "https://img.alin.com/tfs/TB1rmJIQbY1gK0jSZTEXXXDQVXa-209-75.png",
+      "https://img.alicdn.com/tfs/TB1TRHzfLzO3e4jSZFxXXaP_FXa-90-80.png",
+      "https://img.alicdn.com/tfs/TB1eiXTXlTH8KJjy0FiXXcRsXXa-24-595.png",
+      "https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png",
+      "https://img.alicdn.com/tfs/TB1ApdFdipE_u4jSZKbXXbCUVXa-1920-100.png",
+      "https://img.alicdn.com/tfs/TB1OaEjIhD1gK0jSZFsXXbldVXa-1190-70.png",
+    ];
+
+    const app = document.getElementById("app");
+
+    function createList() {
+      app.innerHTML = images.reduce(
+        (acc, cur) => (acc += `<img lazy-src="${cur}"/>`),
+        ""
+      );
+    }
+
+    createList();
+
+    function elementInViewport(el) {
+      if (el instanceof Element) {
+        const { top, left, width, height } = el.getBoundingClientRect();
+        const { innerHeight, innerWidth } = window;
+        return (
+          top + height >= 0 &&
+          left + width >= 0 &&
+          top <= innerHeight &&
+          left <= innerWidth
+        );
+      }
+      return false;
+    }
+
+    function lazyLoadImg(
+      query = "lazy-src",
+      devalue = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+    ) {
+      const images = Array.from(
+        document.querySelectorAll(`img[${query}]:not([src])`)
+      ).map((el) => ({
+        el,
+        status: 0, // 0 未加载   1 加载中  2 加载成功 3 加载失败
+      }));
+
+      images.forEach(({ el }) => {
+        el.src = devalue;
+      });
+
+      const loadImg = (item) => {
+        const attr = item.el.getAttribute(query);
+        item.status = 1;
+        if (attr) {
+          item.el.src = attr;
+          item.el.onload = () => {
+            item.status = 2;
+            item.el.removeAttribute(query);
+          };
+          item.el.onerror = () => {
+            item.status = 3;
+            item.el.src = devalue;
+          };
+        }
+      };
+      const processScroll = () => {
+        images
+          .filter(({ status }) => status === 0)
+          .forEach((item) => {
+            if (elementInViewport(item.el)) {
+              loadImg(item);
+            }
+          });
+      };
+      processScroll();
+      window.addEventListener("scroll", processScroll, false);
+      window.removeEventListener("beforeunload", processScroll, false);
+    }
+
+    lazyLoadImg();
+  </script>
+</html>

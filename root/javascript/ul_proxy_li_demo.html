@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ul 点击代理</title>
+    <style>
+      ul {
+        display: inline-block;
+        padding: 20px;
+        background-color: #666;
+        border-radius: 5px;
+      }
+
+      li {
+        width: 200px;
+        height: 50px;
+        margin-bottom: 15px;
+        background-color: green;
+        color: #fff;
+        font-weight: bold;
+        line-height: 50px;
+        padding-left: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="ul">
+      <li data-id="0">0</li>
+      <li data-id="1">1</li>
+      <li data-id="2">2</li>
+      <li data-id="3">3</li>
+      <li data-id="4">4</li>
+      <li data-id="5">5</li>
+    </ul>
+    <div id="app"></div>
+  </body>
+  <script>
+    const appDiv = document.getElementById("app");
+
+    /**
+     *
+     * @param eventName 鼠标事件
+     * @param parentNodeName 父节点
+     * @param childNodeName 子节点
+     * @param callback 子节点事件响应
+     */
+    function eventDelegate(eventName, parentNodeName, childNodeName, callback) {
+      document
+        .querySelector(parentNodeName)
+        .addEventListener(eventName, (e) => {
+          e.stopPropagation();
+          if (e.target.nodeName.toUpperCase() === childNodeName) {
+            callback(e.target);
+          }
+        });
+    }
+
+    eventDelegate("click", "ul", "LI", (e) => {
+      appDiv.textContent = JSON.stringify({
+        tagName: e.tagName,
+        nodeType: e.nodeType,
+        innerHTML: e.innerHTML,
+        ID: e.getAttribute("data-id"),
+      });
+    });
+  </script>
+</html>

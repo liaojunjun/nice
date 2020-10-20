@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>拖拽交换</title>
+    <style>
+      div {
+        border: 1px solid #eee;
+        border-radius: 4px;
+        height: 200px;
+        width: 400px;
+        background: #fefefe;
+        margin: 20px;
+      }
+
+      span {
+        display: inline-block;
+        border: 2px dotted transparent;
+        margin: 20px;
+        background: #eee;
+        padding: 2px;
+        border-radius: 2px;
+      }
+      .drag {
+        border-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <div
+          @dragenter="dragenter"
+          @dragover="dragover"
+          @dragleave="dragleave"
+          @drop="drop"
+          class="box"
+        >
+          <span
+            v-for="s in [1,2,3,4,5,6,7,8,9]"
+            draggable="true"
+            @dragstart="dragstart"
+            @dragend="dragend"
+            >可拖拽{{s}}</span
+          >
+        </div>
+        <div
+          class="box"
+          @dragenter="dragenter"
+          @dragover="dragover"
+          @dragleave="dragleave"
+          @drop="drop"
+        ></div>
+      </main>
+    </script>
+    <script>
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          dragstart(e) {
+            e.target.classList.add("drag");
+            this.span = e.target;
+          },
+          dragend(e) {
+            e.target.classList.remove("drag");
+          },
+          dragenter(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if (e.target.classList.contains("box")) {
+              e.target.classList.add("drag");
+            }
+          },
+          dragover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+          },
+          dragleave(e) {
+            e.target.classList.remove("drag");
+          },
+          drop(e) {
+            if (e.target.classList.contains("box")) {
+              this.span.parentNode.removeChild(this.span);
+              e.target.appendChild(this.span);
+            }
+            this.span = null;
+            e.target.classList.remove("drag");
+          },
+        },
+        data: {
+          span: null,
+        },
+      });
+    </script>
+  </body>
+</html>

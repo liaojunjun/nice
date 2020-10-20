@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用 SVG 画曲线</title>
+  </head>
+  <body>
+    <svg viewBox="0 -200 1800 800" width="1800" height="800">
+      <rect
+        x="0"
+        y="-300"
+        width="1800"
+        height="500"
+        rx="0"
+        ry="0"
+        fill="rgba(255,0,0)"
+        stroke="none"
+      ></rect>
+      <path
+        id="path"
+        stroke="rgba(137,255,47,0.6)"
+        stroke-width="6"
+        fill="none"
+      ></path>
+      <path id="path-2" stroke="none" fill="rgba(137,255,47,0.3"></path>
+      <g id="pos" fill="#000" stroke="none"></g>
+    </svg>
+  </body>
+  <script>
+    const toFixed = (v) => Number(Number(v).toFixed(3));
+
+    function createY() {
+      return toFixed(Math.random() * 100);
+    }
+
+    const length = 50;
+    const max = 1800;
+
+    const value = (v) => toFixed(Math.min(v, max));
+
+    function createFn() {
+      const base = max / length;
+      let start = 0;
+      let i = 0;
+      return () => {
+        i++;
+        if (i < length + 1) start += base;
+        return value(start);
+      };
+    }
+
+    const path = document.getElementById("path");
+    const path2 = document.getElementById("path-2");
+    const pos = document.getElementById("pos");
+
+    function pairwise(arr) {
+      if (!Array.isArray(arr)) return arr;
+      const a1 = arr.slice(0, -1);
+      const a2 = arr.slice(1);
+      return a2.map((item, index) => [a1[index], item]);
+    }
+    function controlPoint([a, b]) {
+      const [xa, ya] = a.split(",").map(Number);
+      const [xb, yb] = b.split(",").map(Number);
+
+      const x = xb - xa;
+      const y = yb - ya;
+      const x1 = x / 3 + xa;
+      const y1 = y / 3 + ya;
+      const x2 = x * (2 / 3) + xa;
+      const y2 = y * (2 / 3) + ya;
+
+      return [
+        `${toFixed(x1)},${toFixed(y1 + (y1 - y2))}`,
+        `${toFixed(x2)},${toFixed(y2 + (y2 - y1))}`,
+      ];
+    }
+
+    function draw() {
+      const createX = createFn();
+      const data = ["0,0"].concat(
+        Array.from({ length: length }, () => `${createX()},${createY()}`)
+      );
+
+      const c = data.reduce((acc, cur) => {
+        const [cx, cy] = cur.split(",");
+        acc += `<circle cx="${cx}" cy="${cy}" r="3"></circle>`;
+        return acc;
+      }, "");
+      pos.innerHTML = c;
+
+      const newData = pairwise(data).map((item) => {
+        item.splice(1, 0, ...controlPoint(item));
+        return item;
+      });
+
+      const nd = newData.reduce(
+        (acc, cur, i) =>
+          (acc +=
+            (i === 0 ? `M${cur[0]}` : "") + `C${cur[1]} ${cur[2]} ${cur[3]}`),
+        ""
+      );
+
+      const d = `${nd}V200h-${max}Z`;
+
+      path.setAttributeNS(null, "d", nd);
+      path2.setAttributeNS(null, "d", d);
+    }
+    draw();
+    setInterval(() => {
+      draw();
+    }, 2000);
+  </script>
+</html>

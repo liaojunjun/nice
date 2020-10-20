@@ -12,4 +12,4 @@ function userOffline(time = 15) {
 }
 ```
 
-<iframe src="./root/rxjs/user_offline_demo.html" width="100%" height="50"></iframe>
+<iframe src="./rxjs/user_offline_demo.html" width="100%" height="50"></iframe>

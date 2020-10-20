@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>svg 环形图</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          :viewBox="conf.viewBox"
+          :height="height"
+          :width="width"
+        >
+          <g fill="none" stroke-width="50">
+            <path v-for="item of ringData" :d="item.d" :stroke="item.color"></path>
+          </g>
+        </svg>
+      </main>
+    </script>
+    <script>
+      function pairwise(arr) {
+        const newArr = [];
+        for (let i = 0; i < arr.length - 1; i++) {
+          newArr.push([arr[i], arr[i + 1]]);
+        }
+        return newArr;
+      }
+      function scan(arr) {
+        const newArr = [];
+        let value = 0;
+        for (let i = 0; i < arr.length; i++) {
+          const cur = value + arr[i];
+          newArr.push(cur);
+          value = cur;
+        }
+        return newArr;
+      }
+
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          render() {
+            this.conf.viewBox = `${-this.width / 2},${-this.height / 2},${
+              this.width
+            },${this.height}`;
+
+            const all = this.data.reduce((acc, item) => (acc += item.value), 0);
+            const newData = this.data.map((item) => {
+              const rote = item.value / all;
+              const deg = rote * 360; // 角度值
+              const laf = deg > 180 ? 1 : 0;
+              const rad = deg * (Math.PI / 180); // 幅度值
+              return { rad, laf };
+            });
+            const r = 100;
+
+            const fx = (rad) => Number((Math.sin(rad) * r).toFixed(3));
+            const fy = (rad) => -Number((Math.cos(rad) * r).toFixed(3));
+
+            const radList = scan(newData.map((item) => item.rad));
+
+            newData.forEach((item, idx) => {
+              item.x = fx(radList[idx]);
+              item.y = fy(radList[idx]);
+            });
+
+            newData.unshift({ x: 0, y: -r, laf: 0 });
+            this.ringData = pairwise(newData).map(([prev, cur], index) => {
+              const { laf } = newData[index];
+              const path = `M${prev.x},${prev.y}A${r},${r},0,${laf},1,${cur.x},${cur.y}`;
+              return { d: path, color: this.data[index].color };
+            });
+          },
+        },
+        created: function () {
+          this.render();
+        },
+        data: {
+          conf: {
+            viewBox: undefined,
+          },
+          height: 500,
+          width: 300,
+          data: [
+            { value: 100, color: "red" },
+            { value: 400, color: "green" },
+            { value: 800, color: "#444" },
+            { value: 200, color: "#444" },
+            { value: 300, color: "#888" },
+            { value: 100, color: "#888" },
+          ],
+          ringData: [],
+        },
+      });
+    </script>
+  </body>
+</html>

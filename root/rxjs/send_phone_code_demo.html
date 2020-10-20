@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>发送手机验证码</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+  </head>
+  <body>
+    <input id="tel" type="number" placeholder="请输入手机号码" />
+    <input id="code" type="number" placeholder="请输入手机验证码" />
+    <button id="send" type="button">发送</button>
+  </body>
+  <script>
+    const { zip, fromEvent, timer, range } = rxjs;
+    const {
+      map,
+      filter,
+      switchMapTo,
+      finalize,
+      tap,
+      distinctUntilChanged,
+      startWith,
+      take,
+    } = rxjs.operators;
+
+    const $id = (id) => document.getElementById(id);
+
+    const tel = $id("tel");
+    const code = $id("code");
+    const send = $id("send");
+
+    const originalText = send.textContent;
+
+    const setDisabled = (ele) => ele.setAttribute("disabled", "disabled");
+
+    const unDisabled = (ele) => ele.removeAttribute("disabled");
+
+    const setText = (ele, value) => (ele.textContent = String(value));
+
+    const countdown = timer(0, 1000).pipe(
+      take(10),
+      map((i) => 9 - i)
+    );
+
+    let isRunning = false;
+
+    function finish() {
+      unDisabled(send);
+      setText(send, originalText);
+      isRunning = false;
+    }
+
+    fromEvent(tel, "input")
+      .pipe(
+        filter(() => !isRunning),
+        map(() => tel.value.trim() !== ""),
+        distinctUntilChanged(),
+        startWith(false)
+      )
+      .subscribe((bol) => (bol ? unDisabled(send) : setDisabled(send)));
+
+    fromEvent(send, "click")
+      .pipe(
+        tap(() => {
+          isRunning = true;
+          setDisabled(send);
+        }),
+        switchMapTo(countdown.pipe(finalize(finish)))
+      )
+      .subscribe((v) => {
+        setText(send, v);
+      });
+  </script>
+</html>

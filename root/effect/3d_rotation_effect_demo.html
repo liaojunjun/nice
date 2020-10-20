@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3d旋转效果</title>
+    <style>
+      body {
+        margin: 50px;
+      }
+      .animate__animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+      .warp li:nth-child(1),
+      .warp li:nth-child(6) {
+        background-color: cadetblue;
+      }
+      .warp li:nth-child(2),
+      .warp li:nth-child(7) {
+        background-color: chartreuse;
+      }
+      .warp li:nth-child(3),
+      .warp li:nth-child(8) {
+        background-color: chocolate;
+      }
+      .warp li:nth-child(4),
+      .warp li:nth-child(9) {
+        background-color: coral;
+      }
+      .warp li:nth-child(5),
+      .warp li:nth-child(10) {
+        background-color: cornflowerblue;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      @-webkit-keyframes pulse {
+        0% {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+        to {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+      }
+      @keyframes pulse {
+        0% {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+        to {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+      }
+      ul {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        transition: all 1s;
+      }
+      li {
+        position: absolute;
+        z-index: 10;
+        height: inherit;
+        width: inherit;
+        font-size: 20px;
+      }
+      .warp {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 600px;
+        perspective: 900px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warp" id="swirl">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul>
+    </div>
+    <button onclick="swirl.prev()">prev</button>
+    <button onclick="swirl.next()">next</button>
+
+    <!-- 
+      
+      舞台
+          容器
+              元素
+              元素
+       -->
+  </body>
+  <script>
+    const ul = document.querySelector("#swirl ul");
+    const allCard = ul.querySelectorAll("li");
+    const length = allCard.length;
+
+    const list = Array.from({ length }, (_, i) => {
+      const deg = i * (360 / length);
+      return deg;
+    });
+
+    const z = 200 / 2 / Math.tan((list[1] / 2 / 180) * Math.PI);
+
+    list.forEach((deg, i) => {
+      allCard[
+        i
+      ].style.webkitTransform = `rotateY(${deg}deg) translateZ(${z}px)`; // 先旋转再平移
+    });
+    let curRotate = 0;
+    function prev() {
+      curRotate += 36;
+      ul.style.webkitTransform = `rotateY(${curRotate}deg)`;
+    }
+    function next() {
+      curRotate -= 36;
+      ul.style.webkitTransform = `rotateY(${curRotate}deg)`;
+    }
+
+    window["swirl"] = { prev, next };
+  </script>
+</html>

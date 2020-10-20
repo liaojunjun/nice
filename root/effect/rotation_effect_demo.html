@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>轮换效果</title>
+    <style>
+      body {
+        margin: 10px;
+      }
+      .animate__animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+      .warp li:nth-child(1),
+      .warp li:nth-child(6) {
+        background-color: cadetblue;
+      }
+      .warp li:nth-child(2),
+      .warp li:nth-child(7) {
+        background-color: chartreuse;
+      }
+      .warp li:nth-child(3),
+      .warp li:nth-child(8) {
+        background-color: chocolate;
+      }
+      .warp li:nth-child(4),
+      .warp li:nth-child(9) {
+        background-color: coral;
+      }
+      .warp li:nth-child(5),
+      .warp li:nth-child(10) {
+        background-color: cornflowerblue;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      @-webkit-keyframes pulse {
+        0% {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+        to {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+      }
+      @keyframes pulse {
+        0% {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+        to {
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+      }
+
+      .warp {
+        width: 900px;
+        height: 400px;
+        padding-top: 50px;
+        perspective: 900px;
+      }
+
+      ul {
+        display: flex;
+        height: 100%;
+        transform-style: preserve-3d;
+      }
+
+      .warp {
+        overflow: hidden;
+      }
+
+      li:nth-child(1) {
+        transform-origin: right center;
+        transform: rotateY(-45deg);
+      }
+      li:nth-child(2) {
+        animation-name: pulse;
+        animation-timing-function: ease-in-out;
+      }
+      li:nth-child(3) {
+        transform-origin: left center;
+        transform: rotateY(45deg);
+      }
+
+      li {
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        font-size: 300px;
+        line-height: 300px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warp" id="walkAround">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+    </div>
+    <button onclick="walkAround.prev()">prev</button>
+    <button onclick="walkAround.next()">next</button>
+  </body>
+  <script>
+    const ul = document.querySelector("#walkAround ul");
+    const allCard = () => ul.querySelectorAll("li");
+    const length = allCard().length;
+    const firstCard = () => allCard()[0];
+    const lastCard = () => allCard()[length - 1];
+    const curCard = () => allCard()[1];
+    const aniClass = "animate__animated";
+
+    function curShow() {
+      const cur = curCard();
+      cur.classList.add(aniClass);
+      cur.addEventListener(
+        "animationend",
+        () => {
+          cur.classList.remove(aniClass);
+        },
+        { once: true }
+      );
+    }
+    function prev() {
+      ul.insertBefore(firstCard(), null);
+      curShow();
+    }
+    function next() {
+      ul.insertBefore(lastCard(), firstCard());
+      curShow();
+    }
+    window["walkAround"] = { prev, next };
+  </script>
+</html>

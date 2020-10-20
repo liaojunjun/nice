@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关键字搜索</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+    <style>
+      body {
+        padding: 50px;
+      }
+      #log span {
+        margin: 10px;
+        background-color: #ccc;
+        color: blueviolet;
+        font-size: 12px;
+        padding: 3px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="search" id="search" />
+    <hr />
+    <div id="res"></div>
+    <hr />
+    <div id="log"></div>
+  </body>
+  <script>
+    const { fromEvent } = rxjs;
+    const {
+      map,
+      filter,
+      tap,
+      distinctUntilChanged,
+      delay,
+      debounceTime,
+    } = rxjs.operators;
+
+    const $id = (id) => document.getElementById(id);
+
+    const search = $id("search");
+    const res = $id("res");
+    const log = $id("log");
+
+    function createData(keyword) {
+      return Array.from({ length: 10 }, () => {
+        return keyword + Math.random();
+      });
+    }
+
+    function inputToRes(arr = []) {
+      res.innerHTML = "";
+      arr.forEach((i) => {
+        const p = document.createElement("p");
+        p.textContent = i;
+        res.appendChild(p);
+      });
+    }
+
+    function writeLog(content) {
+      const span = document.createElement("span");
+      span.textContent = content;
+      log.appendChild(span);
+    }
+
+    let flag = true;
+
+    fromEvent(search, "compositionstart").subscribe(() => (flag = false));
+    fromEvent(search, "compositionend").subscribe(() => (flag = true));
+
+    fromEvent(search, "input")
+      .pipe(
+        delay(100),
+        filter(() => flag),
+        map(() => search.value.trim()),
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => inputToRes()),
+        filter((value) => value.length >= 2)
+      )
+      .subscribe(() => {
+        writeLog(search.value);
+        inputToRes(createData(search.value));
+      });
+  </script>
+</html>

@@ -1,0 +1,28 @@
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exchangeCombination</span>(<span class="hljs-params">arr</span>) </span>{
+  <span class="hljs-keyword">const</span> len = arr.length;
+  <span class="hljs-keyword">if</span> (len &gt;= <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">const</span> len0 = arr[<span class="hljs-number">0</span>].length;
+    <span class="hljs-keyword">const</span> len1 = arr[<span class="hljs-number">1</span>].length;
+    <span class="hljs-keyword">const</span> items = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(len0 * len1);
+    <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; len0; i++) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; len1; j++) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(arr[<span class="hljs-number">0</span>][i])) {
+          items[index] = arr[<span class="hljs-number">0</span>][i].concat(arr[<span class="hljs-number">1</span>][j]);
+        } <span class="hljs-keyword">else</span> {
+          items[index] = [arr[<span class="hljs-number">0</span>][i]].concat(arr[<span class="hljs-number">1</span>][j]);
+        }
+        index++;
+      }
+    }
+    <span class="hljs-keyword">const</span> newArr = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(len - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; arr.length; i++) {
+      newArr[i - <span class="hljs-number">1</span>] = arr[i];
+    }
+    newArr[<span class="hljs-number">0</span>] = items;
+    <span class="hljs-keyword">return</span> exchangeCombination(newArr);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> arr[<span class="hljs-number">0</span>];
+  }
+}</code></pre>
+<iframe src="./javascript/product_specification_combination_demo.html" width="100%" height="800"></iframe>

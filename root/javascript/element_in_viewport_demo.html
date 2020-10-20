@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>判断元素是否在视口中</title>
+    <style>
+      #ele {
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        margin-left: 300px;
+        margin-top: 300px;
+      }
+      body {
+        height: 500px;
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ele"></div>
+  </body>
+  <script>
+    function elementInViewport(el) {
+      if (el instanceof Element) {
+        const { top, left, width, height } = el.getBoundingClientRect();
+        const { innerHeight, innerWidth } = window;
+        return (
+          top + height >= 0 &&
+          left + width >= 0 &&
+          top <= innerHeight &&
+          left <= innerWidth
+        );
+      }
+      return false;
+    }
+    const ele = document.getElementById("ele");
+    document.addEventListener(
+      "scroll",
+      () => {
+        console.log(elementInViewport(ele));
+      },
+      false
+    );
+  </script>
+</html>

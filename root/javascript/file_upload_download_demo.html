@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文件下载和上传</title>
+  </head>
+  <body>
+    <h4>下载</h4>
+    <button onclick="download('./internet-explorer.svg','ie.svg')">下载</button>
+    <hr />
+    <h4>上传</h4>
+    <input type="file" name="file" id="file" />
+    <button onclick="submit()">上传</button>
+  </body>
+  <script>
+    function download(url, name) {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.open("GET", url, true);
+      //发送合适的请求头信息
+      // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.send();
+      // xhr.send("foo=bar&lorem=ipsum");
+      // xhr.send({ form: 'data' });
+
+      xhr.addEventListener("progress", progress, false);
+      xhr.addEventListener("load", load, false);
+      xhr.addEventListener("error", error, false);
+      xhr.addEventListener("abort", abort, false);
+      xhr.addEventListener("loadend", loadend, false);
+
+      function progress(e) {
+        if (e.lengthComputable) {
+          const percentComplete = e.loaded / e.total;
+        } else {
+          console.log("不能计算进度");
+        }
+      }
+
+      function load(e) {
+        alert("传输结束");
+
+        const link = document.createElement("a");
+        link.download = name;
+
+        link.href = URL.createObjectURL(xhr.response);
+
+        link.click();
+
+        URL.revokeObjectURL(link.href); // 内部映射中移除引用,释放内存
+      }
+      function loadend() {
+        // 当请求结束时触发, 无论请求成功 ( load) 还是失败 (abort 或 error)。
+      }
+
+      function error(e) {
+        alert("传输过程中发生错误");
+      }
+
+      function abort(e) {
+        alert("用户取消了传输");
+      }
+      // 返回方法用于用户取消下载
+      return () => xhr.abort();
+    }
+
+    function upload(url, formData) {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "json";
+      xhr.open("POST", url, true);
+      xhr.send(formData);
+      xhr.addEventListener("progress", progress, false);
+      xhr.addEventListener("load", load, false);
+      xhr.addEventListener("error", error, false);
+      xhr.addEventListener("abort", abort, false);
+      xhr.addEventListener("loadend", loadend, false);
+      function progress(e) {
+        if (e.lengthComputable) {
+          const percentComplete = e.loaded / e.total;
+        } else {
+          console.log("不能计算进度");
+        }
+      }
+      function load(e) {
+        alert("传输结束");
+        console.log(xhr.response);
+      }
+      function loadend() {
+        // 当请求结束时触发, 无论请求成功 ( load) 还是失败 (abort 或 error)。
+      }
+      function error(e) {
+        alert("传输过程中发生错误");
+      }
+      function abort(e) {
+        alert("用户取消了传输");
+      }
+      // 返回方法用于用户取消上传
+      return () => xhr.abort();
+    }
+    function createFormData() {
+      const { files } = document.getElementById("file");
+      const formData = new FormData();
+      formData.append("file", files[0], file.name);
+      return formData;
+    }
+    function submit() {
+      upload("http:baidu.com", createFormData());
+    }
+  </script>
+</html>

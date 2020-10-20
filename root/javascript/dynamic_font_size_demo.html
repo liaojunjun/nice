@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rem 使用</title>
+    <style>
+      p {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <p>1. 设置字体大小 2. 系统字体大小 3. 修正字体大小</p>
+  </body>
+  <script>
+    (function (doc, eventName, baseSize, baseWidth) {
+      function listener() {
+        // 设置字体大小
+        const size = (doc.clientWidth * baseSize) / baseWidth;
+        doc.style.fontSize = `${size}px`;
+        // 系统字体大小
+        const sysSize = Number.parseFloat(
+          window.getComputedStyle(doc).getPropertyValue("font-size")
+        );
+        // 修正字体大小
+        doc.style.fontSize = `${(size * (size / sysSize)).toFixed(3)}px`;
+      }
+      listener();
+      window.addEventListener(eventName, listener, false);
+      window.addEventListener(
+        "beforeunload",
+        window.removeEventListener.bind(null, eventName, listener),
+        false
+      );
+    })(
+      document.documentElement,
+      "orientationchange" in window ? "orientationchange" : "resize",
+      16,
+      375
+    );
+  </script>
+</html>

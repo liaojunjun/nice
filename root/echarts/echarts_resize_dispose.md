@@ -24,4 +24,4 @@ function chartsResize(chartsInstance, opts) {
 window.cancel = chartsResize(chart);
 ```
 
-<iframe src="./root/echarts/echarts_resize_dispose_demo.html" width="100%" height="500"></iframe>
+<iframe src="./echarts/echarts_resize_dispose_demo.html" width="100%" height="500"></iframe>

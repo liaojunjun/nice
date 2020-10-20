@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>组合所有商品规格</title>
+    <style>
+      body {
+        font-size: 14px;
+        padding: 1em 10em;
+        background-color: #ddd;
+      }
+      .format {
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        padding: 1em;
+      }
+      table {
+        background-color: #fff;
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      input {
+        margin-left: 20px;
+        padding: 5px;
+        font-size: 15px;
+      }
+      td,
+      th {
+        text-align: left;
+        border: 1px solid #ddd;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <div>
+        <h4>规格组合</h4>
+        <div class="format">
+            <div>
+                颜色：
+                  <ul>
+                      <li v-for="i in  colors">{{i}}</li>
+                  </ul>
+                  <input type="text" v-model="color" @keyup.13="addColor">
+              </div>
+              <div>
+                大小:
+                  <ul>
+                      <li v-for="i in  sizes">{{i}}</li>
+                  </ul>
+                  <input type="text" v-model="size" @keyup.13="addSize">
+              </div>
+              <div>
+                终端：
+                  <ul>
+                      <li v-for="i in  terminals">{{i}}</li>
+                  </ul>
+                  <input type="text" v-model="terminal" @keyup.13="addTerminal">
+              </div>
+        </div>
+          <br>
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th>颜色</th>
+                <th>大小</th>
+                <th>终端</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr v-for="i in combination">
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                </tr>
+            </tbody>
+          </table>
+      </div>
+    </script>
+    <script>
+      function exchangeCombination(arr) {
+        const len = arr.length;
+        if (len >= 2) {
+          const len0 = arr[0].length;
+          const len1 = arr[1].length;
+          const items = new Array(len0 * len1);
+          let index = 0;
+          for (let i = 0; i < len0; i++) {
+            for (let j = 0; j < len1; j++) {
+              if (Array.isArray(arr[0][i])) {
+                items[index] = arr[0][i].concat(arr[1][j]);
+              } else {
+                items[index] = [arr[0][i]].concat(arr[1][j]);
+              }
+              index++;
+            }
+          }
+          const newArr = new Array(len - 1);
+          for (let i = 2; i < arr.length; i++) {
+            newArr[i - 1] = arr[i];
+          }
+          newArr[0] = items;
+          return exchangeCombination(newArr);
+        } else {
+          return arr[0];
+        }
+      }
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          addColor() {
+            this.colors.push(this.color);
+            this.color = "";
+            this.calculate();
+          },
+          addSize() {
+            this.sizes.push(this.size);
+            this.size = "";
+            this.calculate();
+          },
+          addTerminal() {
+            this.terminals.push(this.terminal);
+            this.terminal = "";
+            this.calculate();
+          },
+          calculate() {
+            // 顺序要和th一致
+            var o = [this.colors, this.sizes, this.terminals];
+            this.combination = exchangeCombination(o);
+          },
+        },
+        mounted: function () {
+          this.calculate();
+        },
+        data: {
+          colors: ["红色", "蓝色"],
+          color: "",
+          sizes: ["大", "小"],
+          size: "",
+          terminals: ["电脑", "手机"],
+          terminal: "",
+          combination: [],
+        },
+      });
+    </script>
+  </body>
+</html>

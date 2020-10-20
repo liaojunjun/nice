@@ -21,4 +21,4 @@ mousedown.pipe(
 );
 ```
 
-<iframe src="./root/canvas/signature_demo.html" width="100%" height="350"></iframe>
+<iframe src="./canvas/signature_demo.html" width="100%" height="350"></iframe>

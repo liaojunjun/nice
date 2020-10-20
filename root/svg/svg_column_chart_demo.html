@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>svg 画柱形图</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <svg xmlns="http://www.w3.org/2000/svg" :viewBox="conf.viewBox" :height="height" :width="width">
+            <g stroke="none">
+              <rect
+                v-for="item in rectData"
+                :fill="item.color"
+                :x="item.x"
+                :y="item.y"
+                :width="conf.width"
+                :height="item.value"
+              ></rect>
+            </g>
+          </svg>
+      </main>
+    </script>
+    <script>
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          render() {
+            const len = this.data.length;
+            const max = Math.max(...this.data.map((item) => item.value));
+            const width =
+              len * (this.conf.gap + this.conf.width) - this.conf.gap;
+
+            this.conf.viewBox = `0,0,${width},${max}`;
+            this.rectData = this.data.map((item, i) => {
+              const x = i * (this.conf.gap + this.conf.width);
+              const y = max - item.value;
+              return { ...item, x, y };
+            });
+          },
+        },
+        created: function () {
+          this.render();
+        },
+        data: {
+          conf: {
+            width: 50,
+            gap: 20,
+            viewBox: undefined,
+          },
+          height: 100,
+          width: 200,
+          data: [
+            { value: 100, color: "red" },
+            { value: 400, color: "green" },
+            { value: 800, color: "#444" },
+            { value: 200, color: "#444" },
+            { value: 300, color: "#888" },
+            { value: 100, color: "#888" },
+          ],
+          rectData: [],
+        },
+      });
+    </script>
+  </body>
+</html>
