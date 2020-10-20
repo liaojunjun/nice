@@ -11,4 +11,4 @@ const checkMap = {
 };
 ```
 
-<iframe src="./javascript/common_form_validation_demo.html" width="100%" height="400"></iframe>
+<iframe src="https://liaojunjun.github.io/nice/root/javascript/common_form_validation_demo.html" width="100%" height="400"></iframe>
