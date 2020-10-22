@@ -190,16 +190,16 @@
         .task-list-item{list-style-type:none}
         .task-list-item+.task-list-item{margin-top:3px}
         .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}
-        #page{width:calc(100% - 300px);margin-left:300px}
+        #page{width:calc(100% - 500px);margin-left:500px;overflow: hidden;}
         fieldset{display:none;background-color:#fff;border:0;overflow:hidden;box-shadow:2px 2px 10px rgba(128,128,128,0.2);margin-bottom:20px;padding:20px}
         fieldset legend{font-weight:bold;color:green;height:3.5em;margin-left:-20px;padding:0}
-        #nav{background:rgb(255 255 255 / .6);padding:40px;position:fixed;top:0;left:0;bottom:0;width:300px;overflow-y:auto}
+        #nav{background:rgb(255 255 255 / .7);padding:20px 10px 100px 20px;position:fixed;top:0;left:0;bottom:0;width:500px;overflow-y:auto;overflow-x: hidden;white-space:nowrap}
         ::-webkit-scrollbar{width:5px}
         ::-webkit-scrollbar-thumb{background-color:#79a5e8}
         @media print,(max-width:900px){
           #nav{display:none!important}
           #page{width:100%!important;margin-left:0!important}
-          fieldset{display:block!important;box-shadow:none!important}
+          fieldset{padding-top: 0 !important;padding-bottom: 0 !important;display:block!important;box-shadow:none!important}
           .toggle-hash-btn {display: none !important;}
         }
         .hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}
@@ -220,6 +220,7 @@
         .hljs-emphasis{font-style:italic}
         .hljs-strong{font-weight:bold}
         .toggle-hash-btn {position: fixed;bottom: 10px;left:10px;z-index: 1000; display: flex; justify-content: space-between;  width: 270px;}
+        iframe {border: 5px solid #999;margin:10px;width: 90%;min-height: 50px;}
     </style>
     <script>
           const $ = selector => document.querySelector(selector);
@@ -263,9 +264,8 @@
 <body>
   <div class="toggle-hash-btn">
     <button  onclick="toggleHash()">开启专注模式</button>
-     <a target='_blank' href="https://github.com/liaojunjun/ggdoc"><svg class="octicon octicon-mark-github v-align-middle" height="25" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
   </div><div id="page">
-      <fieldset id='_m3gAwZ'>
+      <fieldset id='_1iDSQA'>
       <legend>copy_to_clipboard</legend>
       <pre><code class="language-ts">el.select();
 <span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&quot;copy&quot;</span>);</code></pre>
@@ -273,36 +273,36 @@
 
       </fieldset>
       
-      <fieldset id='_U1P1Jj'>
+      <fieldset id='_kO3MjP'>
       <legend>scroll_load_pictures</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/scroll_load_pictures_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_pnUhR3'>
+      <fieldset id='_75cdRN'>
       <legend>generate_random_string</legend>
       <p>setTimeout 分解繁重的循环任务</p>
 <iframe src="https://liaojunjun.github.io/nice/root/javascript/generate_random_string_demo.html" width="100%" height="70"></iframe>
 
       </fieldset>
       
-      <fieldset id='_Gsa9Ux'>
+      <fieldset id='_lN1TCi'>
       <legend>file_upload_download</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/file_upload_download_demo.html" width="100%" height="200"></iframe>
 
       </fieldset>
       
-      <fieldset id='_Nw16JD'>
+      <fieldset id='_8zkxaH'>
       <legend>dynamic_font_size</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/dynamic_font_size_demo.html" width="100%" height="200"></iframe>
       </fieldset>
       
-      <fieldset id='_QQ62hG'>
+      <fieldset id='_ynRk6V'>
       <legend>element_in_viewport</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/element_in_viewport_demo.html" width="100%" height="200"></iframe>
       </fieldset>
       
-      <fieldset id='_hZyKCA'>
+      <fieldset id='_IJ5Ozd'>
       <legend>limit_input</legend>
       <ol>
 <li>考虑中文输入</li>
@@ -312,7 +312,7 @@
 
       </fieldset>
       
-      <fieldset id='_BH6IMZ'>
+      <fieldset id='_OjDJ0r'>
       <legend>slide_unlock</legend>
       <p>window 上监听 mousemove、mouseup 而不是滑块或滑板上</p>
 <pre><code class="language-ts"><span class="hljs-keyword">const</span> mousedown = fromEvent(unlock_slide, <span class="hljs-string">&quot;mousedown&quot;</span>);
@@ -322,10 +322,10 @@
 
       </fieldset>
       
-      <fieldset id='_J7PImg'>
+      <fieldset id='_W5TOqW'>
       <legend>common_form_validation</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">const</span> checkMap = {
-  tel: <span class="hljs-regexp">/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/</span>,
+  <span class="hljs-attr">tel</span>: <span class="hljs-regexp">/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/</span>,
   phone: <span class="hljs-regexp">/^1[3456789]\d{9}$/</span>,
   smsCode: <span class="hljs-regexp">/^\d{6}$/</span>,
   goodPass: <span class="hljs-regexp">/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/</span>,
@@ -338,18 +338,18 @@
 
       </fieldset>
       
-      <fieldset id='_NQzv2m'>
+      <fieldset id='_B56tB1'>
       <legend>ul_proxy_li</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/ul_proxy_li_demo.html" width="100%" height="520"></iframe>
 
       </fieldset>
       
-      <fieldset id='_mgzAxe'>
+      <fieldset id='_fkxcvn'>
       <legend>drag_drop_swap</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/javascript/drag_drop_swap_demo.html" width="100%" height="500"></iframe>
       </fieldset>
       
-      <fieldset id='_0vux9R'>
+      <fieldset id='_AoeFdv'>
       <legend>product_specification_combination</legend>
       <pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exchangeCombination</span>(<span class="hljs-params">arr</span>) </span>{
   <span class="hljs-keyword">const</span> len = arr.length;
@@ -382,19 +382,19 @@
 
       </fieldset>
       
-      <fieldset id='_XWE833'>
+      <fieldset id='_raBNzm'>
       <legend>rotation_effect</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/effect/rotation_effect_demo.html" width="100%" height="500"></iframe>
 
       </fieldset>
       
-      <fieldset id='_iXfjw2'>
+      <fieldset id='_YvGByv'>
       <legend>3d_rotation_effect</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/effect/3d_rotation_effect_demo.html" width="100%" height="500"></iframe>
 
       </fieldset>
       
-      <fieldset id='_9Wp3Wh'>
+      <fieldset id='_jCyB2z'>
       <legend>signature</legend>
       <ol>
 <li>监听 canvas 的 mousedown、mousemove</li>
@@ -406,14 +406,14 @@
     mousemove.pipe(
       takeUntil(mouseup),
       startWith({
-        x: e.offsetX,
-        y: e.offsetY,
+        <span class="hljs-attr">x</span>: e.offsetX,
+        <span class="hljs-attr">y</span>: e.offsetY,
       })
     )
   ),
   map(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> ({
-    x: e.offsetX,
-    y: e.offsetY,
+    <span class="hljs-attr">x</span>: e.offsetX,
+    <span class="hljs-attr">y</span>: e.offsetY,
   })),
   pairwise()
 );</code></pre>
@@ -421,55 +421,55 @@
 
       </fieldset>
       
-      <fieldset id='_czOaKA'>
+      <fieldset id='_iXYyuR'>
       <legend>svg_curve</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_curve_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_ifQVsC'>
+      <fieldset id='_usa2LS'>
       <legend>svg_column_chart</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_column_chart_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_eMXEXk'>
+      <fieldset id='_nBHzey'>
       <legend>svg_line_graph</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_line_graph_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_nf1oVS'>
+      <fieldset id='_xsquyw'>
       <legend>svg_pie_chart</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_pie_chart_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_fkYnPi'>
+      <fieldset id='_UZPaJz'>
       <legend>svg_radar_chart</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_radar_chart_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_u0FwWU'>
+      <fieldset id='_Uw0A3m'>
       <legend>svg_ring_graph</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_ring_graph_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_xCPO0F'>
+      <fieldset id='_tsXsYB'>
       <legend>svg_polygon</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/svg/svg_polygon_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_qxiXe9'>
+      <fieldset id='_9UMg6h'>
       <legend>echarts_resize_dispose</legend>
       <ol>
 <li>去抖动</li>
 <li>图表 init、resize、dispose</li>
 </ol>
-<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">fn, ms = 300</span>) </span>{
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">fn, ms = <span class="hljs-number">300</span></span>) </span>{
   <span class="hljs-keyword">let</span> timeoutId;
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args</span>) </span>{
     <span class="hljs-built_in">clearTimeout</span>(timeoutId);
@@ -493,11 +493,11 @@
 
       </fieldset>
       
-      <fieldset id='_FEWrFT'>
+      <fieldset id='_WMxHKf'>
       <legend>annotation_use</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component, AfterViewInit, HostListener } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_debounce</span>(<span class="hljs-params">fn, ms = 300</span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_debounce</span>(<span class="hljs-params">fn, ms = <span class="hljs-number">300</span></span>) </span>{
   <span class="hljs-keyword">let</span> timeoutId;
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args</span>) </span>{
     <span class="hljs-built_in">clearTimeout</span>(timeoutId);
@@ -505,7 +505,7 @@
   };
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">delay: <span class="hljs-built_in">number</span> = 300</span>): <span class="hljs-title">MethodDecorator</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">delay: <span class="hljs-built_in">number</span> = <span class="hljs-number">300</span></span>): <span class="hljs-title">MethodDecorator</span> </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
     target: <span class="hljs-built_in">any</span>,
     propertyKey: <span class="hljs-built_in">string</span>,
@@ -517,9 +517,9 @@
 }
 
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;use-descriptor&quot;</span>,
-  template: <span class="hljs-string">` &lt;div id=&quot;main&quot; [style.width.px]=&quot;mainWidth&quot;&gt;&lt;/div&gt; `</span>,
-  styles: [
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;use-descriptor&quot;</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">` &lt;div id=&quot;main&quot; [style.width.px]=&quot;mainWidth&quot;&gt;&lt;/div&gt; `</span>,
+  <span class="hljs-attr">styles</span>: [
     <span class="hljs-string">`
       #main {
         background-color: red;
@@ -528,11 +528,11 @@
     `</span>,
   ],
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UseDescriptorComponent <span class="hljs-keyword">implements</span> AfterViewInit {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UseDescriptorComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">AfterViewInit</span> </span>{
   mainWidth;
   <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">&quot;window:resize&quot;</span>, [<span class="hljs-string">&quot;$event&quot;</span>])
   <span class="hljs-meta">@debounce</span>()
-  ngAfterViewInit(event?) {
+  <span class="hljs-function"><span class="hljs-title">ngAfterViewInit</span>(<span class="hljs-params">event?</span>)</span> {
     <span class="hljs-built_in">this</span>.mainWidth = <span class="hljs-built_in">document</span>.body.clientWidth - <span class="hljs-number">1000</span>;
     <span class="hljs-keyword">if</span> (event) {
     }
@@ -541,7 +541,7 @@
 
       </fieldset>
       
-      <fieldset id='_euNsx6'>
+      <fieldset id='_xwq7No'>
       <legend>responsive_form</legend>
       <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">novalidate</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">&quot;form&quot;</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">&quot;onSubmit($event)&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
@@ -614,9 +614,9 @@
 <span class="hljs-keyword">import</span> { FormControl, FormGroup, Validators } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/forms&quot;</span>;
 
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;use-form&quot;</span>,
-  templateUrl: <span class="hljs-string">&quot;./use-form.component.html&quot;</span>,
-  styles: [
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;use-form&quot;</span>,
+  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&quot;./use-form.component.html&quot;</span>,
+  <span class="hljs-attr">styles</span>: [
     <span class="hljs-string">`
       .has-error {
         display: inline-block;
@@ -643,41 +643,41 @@
     `</span>,
   ],
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UseFormComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UseFormComponent</span> </span>{
   form = <span class="hljs-keyword">new</span> FormGroup({
-    tel: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-    phone: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>),
-    smsCode: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-    pass: <span class="hljs-keyword">new</span> FormGroup(
+    <span class="hljs-attr">tel</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">phone</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>),
+    <span class="hljs-attr">smsCode</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">pass</span>: <span class="hljs-keyword">new</span> FormGroup(
       {
-        goodPass: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-        twoPassword: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+        <span class="hljs-attr">goodPass</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+        <span class="hljs-attr">twoPassword</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
       },
       <span class="hljs-function">(<span class="hljs-params">group: FormGroup</span>) =&gt;</span> {
         <span class="hljs-keyword">return</span> group.get(<span class="hljs-string">&quot;goodPass&quot;</span>).value === group.get(<span class="hljs-string">&quot;twoPassword&quot;</span>).value
           ? <span class="hljs-literal">null</span>
-          : { pass: <span class="hljs-literal">true</span> };
+          : { <span class="hljs-attr">pass</span>: <span class="hljs-literal">true</span> };
       }
     ),
-    integerNum: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-    carNo: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-    birthDate: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
-    email: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">integerNum</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">carNo</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">birthDate</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
+    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> FormControl(<span class="hljs-literal">null</span>, [Validators.required]),
   });
 
   pass: FormGroup = <span class="hljs-built_in">this</span>.form.get(<span class="hljs-string">&quot;pass&quot;</span>) <span class="hljs-keyword">as</span> FormGroup;
 
-  check(<span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form) {
+  <span class="hljs-function"><span class="hljs-title">check</span>(<span class="hljs-params"><span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form</span>)</span> {
     <span class="hljs-keyword">return</span> group.get([<span class="hljs-keyword">type</span>]).touched &amp;&amp; group.get([<span class="hljs-keyword">type</span>]).invalid;
   }
-  getErrorMsg(<span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form) {
+  <span class="hljs-function"><span class="hljs-title">getErrorMsg</span>(<span class="hljs-params"><span class="hljs-keyword">type</span>, group: FormGroup = <span class="hljs-built_in">this</span>.form</span>)</span> {
     <span class="hljs-keyword">if</span> (group.get([<span class="hljs-keyword">type</span>]).hasError(<span class="hljs-string">&quot;required&quot;</span>)) {
       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;必填的&quot;</span>;
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;格式不正确&quot;</span>;
     }
   }
-  onSubmit(e: Event) {
+  <span class="hljs-function"><span class="hljs-title">onSubmit</span>(<span class="hljs-params">e: Event</span>)</span> {
     e.stopPropagation();
     e.preventDefault();
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.form.value);
@@ -686,7 +686,7 @@
 
       </fieldset>
       
-      <fieldset id='_j3W5OK'>
+      <fieldset id='_OjcvRB'>
       <legend>time_picker</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> {
   ChangeDetectionStrategy,
@@ -698,15 +698,15 @@
 
 <span class="hljs-keyword">const</span> floor = <span class="hljs-built_in">Math</span>.floor;
 <span class="hljs-keyword">const</span> numStr = <span class="hljs-function">(<span class="hljs-params">n: <span class="hljs-built_in">number</span></span>) =&gt;</span> (n &lt; <span class="hljs-number">10</span> ? <span class="hljs-string">`0<span class="hljs-subst">${n}</span>`</span> : <span class="hljs-string">`<span class="hljs-subst">${n}</span>`</span>);
-<span class="hljs-keyword">const</span> hours = <span class="hljs-built_in">Array</span>.from({ length: <span class="hljs-number">24</span> }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i));
+<span class="hljs-keyword">const</span> hours = <span class="hljs-built_in">Array</span>.from({ <span class="hljs-attr">length</span>: <span class="hljs-number">24</span> }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i));
 <span class="hljs-keyword">const</span> minutes = <span class="hljs-function">(<span class="hljs-params">step: <span class="hljs-built_in">number</span></span>) =&gt;</span>
-  <span class="hljs-built_in">Array</span>.from({ length: floor(<span class="hljs-number">60</span> / step) }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i * step));
+  <span class="hljs-built_in">Array</span>.from({ <span class="hljs-attr">length</span>: floor(<span class="hljs-number">60</span> / step) }, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> numStr(i * step));
 <span class="hljs-comment">/**
  * &lt;time-picker [(value)]=&quot;value&quot;&gt;&lt;/time-picker&gt;
  */</span>
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;time-picker&quot;</span>,
-  template: <span class="hljs-string">`
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;time-picker&quot;</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
     &lt;div class=&quot;time-picker&quot;&gt;
       &lt;select [(ngModel)]=&quot;a&quot; (change)=&quot;change()&quot;&gt;
         &lt;option *ngFor=&quot;let h of h1&quot; [value]=&quot;h&quot;&gt;{{ h }}&lt;/option&gt;
@@ -723,7 +723,7 @@
       &lt;/select&gt;
     &lt;/div&gt;
   `</span>,
-  styles: [
+  <span class="hljs-attr">styles</span>: [
     <span class="hljs-string">`
       .time-picker select {
         width: 3em;
@@ -735,16 +735,16 @@
       }
     `</span>,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  <span class="hljs-attr">changeDetection</span>: ChangeDetectionStrategy.OnPush,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TimePickerComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePickerComponent</span> </span>{
   <span class="hljs-meta">@Output</span>() valueChange = <span class="hljs-keyword">new</span> EventEmitter&lt;<span class="hljs-built_in">string</span>&gt;();
 
   <span class="hljs-meta">@Input</span>()
-  get value() {
+  <span class="hljs-keyword">get</span> <span class="hljs-title">value</span>() {
     <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.a}</span>:<span class="hljs-subst">${<span class="hljs-built_in">this</span>.b}</span>-<span class="hljs-subst">${<span class="hljs-built_in">this</span>.c}</span>:<span class="hljs-subst">${<span class="hljs-built_in">this</span>.d}</span>`</span>;
   }
-  set value(str: <span class="hljs-built_in">string</span>) {
+  <span class="hljs-keyword">set</span> <span class="hljs-title">value</span>(<span class="hljs-params">str: <span class="hljs-built_in">string</span></span>) {
     [<span class="hljs-built_in">this</span>.a, <span class="hljs-built_in">this</span>.b, <span class="hljs-built_in">this</span>.c, <span class="hljs-built_in">this</span>.d] = (
       (str || <span class="hljs-string">&quot;&quot;</span>).match(<span class="hljs-regexp">/^(\d\d):(\d\d)-(\d\d):(\d\d)$/</span>) || []
     ).slice(<span class="hljs-number">1</span>);
@@ -757,25 +757,25 @@
   c = <span class="hljs-string">&quot;&quot;</span>;
   d = <span class="hljs-string">&quot;&quot;</span>;
 
-  get h1() {
+  <span class="hljs-keyword">get</span> <span class="hljs-title">h1</span>() {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.c ? hours.slice(<span class="hljs-number">0</span>, +<span class="hljs-built_in">this</span>.c + <span class="hljs-number">1</span>) : hours;
   }
-  get m1() {
+  <span class="hljs-keyword">get</span> <span class="hljs-title">m1</span>() {
     <span class="hljs-keyword">return</span> minutes(<span class="hljs-built_in">this</span>.step).slice(
       <span class="hljs-number">0</span>,
       <span class="hljs-built_in">this</span>.d &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c ? floor(+<span class="hljs-built_in">this</span>.d / <span class="hljs-built_in">this</span>.step) + <span class="hljs-number">1</span> : <span class="hljs-literal">undefined</span>
     );
   }
-  get h2() {
+  <span class="hljs-keyword">get</span> <span class="hljs-title">h2</span>() {
     <span class="hljs-keyword">return</span> hours.slice(+<span class="hljs-built_in">this</span>.a);
   }
-  get m2() {
+  <span class="hljs-keyword">get</span> <span class="hljs-title">m2</span>() {
     <span class="hljs-keyword">return</span> minutes(<span class="hljs-built_in">this</span>.step).slice(
       <span class="hljs-built_in">this</span>.b &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c ? floor(+<span class="hljs-built_in">this</span>.b / <span class="hljs-built_in">this</span>.step) : <span class="hljs-number">0</span>
     );
   }
 
-  change() {
+  <span class="hljs-function"><span class="hljs-title">change</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.b &amp;&amp; <span class="hljs-built_in">this</span>.d &amp;&amp; <span class="hljs-built_in">this</span>.a === <span class="hljs-built_in">this</span>.c &amp;&amp; <span class="hljs-built_in">this</span>.b &gt; <span class="hljs-built_in">this</span>.d) {
       <span class="hljs-built_in">this</span>.b = <span class="hljs-built_in">this</span>.d;
     }
@@ -786,53 +786,53 @@
 }
 
 <span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`&lt;time-picker [(value)]=&quot;value&quot;&gt;&lt;/time-picker&gt;`</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;time-picker [(value)]=&quot;value&quot;&gt;&lt;/time-picker&gt;`</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TimePickerDemoComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePickerDemoComponent</span> </span>{
   value = <span class="hljs-string">&quot;10:10-11:20&quot;</span>;
 }</code></pre>
 
       </fieldset>
       
-      <fieldset id='_JHTu6W'>
+      <fieldset id='_ToaH4Y'>
       <legend>block_loading_container</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> { Component, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
 
 <span class="hljs-comment">/**
- * @example
+ * <span class="hljs-doctag">@example</span>
  * &lt;loader [loading]=&quot;isLoading&quot;&gt;&lt;app-component&gt;&lt;/app-component&gt;&lt;/loader&gt;
  */</span>
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;loader&quot;</span>,
-  template: <span class="hljs-string">`
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;loader&quot;</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
     &lt;ng-content *ngIf=&quot;!loading; else showLoader&quot;&gt;&lt;/ng-content
     &gt;&lt;ng-template #showLoader&gt;加载中...&lt;/ng-template&gt;
   `</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LoaderComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoaderComponent</span> </span>{
   <span class="hljs-meta">@Input</span>() loading: <span class="hljs-built_in">boolean</span> | <span class="hljs-literal">undefined</span>;
 }
 
 <span class="hljs-comment">/**
- * @example
+ * <span class="hljs-doctag">@example</span>
  * &lt;wrapper&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;/wrapper&gt;
  */</span>
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;wrapper&quot;</span>,
-  template: <span class="hljs-string">`
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;wrapper&quot;</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
     &lt;div class=&quot;wrapper&quot;&gt;
       &lt;ng-content&gt;&lt;/ng-content&gt;
     &lt;/div&gt;
   `</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Wrapper {}
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Wrapper</span> </span>{}
 
 <span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`&lt;loader [loading]=&quot;isLoading&quot;&gt;你好呀&lt;/loader&gt;`</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;loader [loading]=&quot;isLoading&quot;&gt;你好呀&lt;/loader&gt;`</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LoaderDemoComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoaderDemoComponent</span> </span>{
   isLoading = <span class="hljs-literal">true</span>;
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
       <span class="hljs-built_in">this</span>.isLoading = <span class="hljs-literal">false</span>;
     }, <span class="hljs-number">3000</span>);
@@ -841,7 +841,7 @@
 
       </fieldset>
       
-      <fieldset id='_OWG1Yy'>
+      <fieldset id='_PDU9lC'>
       <legend>countdown</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> {
   AfterViewInit,
@@ -856,16 +856,16 @@
 <span class="hljs-keyword">import</span> { finalize, map, switchMapTo, take } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;rxjs/operators&quot;</span>;
 
 <span class="hljs-meta">@Directive</span>({
-  selector: <span class="hljs-string">&quot;[countDown]&quot;</span>,
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;[countDown]&quot;</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CountDownDirective <span class="hljs-keyword">implements</span> OnDestroy, AfterViewInit {
-  dom: HTMLButtonElement;
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CountDownDirective</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnDestroy</span>, <span class="hljs-title">AfterViewInit</span> </span>{
+  <span class="hljs-attr">dom</span>: HTMLButtonElement;
   task$: Subject&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-keyword">new</span> Subject();
 
   <span class="hljs-meta">@Input</span>() start: <span class="hljs-built_in">number</span> = <span class="hljs-number">99</span>;
 
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> element: ElementRef</span>) {}
-  ngAfterViewInit() {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> element: ElementRef</span>)</span> {}
+  <span class="hljs-function"><span class="hljs-title">ngAfterViewInit</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">this</span>.dom = <span class="hljs-built_in">this</span>.element.nativeElement;
     <span class="hljs-keyword">const</span> text = <span class="hljs-built_in">this</span>.dom.textContent;
     <span class="hljs-built_in">this</span>.task$
@@ -886,30 +886,30 @@
       });
   }
 
-  toggleDisabled(bol: <span class="hljs-built_in">boolean</span>) {
+  <span class="hljs-function"><span class="hljs-title">toggleDisabled</span>(<span class="hljs-params">bol: <span class="hljs-built_in">boolean</span></span>)</span> {
     bol
       ? <span class="hljs-built_in">this</span>.dom.setAttribute(<span class="hljs-string">&quot;disabled&quot;</span>, <span class="hljs-string">&quot;disabled&quot;</span>)
       : <span class="hljs-built_in">this</span>.dom.removeAttribute(<span class="hljs-string">&quot;disabled&quot;</span>);
   }
 
   <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">&quot;click&quot;</span>)
-  click() {
+  <span class="hljs-function"><span class="hljs-title">click</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">this</span>.toggleDisabled(<span class="hljs-literal">true</span>);
     <span class="hljs-built_in">this</span>.task$.next();
   }
-  ngOnDestroy() {
+  <span class="hljs-function"><span class="hljs-title">ngOnDestroy</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">this</span>.task$.unsubscribe();
   }
 }
 
 <span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`&lt;button type=&quot;button&quot; countDown [start]=&quot;10&quot;&gt;倒计数&lt;/button&gt;`</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;button type=&quot;button&quot; countDown [start]=&quot;10&quot;&gt;倒计数&lt;/button&gt;`</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CountDownComponent {}</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CountDownComponent</span> </span>{}</code></pre>
 
       </fieldset>
       
-      <fieldset id='_anbAMi'>
+      <fieldset id='_oRsuAY'>
       <legend>permission_panel</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> {
   Component,
@@ -920,17 +920,17 @@
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
 
 <span class="hljs-meta">@Directive</span>({
-  selector: <span class="hljs-string">&quot;[permissions]&quot;</span>,
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;[permissions]&quot;</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PermissionsDirective {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PermissionsDirective</span> </span>{
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">
     <span class="hljs-keyword">private</span> viewContainer: ViewContainerRef,
     <span class="hljs-keyword">private</span> templateRef: TemplateRef&lt;<span class="hljs-built_in">any</span>&gt;
-  </span>) {}
+  </span>)</span> {}
 
-  allPermissions: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>];
+  <span class="hljs-attr">allPermissions</span>: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>];
 
-  <span class="hljs-meta">@Input</span>() set permissions(input: <span class="hljs-built_in">string</span>) {
+  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title">permissions</span>(<span class="hljs-params">input: <span class="hljs-built_in">string</span></span>) {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.allPermissions?.includes(input)) {
       <span class="hljs-built_in">this</span>.viewContainer.createEmbeddedView(<span class="hljs-built_in">this</span>.templateRef);
     } <span class="hljs-keyword">else</span> {
@@ -940,36 +940,36 @@
 }
 
 <span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
     有a权限的才显示:
     &lt;div *permissions=&quot;&#x27;a&#x27;&quot;&gt;我有a权限&lt;/div&gt;
     &lt;div *permissions=&quot;&#x27;f&#x27;&quot;&gt;我有f权限&lt;/div&gt;
     &lt;div *permissions=&quot;&#x27;g&#x27;&quot;&gt;我有g权限&lt;/div&gt;
   `</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PermissionsComponent {}</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PermissionsComponent</span> </span>{}</code></pre>
 
       </fieldset>
       
-      <fieldset id='_zgZBvC'>
+      <fieldset id='_Lzqapz'>
       <legend>piping</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> { Pipe, PipeTransform } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/core&quot;</span>;
 <span class="hljs-keyword">import</span> { DomSanitizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@angular/platform-browser&quot;</span>;
 <span class="hljs-keyword">import</span> { get } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash&quot;</span>;
 
 <span class="hljs-meta">@Pipe</span>({
-  name: <span class="hljs-string">&quot;get&quot;</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;get&quot;</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> GetPipe <span class="hljs-keyword">implements</span> PipeTransform {
-  transform(obj: <span class="hljs-built_in">object</span>, path: <span class="hljs-built_in">string</span>, def?): <span class="hljs-built_in">any</span> {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GetPipe</span> <span class="hljs-title">implements</span> <span class="hljs-title">PipeTransform</span> </span>{
+  transform(obj: <span class="hljs-built_in">object</span>, <span class="hljs-attr">path</span>: <span class="hljs-built_in">string</span>, def?): <span class="hljs-built_in">any</span> {
     <span class="hljs-keyword">return</span> get(obj, path, def);
   }
 }
 
 <span class="hljs-meta">@Pipe</span>({
-  name: <span class="hljs-string">&quot;json2obj&quot;</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;json2obj&quot;</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Json2objPipe <span class="hljs-keyword">implements</span> PipeTransform {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Json2objPipe</span> <span class="hljs-title">implements</span> <span class="hljs-title">PipeTransform</span> </span>{
   transform(str: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">object</span> {
     <span class="hljs-keyword">try</span> {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(str);
@@ -980,18 +980,18 @@
 }
 
 <span class="hljs-meta">@Pipe</span>({
-  name: <span class="hljs-string">&quot;safeHtml&quot;</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;safeHtml&quot;</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SafeHtmlPipe <span class="hljs-keyword">implements</span> PipeTransform {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> sanitized: DomSanitizer</span>) {}
-  transform(value: <span class="hljs-built_in">string</span>) {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SafeHtmlPipe</span> <span class="hljs-title">implements</span> <span class="hljs-title">PipeTransform</span> </span>{
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> sanitized: DomSanitizer</span>)</span> {}
+  <span class="hljs-function"><span class="hljs-title">transform</span>(<span class="hljs-params">value: <span class="hljs-built_in">string</span></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sanitized.bypassSecurityTrustHtml(value);
   }
 }</code></pre>
 
       </fieldset>
       
-      <fieldset id='_GgTn5G'>
+      <fieldset id='_gx45sT'>
       <legend>tools</legend>
       <pre><code class="language-ts"><span class="hljs-keyword">import</span> { omitBy, isNil } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash&quot;</span>;
 
@@ -1028,7 +1028,7 @@
 
       </fieldset>
       
-      <fieldset id='_j6XcBZ'>
+      <fieldset id='_lfn0GS'>
       <legend>translate</legend>
       <ol>
 <li>导入模块</li>
@@ -1040,17 +1040,17 @@
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TranslateHttpLoader(httpClient);
 }
 <span class="hljs-meta">@NgModule</span>({
-  declarations: [
+  <span class="hljs-attr">declarations</span>: [
     AppComponent
   ],
-  imports: [
+  <span class="hljs-attr">imports</span>: [
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+      <span class="hljs-attr">loader</span>: {
+        <span class="hljs-attr">provide</span>: TranslateLoader,
+        <span class="hljs-attr">useFactory</span>: HttpLoaderFactory,
+        <span class="hljs-attr">deps</span>: [HttpClient]
       }
     })
   ],
@@ -1063,8 +1063,8 @@
 <span class="hljs-keyword">import</span> { TranslateService } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@ngx-translate/core&quot;</span>;
 
 <span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">&quot;app-root&quot;</span>,
-  template: <span class="hljs-string">`
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;app-root&quot;</span>,
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
     &lt;div&gt;
       &lt;h2&gt;{{ &quot;HOME.TITLE&quot; | translate }}&lt;/h2&gt;
       &lt;label&gt;
@@ -1082,8 +1082,8 @@
     &lt;/div&gt;
   `</span>,
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> translate: TranslateService</span>) {
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> translate: TranslateService</span>)</span> {
     translate.addLangs([<span class="hljs-string">&quot;en&quot;</span>, <span class="hljs-string">&quot;zh&quot;</span>]);
     translate.setDefaultLang(<span class="hljs-string">&quot;en&quot;</span>);
 
@@ -1111,7 +1111,7 @@
 
       </fieldset>
       
-      <fieldset id='_qtHwrp'>
+      <fieldset id='_tNNelD'>
       <legend>create_component</legend>
       <ol>
 <li><a href="https://cn.vuejs.org/v2/guide/components-registration.html">组件-注册</a></li>
@@ -1123,7 +1123,7 @@
 
       </fieldset>
       
-      <fieldset id='_UakNTT'>
+      <fieldset id='_5GzWLr'>
       <legend>create_component</legend>
       <ol>
 <li><a href="https://cn.vuejs.org/v2/guide/components-registration.html">组件-注册</a></li>
@@ -1135,19 +1135,19 @@
 
       </fieldset>
       
-      <fieldset id='_lIIkYG'>
+      <fieldset id='_1powdC'>
       <legend>create_directive</legend>
       <p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html">vue custom directive</a></p>
 
       </fieldset>
       
-      <fieldset id='_wntwnI'>
+      <fieldset id='_LEglB6'>
       <legend>create_service</legend>
       <p><a href="https://github.com/axios/axios">axios</a></p>
 
       </fieldset>
       
-      <fieldset id='_5eI49s'>
+      <fieldset id='_mfpEi2'>
       <legend>flex_layout</legend>
       <pre><code class="language-scss"><span class="hljs-selector-class">.flex</span> {
   <span class="hljs-attribute">display</span>: flex;
@@ -1239,14 +1239,14 @@
 
       </fieldset>
       
-      <fieldset id='_ddSsfq'>
+      <fieldset id='_7lMTch'>
       <legend>loading</legend>
       <p><a href="https://connoratherton.com/loaders">loaders</a></p>
 <iframe src="https://liaojunjun.github.io/nice/root/css/loading_demo.html" width="100%" height="120"></iframe>
 
       </fieldset>
       
-      <fieldset id='_Pqnm4t'>
+      <fieldset id='_qvdZog'>
       <legend>background</legend>
       <pre><code class="language-scss"><span class="hljs-comment">/**
  * $name 图片名字
@@ -1289,7 +1289,7 @@
 
       </fieldset>
       
-      <fieldset id='_spbot6'>
+      <fieldset id='_e9aVpf'>
       <legend>fonts</legend>
       <pre><code class="language-scss"><span class="hljs-comment">/**
  *
@@ -1356,7 +1356,7 @@
 
       </fieldset>
       
-      <fieldset id='_a9OGS6'>
+      <fieldset id='_pS06L6'>
       <legend>icon</legend>
       <pre><code class="language-scss"><span class="hljs-comment">/**
  *
@@ -1413,7 +1413,7 @@
 
       </fieldset>
       
-      <fieldset id='_7TeyFb'>
+      <fieldset id='_wDIUps'>
       <legend>form</legend>
       <pre><code class="language-scss"><span class="hljs-comment">/**
  *
@@ -1460,7 +1460,7 @@
 
       </fieldset>
       
-      <fieldset id='_bc8By8'>
+      <fieldset id='_kKF4m6'>
       <legend>screen</legend>
       <pre><code class="language-scss"><span class="hljs-comment">/**
  * USAGE:
@@ -1527,14 +1527,14 @@
 
       </fieldset>
       
-      <fieldset id='_au9IV1'>
+      <fieldset id='_TjsdL0'>
       <legend>user_offline</legend>
       <ol>
 <li>debounceTime 节流操作信号</li>
 <li>switchMapTo 转 of(0) 并延时 time 分钟,信号发出时间在 time 内阻止发出 0,否则将发出 0</li>
 <li>如果最后发出 0，则用户下线了</li>
 </ol>
-<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">userOffline</span>(<span class="hljs-params">time = 15</span>) </span>{
+<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">userOffline</span>(<span class="hljs-params">time = <span class="hljs-number">15</span></span>) </span>{
   <span class="hljs-keyword">return</span> merge(
     fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&quot;mousemove&quot;</span>),
     fromEvent(<span class="hljs-built_in">document</span>, <span class="hljs-string">&quot;click&quot;</span>),
@@ -1545,19 +1545,19 @@
 
       </fieldset>
       
-      <fieldset id='_q657BV'>
+      <fieldset id='_73liAf'>
       <legend>send_phone_code</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/rxjs/send_phone_code_demo.html" width="100%" height="100"></iframe>
 
       </fieldset>
       
-      <fieldset id='_AZfDxB'>
+      <fieldset id='_i8nMBX'>
       <legend>keyword_search</legend>
       <iframe src="https://liaojunjun.github.io/nice/root/rxjs/keyword_search_demo.html" width="100%" height="300"></iframe>
 
       </fieldset>
       
-      <fieldset id='_47Y3It'>
+      <fieldset id='_uHYxD1'>
       <legend>broadcast</legend>
       <ol>
 <li>创建 ReplaySubject 服务</li>
@@ -1572,26 +1572,26 @@
 <span class="hljs-keyword">const</span> { Observable, ReplaySubject, <span class="hljs-keyword">of</span> } = rxjs;
 <span class="hljs-keyword">const</span> { switchMap } = rxjs.operators;
 
-<span class="hljs-keyword">class</span> AppService {
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppService</span> </span>{
   userSubject = <span class="hljs-keyword">new</span> ReplaySubject(<span class="hljs-number">1</span>);
 
   userState = <span class="hljs-built_in">this</span>.userSubject
     .asObservable()
     .pipe(switchMap(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> (user ? <span class="hljs-keyword">of</span>(user) : <span class="hljs-built_in">this</span>.fetchUser())));
 
-  updateUser(user) {
+  <span class="hljs-function"><span class="hljs-title">updateUser</span>(<span class="hljs-params">user</span>)</span> {
     <span class="hljs-built_in">this</span>.userSubject.next(user);
   }
-  unsubscribe() {
+  <span class="hljs-function"><span class="hljs-title">unsubscribe</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">this</span>.userSubject.unsubscribe();
   }
-  fetchUser() {
+  <span class="hljs-function"><span class="hljs-title">fetchUser</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> Observable.create(<span class="hljs-function">(<span class="hljs-params">observer</span>) =&gt;</span> {
       <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
         observer.next({
-          name: <span class="hljs-string">&quot;user name&quot;</span>,
-          age: <span class="hljs-built_in">Math</span>.random(),
-          sex: <span class="hljs-string">&quot;男&quot;</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;user name&quot;</span>,
+          <span class="hljs-attr">age</span>: <span class="hljs-built_in">Math</span>.random(),
+          <span class="hljs-attr">sex</span>: <span class="hljs-string">&quot;男&quot;</span>,
         });
         observer.complete();
       }, <span class="hljs-number">0</span>);
@@ -1609,7 +1609,7 @@
 <span class="hljs-keyword">const</span> content = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;content&quot;</span>);
 
 <span class="hljs-comment">// 赋初始值，不是必须的</span>
-appService.updateUser({ name: <span class="hljs-string">&quot;first&quot;</span>, age: <span class="hljs-number">11</span>, sex: <span class="hljs-string">&quot;女&quot;</span> });
+appService.updateUser({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;first&quot;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">&quot;女&quot;</span> });
 
 <span class="hljs-comment">// 广播出去</span>
 appService.userState.subscribe(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> {
@@ -1629,14 +1629,14 @@ fromEvent(<span class="hljs-built_in">window</span>, <span class="hljs-string">&
 
       </fieldset>
       
-      <fieldset id='_eau8Ys'>
+      <fieldset id='_1HuEtw'>
       <legend>d3_force</legend>
       <p><a href="https://observablehq.com/@d3/d3v6-migration-guide">d3.v6 迁移指南</a></p>
 <iframe src="https://liaojunjun.github.io/nice/root/d3/d3_force_demo.html" width="100%" height="1000"></iframe>
 
       </fieldset>
       
-      <fieldset id='_C7pA5c'>
+      <fieldset id='_aau1d1'>
       <legend>path</legend>
       <ol>
 <li><a href="https://nodejs.org/docs/latest-v13.x/api/modules.html#modules_dirname">__dirname</a></li>
@@ -1646,5 +1646,5 @@ fromEvent(<span class="hljs-built_in">window</span>, <span class="hljs-string">&
 </ol>
 
       </fieldset>
-      </div><div id="nav"><div style="margin-left:0em"><strong>javascript</strong><br/></div><div style="margin-left:2em"><a href="#_m3gAwZ">copy_to_clipboard</a><br/></div><div style="margin-left:2em"><a href="#_U1P1Jj">scroll_load_pictures</a><br/></div><div style="margin-left:2em"><a href="#_pnUhR3">generate_random_string</a><br/></div><div style="margin-left:2em"><a href="#_Gsa9Ux">file_upload_download</a><br/></div><div style="margin-left:2em"><a href="#_Nw16JD">dynamic_font_size</a><br/></div><div style="margin-left:2em"><a href="#_QQ62hG">element_in_viewport</a><br/></div><div style="margin-left:2em"><a href="#_hZyKCA">limit_input</a><br/></div><div style="margin-left:2em"><a href="#_BH6IMZ">slide_unlock</a><br/></div><div style="margin-left:2em"><a href="#_J7PImg">common_form_validation</a><br/></div><div style="margin-left:2em"><a href="#_NQzv2m">ul_proxy_li</a><br/></div><div style="margin-left:2em"><a href="#_mgzAxe">drag_drop_swap</a><br/></div><div style="margin-left:2em"><a href="#_0vux9R">product_specification_combination</a><br/></div><div style="margin-left:0em"><strong>effect</strong><br/></div><div style="margin-left:2em"><a href="#_XWE833">rotation_effect</a><br/></div><div style="margin-left:2em"><a href="#_iXfjw2">3d_rotation_effect</a><br/></div><div style="margin-left:0em"><strong>canvas</strong><br/></div><div style="margin-left:2em"><a href="#_9Wp3Wh">signature</a><br/></div><div style="margin-left:0em"><strong>svg</strong><br/></div><div style="margin-left:2em"><a href="#_czOaKA">svg_curve</a><br/></div><div style="margin-left:2em"><a href="#_ifQVsC">svg_column_chart</a><br/></div><div style="margin-left:2em"><a href="#_eMXEXk">svg_line_graph</a><br/></div><div style="margin-left:2em"><a href="#_nf1oVS">svg_pie_chart</a><br/></div><div style="margin-left:2em"><a href="#_fkYnPi">svg_radar_chart</a><br/></div><div style="margin-left:2em"><a href="#_u0FwWU">svg_ring_graph</a><br/></div><div style="margin-left:2em"><a href="#_xCPO0F">svg_polygon</a><br/></div><div style="margin-left:0em"><strong>echarts</strong><br/></div><div style="margin-left:2em"><a href="#_qxiXe9">echarts_resize_dispose</a><br/></div><div style="margin-left:0em"><strong>ng</strong><br/></div><div style="margin-left:2em"><a href="#_FEWrFT">annotation_use</a><br/></div><div style="margin-left:2em"><a href="#_euNsx6">responsive_form</a><br/></div><div style="margin-left:2em"><a href="#_j3W5OK">time_picker</a><br/></div><div style="margin-left:2em"><a href="#_JHTu6W">block_loading_container</a><br/></div><div style="margin-left:2em"><a href="#_OWG1Yy">countdown</a><br/></div><div style="margin-left:2em"><a href="#_anbAMi">permission_panel</a><br/></div><div style="margin-left:2em"><a href="#_zgZBvC">piping</a><br/></div><div style="margin-left:2em"><a href="#_GgTn5G">tools</a><br/></div><div style="margin-left:2em"><a href="#_j6XcBZ">translate</a><br/></div><div style="margin-left:0em"><strong>vue</strong><br/></div><div style="margin-left:2em"><a href="#_qtHwrp">create_component</a><br/></div><div style="margin-left:2em"><a href="#_UakNTT">create_component</a><br/></div><div style="margin-left:2em"><a href="#_lIIkYG">create_directive</a><br/></div><div style="margin-left:2em"><a href="#_wntwnI">create_service</a><br/></div><div style="margin-left:0em"><strong>css</strong><br/></div><div style="margin-left:2em"><a href="#_5eI49s">flex_layout</a><br/></div><div style="margin-left:2em"><a href="#_ddSsfq">loading</a><br/></div><div style="margin-left:2em"><a href="#_Pqnm4t">background</a><br/></div><div style="margin-left:2em"><a href="#_spbot6">fonts</a><br/></div><div style="margin-left:2em"><a href="#_a9OGS6">icon</a><br/></div><div style="margin-left:2em"><a href="#_7TeyFb">form</a><br/></div><div style="margin-left:2em"><a href="#_bc8By8">screen</a><br/></div><div style="margin-left:0em"><strong>rxjs</strong><br/></div><div style="margin-left:2em"><a href="#_au9IV1">user_offline</a><br/></div><div style="margin-left:2em"><a href="#_q657BV">send_phone_code</a><br/></div><div style="margin-left:2em"><a href="#_AZfDxB">keyword_search</a><br/></div><div style="margin-left:2em"><a href="#_47Y3It">broadcast</a><br/></div><div style="margin-left:0em"><strong>d3</strong><br/></div><div style="margin-left:2em"><a href="#_eau8Ys">d3_force</a><br/></div><div style="margin-left:0em"><strong>node</strong><br/></div><div style="margin-left:2em"><a href="#_C7pA5c">path</a><br/></div></div>
+      </div><div id="nav"><div style="margin-left:0em"><strong>javascript</strong><br/></div><div style="margin-left:2em"><a href="#_1iDSQA">copy_to_clipboard</a><br/></div><div style="margin-left:2em"><a href="#_kO3MjP">scroll_load_pictures</a><br/></div><div style="margin-left:2em"><a href="#_75cdRN">generate_random_string</a><br/></div><div style="margin-left:2em"><a href="#_lN1TCi">file_upload_download</a><br/></div><div style="margin-left:2em"><a href="#_8zkxaH">dynamic_font_size</a><br/></div><div style="margin-left:2em"><a href="#_ynRk6V">element_in_viewport</a><br/></div><div style="margin-left:2em"><a href="#_IJ5Ozd">limit_input</a><br/></div><div style="margin-left:2em"><a href="#_OjDJ0r">slide_unlock</a><br/></div><div style="margin-left:2em"><a href="#_W5TOqW">common_form_validation</a><br/></div><div style="margin-left:2em"><a href="#_B56tB1">ul_proxy_li</a><br/></div><div style="margin-left:2em"><a href="#_fkxcvn">drag_drop_swap</a><br/></div><div style="margin-left:2em"><a href="#_AoeFdv">product_specification_combination</a><br/></div><div style="margin-left:0em"><strong>effect</strong><br/></div><div style="margin-left:2em"><a href="#_raBNzm">rotation_effect</a><br/></div><div style="margin-left:2em"><a href="#_YvGByv">3d_rotation_effect</a><br/></div><div style="margin-left:0em"><strong>canvas</strong><br/></div><div style="margin-left:2em"><a href="#_jCyB2z">signature</a><br/></div><div style="margin-left:0em"><strong>svg</strong><br/></div><div style="margin-left:2em"><a href="#_iXYyuR">svg_curve</a><br/></div><div style="margin-left:2em"><a href="#_usa2LS">svg_column_chart</a><br/></div><div style="margin-left:2em"><a href="#_nBHzey">svg_line_graph</a><br/></div><div style="margin-left:2em"><a href="#_xsquyw">svg_pie_chart</a><br/></div><div style="margin-left:2em"><a href="#_UZPaJz">svg_radar_chart</a><br/></div><div style="margin-left:2em"><a href="#_Uw0A3m">svg_ring_graph</a><br/></div><div style="margin-left:2em"><a href="#_tsXsYB">svg_polygon</a><br/></div><div style="margin-left:0em"><strong>echarts</strong><br/></div><div style="margin-left:2em"><a href="#_9UMg6h">echarts_resize_dispose</a><br/></div><div style="margin-left:0em"><strong>ng</strong><br/></div><div style="margin-left:2em"><a href="#_WMxHKf">annotation_use</a><br/></div><div style="margin-left:2em"><a href="#_xwq7No">responsive_form</a><br/></div><div style="margin-left:2em"><a href="#_OjcvRB">time_picker</a><br/></div><div style="margin-left:2em"><a href="#_ToaH4Y">block_loading_container</a><br/></div><div style="margin-left:2em"><a href="#_PDU9lC">countdown</a><br/></div><div style="margin-left:2em"><a href="#_oRsuAY">permission_panel</a><br/></div><div style="margin-left:2em"><a href="#_Lzqapz">piping</a><br/></div><div style="margin-left:2em"><a href="#_gx45sT">tools</a><br/></div><div style="margin-left:2em"><a href="#_lfn0GS">translate</a><br/></div><div style="margin-left:0em"><strong>vue</strong><br/></div><div style="margin-left:2em"><a href="#_tNNelD">create_component</a><br/></div><div style="margin-left:2em"><a href="#_5GzWLr">create_component</a><br/></div><div style="margin-left:2em"><a href="#_1powdC">create_directive</a><br/></div><div style="margin-left:2em"><a href="#_LEglB6">create_service</a><br/></div><div style="margin-left:0em"><strong>css</strong><br/></div><div style="margin-left:2em"><a href="#_mfpEi2">flex_layout</a><br/></div><div style="margin-left:2em"><a href="#_7lMTch">loading</a><br/></div><div style="margin-left:2em"><a href="#_qvdZog">background</a><br/></div><div style="margin-left:2em"><a href="#_e9aVpf">fonts</a><br/></div><div style="margin-left:2em"><a href="#_pS06L6">icon</a><br/></div><div style="margin-left:2em"><a href="#_wDIUps">form</a><br/></div><div style="margin-left:2em"><a href="#_kKF4m6">screen</a><br/></div><div style="margin-left:0em"><strong>rxjs</strong><br/></div><div style="margin-left:2em"><a href="#_TjsdL0">user_offline</a><br/></div><div style="margin-left:2em"><a href="#_73liAf">send_phone_code</a><br/></div><div style="margin-left:2em"><a href="#_i8nMBX">keyword_search</a><br/></div><div style="margin-left:2em"><a href="#_uHYxD1">broadcast</a><br/></div><div style="margin-left:0em"><strong>d3</strong><br/></div><div style="margin-left:2em"><a href="#_1HuEtw">d3_force</a><br/></div><div style="margin-left:0em"><strong>node</strong><br/></div><div style="margin-left:2em"><a href="#_aau1d1">path</a><br/></div></div>
 </body></html>
