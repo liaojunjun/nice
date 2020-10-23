@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滑块</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+    <style>
+      .warp {
+        background-color: #ccc;
+        height: 30px;
+        width: 400px;
+        border-radius: 5px;
+        position: relative;
+        margin: 50px;
+      }
+      .slider {
+        background-color: blue;
+        width: 20px;
+        height: 50px;
+        position: absolute;
+        top: -10px;
+        z-index: 100;
+        border-radius: 5px;
+        cursor: pointer;
+        left: -10px;
+        touch-action: none;
+      }
+      .value {
+        position: absolute;
+        bottom: 5px;
+        left: calc(100% + 20px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warp">
+      <div class="slider"></div>
+      <div class="value">0%</div>
+    </div>
+    <script>
+      const slider = document.querySelector(".slider");
+      const warp = document.querySelector(".warp");
+      const value = document.querySelector(".value");
+      const width = slider.offsetWidth;
+      const max_width = warp.offsetWidth;
+
+      slider.ondragstart = () => false;
+
+      const { fromEvent } = rxjs;
+      const {
+        switchMap,
+        takeUntil,
+        map,
+        distinctUntilChanged,
+      } = rxjs.operators;
+
+      const pointerdown = fromEvent(slider, "pointerdown");
+      const pointermove = fromEvent(slider, "pointermove");
+      const pointerup = fromEvent(slider, "pointerup");
+
+      let x;
+      const validValue = (v) =>
+        Math.min(Math.max(-width / 2, v), max_width - width / 2);
+
+      pointerdown
+        .pipe(
+          switchMap((e) => {
+            x = e.clientX - slider.offsetLeft - warp.offsetLeft;
+            slider.setPointerCapture(e.pointerId);
+            return pointermove.pipe(takeUntil(pointerup));
+          }),
+          map((e) => validValue(e.clientX - x - warp.offsetLeft)),
+          distinctUntilChanged()
+        )
+        .subscribe((left) => {
+          slider.style.left = left + "px";
+          value.innerText =
+            Math.round(((left + width / 2) / max_width) * 100) + "%";
+        });
+    </script>
+  </body>
+</html>
