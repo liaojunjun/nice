@@ -17,6 +17,7 @@
 | 拖拽交换         | [Drag and drop swap](https://liaojunjun.github.io/nice/root/javascript/drag_drop_swap)                                   |
 | 商品规格组合     | [Product specification combination](https://liaojunjun.github.io/nice/root/javascript/product_specification_combination) |
 | tooltip          | [tooltip](https://liaojunjun.github.io/nice/root/javascript/tooltip)                                                     |
+| slider 滑块      | [slider](https://liaojunjun.github.io/nice/root/javascript/slider)                                                       |
 
 #### effect
 
