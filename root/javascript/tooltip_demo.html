@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      [data-tooltip] {
+        display: inline-block;
+        background-color: #eee;
+        padding: 2px 5px;
+        cursor: pointer;
+      }
+      [data-tooltip] > [data-tooltip] {
+        background-color: #ccc;
+      }
+
+      .tip {
+        position: fixed;
+        z-index: 1000;
+        padding: 10px;
+        max-width: 50vw;
+        background-color: #fff;
+      }
+
+      .tip .content {
+        box-shadow: 5px 5px 5px #ccc;
+        border: 1px solid #efefef;
+        padding: 10px;
+      }
+      .a,
+      .b,
+      .c,
+      .d,
+      .x,
+      .y,
+      .z {
+        position: fixed;
+        z-index: 10;
+      }
+      .a {
+        top: 10px;
+        left: 10px;
+      }
+
+      .b {
+        top: 10px;
+        right: 10px;
+      }
+
+      .c {
+        bottom: 10px;
+        left: 10px;
+      }
+
+      .d {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .x {
+        left: 50%;
+        top: 10px;
+      }
+
+      .y {
+        left: 50%;
+        top: 50%;
+      }
+
+      .z {
+        left: 50%;
+        bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="a"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="b"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="c"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="d"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="x"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="y"
+    >
+      hello
+    </div>
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello world"
+      class="z"
+    >
+      hello
+    </div>
+
+    <div
+      data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello w"
+      style="width: 70%"
+    >
+      Once upon a time there was a mother pig who had three little pigs. The
+      three little pigs grew so big that their mother said to them, "You are too
+      big to live here any longer. You must go and build houses for yourselves.
+      But take care that the wolf does not catch you." The three little pigs set
+      off. "We will
+      <span
+        data-tooltip="hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello w"
+        >take care</span
+      >
+      that the wolf does not catch us," they said. Soon they met a man Hover
+      over me
+    </div>
+  </body>
+  <script>
+    let currentTip = null;
+    document.addEventListener(
+      "mouseover",
+      (e) => {
+        if (currentTip) return;
+        const item = e.target.closest("[data-tooltip]");
+        if (!item) return;
+        const html = item.dataset.tooltip;
+        const tip = document.createElement("div");
+        const content = document.createElement("div");
+        tip.className = "tip";
+        content.className = "content";
+        content.innerHTML = html;
+        tip.appendChild(content);
+        document.body.appendChild(tip);
+
+        const { width, height, x, y } = item.getBoundingClientRect();
+        const { innerWidth, innerHeight } = window;
+        const { offsetWidth, offsetHeight } = tip;
+        const h = x - offsetWidth / 2 + width / 2;
+
+        if (h >= 0 && h <= innerWidth) {
+          tip.style.left = h + "px";
+        } else if (h < 0) {
+          tip.style.left = x + "px";
+        } else {
+          tip.style.right = innerWidth - x - width + "px";
+        }
+
+        if (y + offsetHeight + height < innerHeight) {
+          tip.style.top = y + height + "px";
+        } else {
+          tip.style.bottom = innerHeight - y + "px";
+        }
+
+        currentTip = tip;
+      },
+      false
+    );
+    document.addEventListener(
+      "mouseout",
+      () => {
+        if (!currentTip) return;
+        currentTip.remove();
+        currentTip = null;
+      },
+      false
+    );
+  </script>
+</html>
