@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carousel 轮播</title>
+    <style>
+      body {
+        margin: 10px;
+      }
+      .warp li:nth-child(1),
+      .warp li:nth-child(6) {
+        background-color: cadetblue;
+      }
+      .warp li:nth-child(2),
+      .warp li:nth-child(7) {
+        background-color: chartreuse;
+      }
+      .warp li:nth-child(3),
+      .warp li:nth-child(8) {
+        background-color: chocolate;
+      }
+      .warp li:nth-child(4),
+      .warp li:nth-child(9) {
+        background-color: coral;
+      }
+      .warp li:nth-child(5),
+      .warp li:nth-child(10) {
+        background-color: cornflowerblue;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      ul {
+        width: 5000px;
+        height: inherit;
+      }
+      ul.animate {
+        transition: transform 1s;
+      }
+      li {
+        z-index: 10;
+        height: inherit;
+        width: 500px;
+        font-size: 20px;
+        float: left;
+        overflow: hidden;
+      }
+      .warp {
+        height: 300px;
+        width: 500px;
+        overflow: hidden;
+        border: 10px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warp" id="swirl">
+      <ul class="animate">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul>
+    </div>
+    <button onclick="prev()">prev</button>
+    <button onclick="next()">next</button>
+  </body>
+  <script>
+    const ul = document.querySelector("#swirl ul");
+    const allCard = ul.querySelectorAll("li");
+    const length = allCard.length;
+    const pageMax = length - 1;
+    const width = allCard[0].offsetWidth;
+
+    const list = Array.from({ length }, (_, i) => i * width);
+
+    let page = 0;
+    let forward = true;
+
+    function run(page) {
+      ul.style.webkitTransform = `translateX(-${list[page]}px)`;
+    }
+
+    function prev() {
+      run(--page);
+      if (page < 0) page = 0;
+    }
+    function next() {
+      run(++page);
+      if (page > pageMax) page = pageMax;
+    }
+
+    setInterval(() => {
+      if (forward) {
+        next();
+      } else {
+        prev();
+      }
+      if (page === pageMax) {
+        forward = false;
+      } else if (page === 0) {
+        forward = true;
+      }
+    }, 2000);
+  </script>
+</html>

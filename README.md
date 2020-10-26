@@ -20,6 +20,7 @@
 | slider 滑块      | [slider](https://liaojunjun.github.io/nice/root/javascript/slider)                                                       |
 | sticky 导航条    | [stickyNav](https://liaojunjun.github.io/nice/root/javascript/stickyNav)                                                 |
 | 挪动足球         | [move_ball](https://liaojunjun.github.io/nice/root/javascript/move_ball)                                                 |
+| carousel 轮播    | [carousel](https://liaojunjun.github.io/nice/root/javascript/carousel)                                                   |
 
 #### effect
 
