@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      nav {
+        background-color: green;
+        height: 100px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        line-height: 100px;
+        text-align: center;
+      }
+      nav.sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      .sticky + div {
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>贴合导航</h1>
+    <p>
+      文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域
+    </p>
+    <nav>导航</nav>
+    <div style="height: 1500px">
+      <p>
+        文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域文本内容区域
+      </p>
+    </div>
+
+    <script>
+      const nav = document.querySelector("nav");
+      const navTop = nav.offsetTop;
+      document.addEventListener(
+        "scroll",
+        function () {
+          if ((window.pageYOffset || window.scrollY) >= navTop) {
+            nav.classList.add("sticky");
+          } else {
+            nav.classList.remove("sticky");
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>

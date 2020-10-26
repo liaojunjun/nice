@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #field {
+        width: 200px;
+        height: 150px;
+        border: 10px solid black;
+        background-color: #00ff00;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      #ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        transition: all 1s;
+      }
+    </style>
+  </head>
+
+  <body style="height: 2000px">
+    Click on a field to move the ball there.
+    <br />
+
+    <div id="field">
+      <img src="https://en.js.cx/clipart/ball.svg" id="ball" /> . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <script>
+      const border = field.offsetWidth - field.clientWidth;
+
+      const validX = (x) =>
+        Math.min(Math.max(0, x), field.clientWidth - ball.offsetWidth);
+
+      const validY = (y) =>
+        Math.min(Math.max(0, y), field.clientHeight - ball.offsetHeight);
+
+      field.onclick = function (e) {
+        const { pageX, pageY } = e;
+
+        ball.style.left =
+          validX(pageX - field.offsetLeft - ball.offsetWidth / 2 - border / 2) +
+          "px";
+        ball.style.top =
+          validY(pageY - field.offsetTop - ball.offsetHeight / 2 - border / 2) +
+          "px";
+      };
+    </script>
+  </body>
+</html>

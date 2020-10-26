@@ -18,6 +18,8 @@
 | 商品规格组合     | [Product specification combination](https://liaojunjun.github.io/nice/root/javascript/product_specification_combination) |
 | tooltip          | [tooltip](https://liaojunjun.github.io/nice/root/javascript/tooltip)                                                     |
 | slider 滑块      | [slider](https://liaojunjun.github.io/nice/root/javascript/slider)                                                       |
+| sticky 导航条    | [stickyNav](https://liaojunjun.github.io/nice/root/javascript/stickyNav)                                                 |
+| 挪动足球         | [move_ball](https://liaojunjun.github.io/nice/root/javascript/move_ball)                                                 |
 
 #### effect
 
