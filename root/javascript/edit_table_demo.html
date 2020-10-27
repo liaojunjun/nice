@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      th {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      td {
+        width: 150px;
+        white-space: nowrap;
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px;
+      }
+
+      .nw {
+        background-color: #999;
+      }
+
+      .n {
+        background-color: #03f;
+        color: #fff;
+      }
+
+      .ne {
+        background-color: #ff6;
+      }
+
+      .w {
+        background-color: #ff0;
+      }
+
+      .c {
+        background-color: #60c;
+        color: #fff;
+      }
+
+      .e {
+        background-color: #09f;
+        color: #fff;
+      }
+
+      .sw {
+        background-color: #963;
+        color: #fff;
+      }
+
+      .s {
+        background-color: #f60;
+        color: #fff;
+      }
+
+      .se {
+        background-color: #0c3;
+        color: #fff;
+      }
+
+      .edit-td .edit-area {
+        border: none;
+        margin: 0;
+        padding: 0;
+        display: block;
+
+        /* remove resizing handle in Firefox */
+        resize: none;
+
+        /* remove outline on focus in Chrome */
+        outline: none;
+
+        /* remove scrollbar in IE */
+        overflow: auto;
+      }
+
+      .edit-controls {
+        position: absolute;
+      }
+
+      .edit-td {
+        position: relative;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>Click on a table cell to edit it. Press OK or CANCEL when you finish.</p>
+
+    <table id="bagua-table">
+      <tr>
+        <th colspan="3">
+          <em>Bagua</em> Chart: Direction, Element, Color, Meaning
+        </th>
+      </tr>
+      <tr>
+        <td class="nw">
+          <strong>Northwest</strong> <br />Metal <br />Silver <br />Elders
+        </td>
+        <td class="n">
+          <strong>North</strong> <br />Water <br />Blue <br />Change
+        </td>
+        <td class="ne">
+          <strong>Northeast</strong> <br />Earth <br />Yellow <br />Direction
+        </td>
+      </tr>
+      <tr>
+        <td class="w">
+          <strong>West</strong> <br />Metal <br />Gold <br />Youth
+        </td>
+        <td class="c">
+          <strong>Center</strong> <br />All <br />Purple <br />Harmony
+        </td>
+        <td class="e">
+          <strong>East</strong> <br />Wood <br />Blue <br />Future
+        </td>
+      </tr>
+      <tr>
+        <td class="sw">
+          <strong>Southwest</strong> <br />Earth <br />Brown <br />Tranquility
+        </td>
+        <td class="s">
+          <strong>South</strong> <br />Fire <br />Orange <br />Fame
+        </td>
+        <td class="se">
+          <strong>Southeast</strong> <br />Wood <br />Green <br />Romance
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      const table = document.getElementById("bagua-table");
+
+      let editingTd = null;
+
+      table.onclick = function (e) {
+        const node = e.target.closest("td,.btn-save,.btn-cancel");
+        if (!node) return;
+        if (!table.contains(node)) return;
+        const hasClass = (name) => node.classList.contains(name);
+
+        if (hasClass("btn-save")) {
+          finish(editingTd.ele, true);
+        } else if (hasClass("btn-cancel")) {
+          finish(editingTd.ele, false);
+        } else if (node && node.tagName === "TD" && !editingTd) {
+          edit(node);
+        }
+      };
+      function edit(td) {
+        td.classList.add("edit-td");
+        const area = document.createElement("textarea");
+
+        editingTd = {
+          ele: td,
+          data: td.innerHTML,
+          area,
+        };
+
+        area.value = editingTd.data;
+        area.style.width = td.offsetWidth + "px";
+        area.style.height = td.offsetHeight + "px";
+
+        const controls = document.createElement("div");
+        controls.className = "edit-controls";
+        controls.innerHTML = `<button class="btn-save">btn-save</button><button class="btn-cancel">btn-cancel</button>`;
+
+        td.innerHTML = "";
+        td.append(area, controls);
+        area.focus();
+      }
+      function finish(td, isSave) {
+        if (isSave) {
+          td.innerHTML = editingTd.area.value;
+        } else {
+          td.innerHTML = editingTd.data;
+        }
+        editingTd.area.area.remove();
+        editingTd = null;
+        td.classList.remove("edit-td");
+      }
+    </script>
+  </body>
+</html>

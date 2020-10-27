@@ -22,6 +22,7 @@
 | 挪动足球         | [move_ball](https://liaojunjun.github.io/nice/root/javascript/move_ball)                                                 |
 | carousel 轮播    | [carousel](https://liaojunjun.github.io/nice/root/javascript/carousel)                                                   |
 | 表格排序         | [sort_table](https://liaojunjun.github.io/nice/root/javascript/sort_table)                                               |
+| 编辑表格         | [edit_table](https://liaojunjun.github.io/nice/root/javascript/edit_table)                                               |
 
 #### effect
 
