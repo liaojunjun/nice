@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        padding: 10px;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        text-align: center;
+      }
+      button + button {
+        margin-left: 2em;
+      }
+      .remove,
+      .copy,
+      .detail {
+        color: #fff;
+        border: 0;
+        padding: 5px 10px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.1s;
+      }
+      .remove {
+        background-color: crimson;
+      }
+      .copy {
+        background-color: lightseagreen;
+      }
+      .detail {
+        background-color: limegreen;
+      }
+      .operating button {
+        position: relative;
+      }
+      .confirm {
+        position: absolute;
+        z-index: 1000;
+        background: #fff;
+        color: #333;
+        padding: 10px;
+        border: 1px solid #ccc;
+        width: 10em;
+      }
+      button[disabled] {
+        opacity: 0.4;
+        cursor: default;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th>学历</th>
+          <th>爱好</th>
+          <th>年纪</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td class="operating">
+            <button class="remove" data-action="remove">删除</button>
+            <button class="copy" data-action="copy">复制</button>
+            <button class="detail" data-action="detail">详情</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td class="operating">
+            <button class="remove" data-action="remove">删除</button>
+            <button class="copy" data-action="copy">复制</button>
+            <button class="detail" data-action="detail">详情</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td class="operating">
+            <button class="remove" data-action="remove">删除</button>
+            <button class="copy" data-action="copy">复制</button>
+            <button class="detail" data-action="detail">详情</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td>sdf</td>
+          <td class="operating">
+            <button class="remove" data-action="remove">删除</button>
+            <button class="copy" data-action="copy">复制</button>
+            <button class="detail" data-action="detail">详情</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      const table = document.getElementById("table");
+      const select = "button[data-action]";
+      const buttons = Array.from(table.querySelectorAll(select));
+      let otherButtons = [];
+
+      let confirm = null;
+      table.addEventListener("click", (e) => {
+        const node = e.target.closest(select);
+        if (node && table.contains(node)) {
+          const action = node.dataset.action;
+          if (action === "remove" && !confirm) {
+            otherButtons = buttons.filter((btn) => btn !== node);
+            otherButtons.forEach((btn) => btn.setAttribute("disabled", true));
+            confirm = new Confirm(
+              node,
+              0,
+              node.offsetHeight,
+              "确认删除吗？<br><br>"
+            );
+          } else if (["define", "cancel"].includes(action)) {
+            confirm.destroy();
+            confirm = null;
+            otherButtons.forEach((btn) => btn.removeAttribute("disabled"));
+            otherButtons.splice(0);
+            alert(action);
+          }
+        }
+      });
+
+      class Confirm {
+        div;
+        constructor(parent, x, y, html) {
+          const div = document.createElement("div");
+          div.className = "confirm";
+          div.innerHTML = html;
+
+          div.style.right = x + "px";
+          div.style.top = y + "px";
+
+          const control = document.createElement("div");
+          control.className = "confirm-control";
+          control.innerHTML = `<button data-action="define">确定</button><button data-action="cancel">取消</button>`;
+
+          div.append(control);
+          parent.append(div);
+
+          this.div = div;
+        }
+        destroy() {
+          this.div.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
