@@ -1,1 +1,1 @@
-<iframe src="https://liaojunjun.github.io/nice/root/javascript/sort_table_demo.html" width="100%" height="200"></iframe>
+<iframe data-src="https://liaojunjun.github.io/nice/root/javascript/sort_table_demo.html" width="100%" height="200"></iframe>

@@ -28,4 +28,4 @@ function exchangeCombination(arr) {
 }
 ```
 
-<iframe src="https://liaojunjun.github.io/nice/root/javascript/product_specification_combination_demo.html" width="100%" height="800"></iframe>
+<iframe data-src="https://liaojunjun.github.io/nice/root/javascript/product_specification_combination_demo.html" width="100%" height="800"></iframe>

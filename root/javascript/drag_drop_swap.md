@@ -1,1 +1,1 @@
-<iframe src="https://liaojunjun.github.io/nice/root/javascript/drag_drop_swap_demo.html" width="100%" height="500"></iframe>
+<iframe data-src="https://liaojunjun.github.io/nice/root/javascript/drag_drop_swap_demo.html" width="100%" height="500"></iframe>

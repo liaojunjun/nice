@@ -6,4 +6,4 @@ const mousemove = fromEvent(window, "mousemove");
 const mouseup = fromEvent(window, "mouseup");
 ```
 
-<iframe src="https://liaojunjun.github.io/nice/root/javascript/slide_unlock_demo.html" width="100%" height="620"></iframe>
+<iframe data-src="https://liaojunjun.github.io/nice/root/javascript/slide_unlock_demo.html" width="100%" height="620"></iframe>
