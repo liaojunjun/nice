@@ -101,6 +101,7 @@
 
 #### layout
 
-|           |                                                                         |
-| --------- | ----------------------------------------------------------------------- |
-| grid list | [d3 force map](https://liaojunjun.github.io/nice/root/layout/grid_list) |
+|              |                                                                         |
+| ------------ | ----------------------------------------------------------------------- |
+| css grid     | [d3 force map](https://liaojunjun.github.io/nice/root/layout/grid)      |
+| js grid list | [d3 force map](https://liaojunjun.github.io/nice/root/layout/grid_list) |
