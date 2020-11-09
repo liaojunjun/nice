@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid list</title>
+    <style>
+      body {
+        width: 500px;
+        margin: 2vh auto;
+        background-color: #ddd;
+      }
+
+      .mat-grid-list {
+        display: block;
+        position: relative;
+      }
+      .mat-grid-tile {
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        background-color: #ff9400;
+      }
+      .mat-grid-tile .mat-figure {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      代码主要来源：<a
+        href="https://material.angular.io/components/grid-list/overview"
+        >grid-list</a
+      >，脱离模块独立运行
+    </h3>
+    <div
+      id="demo_1"
+      class="mat-grid-list"
+      data-cols="4"
+      data-row-height="100px"
+    >
+      <div class="mat-grid-tile" data-colspan="3" data-rowspan="1">1</div>
+      <div class="mat-grid-tile" data-colspan="1" data-rowspan="2">2</div>
+      <div class="mat-grid-tile" data-colspan="1" data-rowspan="1">3</div>
+      <div class="mat-grid-tile" data-colspan="2" data-rowspan="1">4</div>
+    </div>
+    <br /><br />
+    <div
+      id="demo_2"
+      class="mat-grid-list"
+      data-cols="2"
+      data-row-height="2:1"
+      data-gutter-size="2%"
+    >
+      <div class="mat-grid-tile">1</div>
+      <div class="mat-grid-tile">2</div>
+      <div class="mat-grid-tile">3</div>
+      <div class="mat-grid-tile">4</div>
+    </div>
+  </body>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
+
+    class TileCoordinator {
+      tracker;
+
+      columnIndex = 0;
+
+      rowIndex = 0;
+
+      get rowCount() {
+        return this.rowIndex + 1;
+      }
+
+      get rowspan() {
+        const lastRowMax = Math.max(...this.tracker);
+
+        return lastRowMax > 1 ? this.rowCount + lastRowMax - 1 : this.rowCount;
+      }
+
+      positions;
+
+      update(numColumns, tiles) {
+        this.columnIndex = 0;
+        this.rowIndex = 0;
+
+        this.tracker = new Array(numColumns);
+        this.tracker.fill(0, 0, this.tracker.length);
+        this.positions = tiles.map((tile) => this._trackTile(tile));
+      }
+
+      _trackTile(tile) {
+        const gapStartIndex = this._findMatchingGap(tile.colspan);
+
+        this._markTilePosition(gapStartIndex, tile);
+
+        this.columnIndex = gapStartIndex + tile.colspan;
+
+        return new TilePosition(this.rowIndex, gapStartIndex);
+      }
+
+      _findMatchingGap(tileCols) {
+        if (tileCols > this.tracker.length) {
+          throw Error(
+            `mat-grid-list with colspan ${tileCols} is wider than ` +
+              `grid with cols="${this.tracker.length}".`
+          );
+        }
+
+        let gapStartIndex = -1;
+        let gapEndIndex = -1;
+
+        do {
+          if (this.columnIndex + tileCols > this.tracker.length) {
+            this._nextRow();
+            gapStartIndex = this.tracker.indexOf(0, this.columnIndex);
+            gapEndIndex = this._findGapEndIndex(gapStartIndex);
+            continue;
+          }
+
+          gapStartIndex = this.tracker.indexOf(0, this.columnIndex);
+
+          if (gapStartIndex == -1) {
+            this._nextRow();
+            gapStartIndex = this.tracker.indexOf(0, this.columnIndex);
+            gapEndIndex = this._findGapEndIndex(gapStartIndex);
+            continue;
+          }
+
+          gapEndIndex = this._findGapEndIndex(gapStartIndex);
+
+          this.columnIndex = gapStartIndex + 1;
+        } while (gapEndIndex - gapStartIndex < tileCols || gapEndIndex == 0);
+
+        return Math.max(gapStartIndex, 0);
+      }
+
+      _nextRow() {
+        this.columnIndex = 0;
+        this.rowIndex++;
+
+        for (let i = 0; i < this.tracker.length; i++) {
+          this.tracker[i] = Math.max(0, this.tracker[i] - 1);
+        }
+      }
+
+      _findGapEndIndex(gapStartIndex) {
+        for (let i = gapStartIndex + 1; i < this.tracker.length; i++) {
+          if (this.tracker[i] != 0) {
+            return i;
+          }
+        }
+
+        return this.tracker.length;
+      }
+
+      _markTilePosition(start, tile) {
+        for (let i = 0; i < tile.colspan; i++) {
+          this.tracker[start + i] = tile.rowspan;
+        }
+      }
+    }
+
+    class TilePosition {
+      constructor(row, col) {
+        this.row = row;
+        this.col = col;
+      }
+    }
+
+    const cssCalcAllowedValue = /^-?\d+((\.\d+)?[A-Za-z%$]?)+$/;
+
+    class TileStyler {
+      _gutterSize;
+      _rows = 0;
+      _rowspan = 0;
+      _cols;
+      _direction;
+
+      init(gutterSize, tracker, cols, direction) {
+        this._gutterSize = normalizeUnits(gutterSize);
+        this._rows = tracker.rowCount;
+        this._rowspan = tracker.rowspan;
+        this._cols = cols;
+        this._direction = direction;
+      }
+
+      getBaseTileSize(sizePercent, gutterFraction) {
+        return `(${sizePercent}% - (${this._gutterSize} * ${gutterFraction}))`;
+      }
+
+      getTilePosition(baseSize, offset) {
+        return offset === 0
+          ? "0"
+          : calc(`(${baseSize} + ${this._gutterSize}) * ${offset}`);
+      }
+
+      getTileSize(baseSize, span) {
+        return `(${baseSize} * ${span}) + (${span - 1} * ${this._gutterSize})`;
+      }
+
+      setStyle(tile, rowIndex, colIndex) {
+        let percentWidthPerTile = 100 / this._cols;
+
+        let gutterWidthFractionPerTile = (this._cols - 1) / this._cols;
+
+        this.setColStyles(
+          tile,
+          colIndex,
+          percentWidthPerTile,
+          gutterWidthFractionPerTile
+        );
+        this.setRowStyles(
+          tile,
+          rowIndex,
+          percentWidthPerTile,
+          gutterWidthFractionPerTile
+        );
+      }
+
+      setColStyles(tile, colIndex, percentWidth, gutterWidth) {
+        let baseTileWidth = this.getBaseTileSize(percentWidth, gutterWidth);
+
+        let side = this._direction === "rtl" ? "right" : "left";
+        tile._setStyle(side, this.getTilePosition(baseTileWidth, colIndex));
+        tile._setStyle(
+          "width",
+          calc(this.getTileSize(baseTileWidth, tile.colspan))
+        );
+      }
+
+      getGutterSpan() {
+        return `${this._gutterSize} * (${this._rowspan} - 1)`;
+      }
+
+      getTileSpan(tileHeight) {
+        return `${this._rowspan} * ${this.getTileSize(tileHeight, 1)}`;
+      }
+
+      getComputedHeight() {
+        return null;
+      }
+    }
+
+    class FixedTileStyler extends TileStyler {
+      fixedRowHeight;
+      constructor(fixedRowHeight) {
+        super();
+        this.fixedRowHeight = fixedRowHeight;
+      }
+
+      init(gutterSize, tracker, cols, direction) {
+        super.init(gutterSize, tracker, cols, direction);
+        this.fixedRowHeight = normalizeUnits(this.fixedRowHeight);
+
+        if (!cssCalcAllowedValue.test(this.fixedRowHeight)) {
+          throw Error(
+            `Invalid value "${this.fixedRowHeight}" set as rowHeight.`
+          );
+        }
+      }
+
+      setRowStyles(tile, rowIndex) {
+        tile._setStyle(
+          "top",
+          this.getTilePosition(this.fixedRowHeight, rowIndex)
+        );
+        tile._setStyle(
+          "height",
+          calc(this.getTileSize(this.fixedRowHeight, tile.rowspan))
+        );
+      }
+
+      getComputedHeight() {
+        return [
+          "height",
+          calc(
+            `${this.getTileSpan(this.fixedRowHeight)} + ${this.getGutterSpan()}`
+          ),
+        ];
+      }
+
+      reset(list) {
+        list._setListStyle(["height", null]);
+
+        if (list._tiles) {
+          list._tiles.forEach((tile) => {
+            tile._setStyle("top", null);
+            tile._setStyle("height", null);
+          });
+        }
+      }
+    }
+
+    class RatioTileStyler extends TileStyler {
+      rowHeightRatio;
+      baseTileHeight;
+
+      constructor(value) {
+        super();
+        this._parseRatio(value);
+      }
+
+      setRowStyles(tile, rowIndex, percentWidth, gutterWidth) {
+        let percentHeightPerTile = percentWidth / this.rowHeightRatio;
+        this.baseTileHeight = this.getBaseTileSize(
+          percentHeightPerTile,
+          gutterWidth
+        );
+
+        tile._setStyle(
+          "marginTop",
+          this.getTilePosition(this.baseTileHeight, rowIndex)
+        );
+        tile._setStyle(
+          "paddingTop",
+          calc(this.getTileSize(this.baseTileHeight, tile.rowspan))
+        );
+      }
+
+      getComputedHeight() {
+        return [
+          "paddingBottom",
+          calc(
+            `${this.getTileSpan(this.baseTileHeight)} + ${this.getGutterSpan()}`
+          ),
+        ];
+      }
+
+      reset(list) {
+        list._setListStyle(["paddingBottom", null]);
+
+        list._tiles.forEach((tile) => {
+          tile._setStyle("marginTop", null);
+          tile._setStyle("paddingTop", null);
+        });
+      }
+
+      _parseRatio(value) {
+        const ratioParts = value.split(":");
+
+        if (ratioParts.length !== 2) {
+          throw Error(
+            `mat-grid-list: invalid ratio given for row-height: "${value}"`
+          );
+        }
+
+        this.rowHeightRatio =
+          parseFloat(ratioParts[0]) / parseFloat(ratioParts[1]);
+      }
+    }
+
+    class FitTileStyler extends TileStyler {
+      setRowStyles(tile, rowIndex) {
+        let percentHeightPerTile = 100 / this._rowspan;
+
+        let gutterHeightPerTile = (this._rows - 1) / this._rows;
+
+        let baseTileHeight = this.getBaseTileSize(
+          percentHeightPerTile,
+          gutterHeightPerTile
+        );
+
+        tile._setStyle("top", this.getTilePosition(baseTileHeight, rowIndex));
+        tile._setStyle(
+          "height",
+          calc(this.getTileSize(baseTileHeight, tile.rowspan))
+        );
+      }
+
+      reset(list) {
+        if (list._tiles) {
+          list._tiles.forEach((tile) => {
+            tile._setStyle("top", null);
+            tile._setStyle("height", null);
+          });
+        }
+      }
+    }
+
+    class GridTile {
+      _rowspan = 1;
+      _colspan = 1;
+      _element;
+
+      constructor(_element) {
+        this._element = _element;
+        _element.innerHTML = `<figure class="mat-figure">${_element.innerHTML}</figure>`;
+        this.rowspan = _element.dataset.rowspan || this._rowspan;
+        this.colspan = _element.dataset.colspan || this._colspan;
+      }
+
+      get rowspan() {
+        return this._rowspan;
+      }
+      set rowspan(value) {
+        this._rowspan = Math.round(coerceNumberProperty(value));
+      }
+
+      get colspan() {
+        return this._colspan;
+      }
+      set colspan(value) {
+        this._colspan = Math.round(coerceNumberProperty(value));
+      }
+      _setStyle(property, value) {
+        this._element.style[property] = value;
+      }
+    }
+
+    const MAT_FIT_MODE = "fit";
+
+    class GridList {
+      _cols;
+      _tileCoordinator;
+      _rowHeight;
+      _gutter = "1px";
+      _tileStyler;
+      _tiles;
+      _element;
+
+      constructor(_element, _tiles) {
+        this._element = _element;
+        this._tiles = _tiles;
+
+        this.cols = _element.dataset.cols;
+        this.gutterSize = _element.dataset.gutterSize || this._gutter;
+        this.rowHeight = _element.dataset.rowHeight;
+
+        this._checkCols();
+        this._checkRowHeight();
+        this._layoutTiles();
+      }
+
+      get cols() {
+        return this._cols;
+      }
+      set cols(value) {
+        this._cols = Math.max(1, Math.round(coerceNumberProperty(value)));
+      }
+
+      get gutterSize() {
+        return this._gutter;
+      }
+      set gutterSize(value) {
+        this._gutter = `${value == null ? "" : value}`;
+      }
+
+      get rowHeight() {
+        return this._rowHeight;
+      }
+      set rowHeight(value) {
+        const newValue = `${value == null ? "" : value}`;
+
+        if (newValue !== this._rowHeight) {
+          this._rowHeight = newValue;
+          this._setTileStyler(this._rowHeight);
+        }
+      }
+      _checkCols() {
+        if (!this.cols) {
+          throw Error(
+            `mat-grid-list: must pass in number of columns. ` +
+              `Example: <mat-grid-list cols="3">`
+          );
+        }
+      }
+      _checkRowHeight() {
+        if (!this._rowHeight) {
+          this._setTileStyler("1:1");
+        }
+      }
+      _setTileStyler(rowHeight) {
+        if (this._tileStyler) {
+          this._tileStyler.reset(this);
+        }
+
+        if (rowHeight === MAT_FIT_MODE) {
+          this._tileStyler = new FitTileStyler();
+        } else if (rowHeight && rowHeight.indexOf(":") > -1) {
+          this._tileStyler = new RatioTileStyler(rowHeight);
+        } else {
+          this._tileStyler = new FixedTileStyler(rowHeight);
+        }
+      }
+
+      _layoutTiles() {
+        if (!this._tileCoordinator) {
+          this._tileCoordinator = new TileCoordinator();
+        }
+
+        const tracker = this._tileCoordinator;
+
+        const direction = this._dir ? this._dir.value : "ltr";
+
+        this._tileCoordinator.update(this.cols, this._tiles);
+        this._tileStyler.init(this.gutterSize, tracker, this.cols, direction);
+
+        this._tiles.forEach((tile, index) => {
+          const pos = tracker.positions[index];
+          this._tileStyler.setStyle(tile, pos.row, pos.col);
+        });
+
+        this._setListStyle(this._tileStyler.getComputedHeight());
+      }
+
+      _setListStyle(style) {
+        console.log(style);
+
+        if (style) {
+          this._element.style[style[0]] = style[1];
+        }
+      }
+    }
+
+    function calc(exp) {
+      return `calc(${exp})`;
+    }
+
+    function normalizeUnits(value) {
+      return value.match(/([A-Za-z%]+)$/) ? value : `${value}px`;
+    }
+
+    function coerceNumberProperty(value, fallbackValue = 0) {
+      return _isNumberValue(value) ? Number(value) : fallbackValue;
+    }
+
+    function _isNumberValue(value) {
+      return !isNaN(parseFloat(value)) && !isNaN(Number(value));
+    }
+
+    new GridList(
+      $("#demo_1.mat-grid-list"),
+      Array.from($$("#demo_1 .mat-grid-tile")).map((ele) => new GridTile(ele))
+    );
+    new GridList(
+      $("#demo_2.mat-grid-list"),
+      Array.from($$("#demo_2 .mat-grid-tile")).map((ele) => new GridTile(ele))
+    );
+  </script>
+</html>

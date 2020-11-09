@@ -9,3 +9,4 @@ css flex_layout.md flex_layout_demo.html loading.md loading_demo.html background
 rxjs user_offline.md user_offline_demo.html send_phone_code.md send_phone_code_demo.html keyword_search.md keyword_search_demo.html broadcast.md broadcast_demo.html
 d3 d3_force.md d3_force_demo.html draw_html_tree.md draw_html_tree_demo.html
 node path.md
+layout grid_list.md grid_list_demo.html
