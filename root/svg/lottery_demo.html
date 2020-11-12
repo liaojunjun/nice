@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>转盘抽奖</title>
+    <style>
+      main {
+        display: flex;
+      }
+      svg {
+        margin: 10px;
+        border: 1px dotted #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/Template" id="tpl">
+      <main>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          :viewBox="conf.viewBox"
+          :height="size"
+          :width="size"
+        >
+          <g fill="none" :stroke-width="r*2" :transform="'rotate('+ deg +')'" >
+            <path v-for="item of ringData" :d="item.d" :stroke="item.color"></path>
+          </g>
+          <image @click="run" href="https://liaojunjun.github.io/nice/assets/turnplate-pointer.png" height="179" width="133" x="-64" y="-115"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" :viewBox="conf.viewBox2" :height="size" :width="size">
+          <g fill="none" stroke="#000" stroke-width="2">
+            <path :d="point"></path>
+          </g>
+        </svg>
+      </main>
+    </script>
+    <script>
+      function pairwise(arr) {
+        const newArr = [];
+        for (let i = 0; i < arr.length - 1; i++) {
+          newArr.push([arr[i], arr[i + 1]]);
+        }
+        return newArr;
+      }
+      function scan(arr) {
+        const newArr = [];
+        let value = 0;
+        for (let i = 0; i < arr.length; i++) {
+          const cur = value + arr[i];
+          newArr.push(cur);
+          value = cur;
+        }
+        return newArr;
+      }
+      function easeOutCubic(x) {
+        return 1 - Math.pow(1 - x, 3);
+      }
+      function animate({ timing, duration, draw, done, start }) {
+        start();
+        let now = performance.now();
+
+        requestAnimationFrame(function animate(time) {
+          // timeFraction 从 0 增加到 1
+          let timeFraction = (time - now) / duration;
+          if (timeFraction > 1) timeFraction = 1;
+
+          // 计算当前动画状态
+          let progress = timing(timeFraction);
+
+          draw(progress, timeFraction); // 绘制
+
+          if (timeFraction < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            done();
+          }
+        });
+      }
+
+      new Vue({
+        el: "#app",
+        template: "#tpl",
+        methods: {
+          render() {
+            this.conf.viewBox = `${-this.size / 2},${-this.size / 2},${
+              this.size
+            },${this.size}`;
+            this.conf.viewBox2 = `0,${-this.size},${this.size},${this.size}`;
+
+            const all = this.data.reduce((acc, item) => (acc += item.value), 0);
+            const newData = this.data.map((item) => {
+              const rote = item.value / all;
+              const deg = rote * 360; // 角度值
+              const laf = deg > 180 ? 1 : 0;
+              const rad = deg * (Math.PI / 180); // 幅度值
+              return { rad, laf };
+            });
+            const r = this.r;
+
+            const fx = (rad) => Number((Math.sin(rad) * r).toFixed(3));
+            const fy = (rad) => -Number((Math.cos(rad) * r).toFixed(3));
+
+            const radList = scan(newData.map((item) => item.rad));
+
+            newData.forEach((item, idx) => {
+              item.x = fx(radList[idx]);
+              item.y = fy(radList[idx]);
+            });
+
+            newData.unshift({ x: 0, y: -r, laf: 0 });
+            this.ringData = pairwise(newData).map(([prev, cur], index) => {
+              const { laf } = newData[index];
+              const path = `M${prev.x},${prev.y}A${r},${r},0,${laf},1,${cur.x},${cur.y}`;
+              return { d: path, color: this.data[index].color };
+            });
+          },
+          run() {
+            if (this.point) return;
+            const ring = 30 + Math.random();
+            animate({
+              duration: 20000,
+              timing: easeOutCubic,
+              start: () => {
+                this.point = "M0,0 ";
+              },
+              draw: (v, t) => {
+                this.deg = v * (360 * ring);
+                this.point += `${t * this.size},${-(v * this.size)} `;
+              },
+              done: () => {
+                this.point = undefined;
+              },
+            });
+          },
+        },
+        created: function () {
+          this.render();
+        },
+        data: {
+          conf: {
+            viewBox: undefined,
+            viewBox2: undefined,
+          },
+          size: 300,
+          r: 75,
+          deg: 0,
+          data: [
+            { value: 10, color: "red" },
+            { value: 40, color: "green" },
+            { value: 20, color: "#444" },
+            { value: 30, color: "#888" },
+          ],
+          point: undefined,
+          ringData: [],
+        },
+      });
+    </script>
+  </body>
+</html>
