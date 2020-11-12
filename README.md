@@ -26,10 +26,11 @@
 
 #### effect
 
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| 轮换效果    | [Rotation effect](https://liaojunjun.github.io/nice/root/effect/rotation_effect)       |
-| 3d 旋转效果 | [3d rotation effect](https://liaojunjun.github.io/nice/root/effect/3d_rotation_effect) |
+|              |                                                                                        |
+| ------------ | -------------------------------------------------------------------------------------- |
+| 轮换效果     | [Rotation effect](https://liaojunjun.github.io/nice/root/effect/rotation_effect)       |
+| 3d 旋转效果  | [3d rotation effect](https://liaojunjun.github.io/nice/root/effect/3d_rotation_effect) |
+| js 动画-抛球 | [3d rotation effect](https://liaojunjun.github.io/nice/root/effect/ball)               |
 
 #### canvas
 
@@ -48,6 +49,7 @@
 | svg 画雷达图 | [svg draw radar chart](https://liaojunjun.github.io/nice/root/svg/svg_radar_chart)   |
 | svg 画环形图 | [svg draw ring graph](https://liaojunjun.github.io/nice/root/svg/svg_ring_graph)     |
 | svg 画多边形 | [svg draw polygon](https://liaojunjun.github.io/nice/root/svg/svg_polygon)           |
+| 转盘抽奖     | [svg draw polygon](https://liaojunjun.github.io/nice/root/svg/lottery)               |
 
 #### echarts
 
