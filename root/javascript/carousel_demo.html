@@ -5,55 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>carousel 轮播</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 10px;
       }
-      .warp li:nth-child(1),
-      .warp li:nth-child(6) {
+      li:nth-child(1),
+      li:nth-child(6) {
         background-color: cadetblue;
       }
-      .warp li:nth-child(2),
-      .warp li:nth-child(7) {
+      li:nth-child(2),
+      li:nth-child(7) {
         background-color: chartreuse;
       }
-      .warp li:nth-child(3),
-      .warp li:nth-child(8) {
+      li:nth-child(3),
+      li:nth-child(8) {
         background-color: chocolate;
       }
-      .warp li:nth-child(4),
-      .warp li:nth-child(9) {
+      li:nth-child(4),
+      li:nth-child(9) {
         background-color: coral;
       }
-      .warp li:nth-child(5),
-      .warp li:nth-child(10) {
+      li:nth-child(5),
+      li:nth-child(10) {
         background-color: cornflowerblue;
       }
+      .warp {
+        height: 300px;
+        width: 100%;
+        overflow: hidden;
+        border: 10px solid gray;
+      }
       ul {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        height: 100%;
         margin: 0;
         padding: 0;
         list-style: none;
-      }
-
-      ul {
-        width: 5000px;
-        height: inherit;
       }
       ul.animate {
         transition: transform 1s;
       }
       li {
-        z-index: 10;
-        height: inherit;
-        width: 500px;
+        flex: 0 0 100%;
         font-size: 20px;
-        float: left;
         overflow: hidden;
-      }
-      .warp {
-        height: 300px;
-        width: 500px;
-        overflow: hidden;
-        border: 10px solid gray;
+        touch-action: none;
       }
     </style>
   </head>
@@ -80,12 +80,22 @@
     const allCard = ul.querySelectorAll("li");
     const length = allCard.length;
     const pageMax = length - 1;
-    const width = allCard[0].offsetWidth;
 
-    const list = Array.from({ length }, (_, i) => i * width);
-
+    let width = 0;
+    let list = [];
     let page = 0;
-    let forward = true;
+
+    function setup() {
+      width = allCard[0].offsetWidth;
+      list.splice(0, length, ...Array.from({ length }, (_, i) => i * width));
+      page = 0;
+      run(page);
+    }
+    setup();
+
+    window.addEventListener("resize", () => {
+      setup();
+    });
 
     function run(page) {
       ul.style.webkitTransform = `translateX(-${list[page]}px)`;
@@ -99,18 +109,23 @@
       run(++page);
       if (page > pageMax) page = pageMax;
     }
+    let start;
 
-    setInterval(() => {
-      if (forward) {
-        next();
-      } else {
-        prev();
+    ul.addEventListener("pointerdown", (event) => {
+      ul.setPointerCapture(event.pointerId);
+      start = event.clientX;
+      event.preventDefault();
+    });
+    ul.addEventListener("pointermove", (event) => {
+      if (start) {
+        if (start - event.clientX > 100) {
+          next();
+          start = null;
+        } else if (event.clientX - start > 100) {
+          prev();
+          start = null;
+        }
       }
-      if (page === pageMax) {
-        forward = false;
-      } else if (page === 0) {
-        forward = true;
-      }
-    }, 2000);
+    });
   </script>
 </html>
