@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用proxy广播状态</title>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+  <script>
+    function Observable(target) {
+      const handlers = [];
+
+      target.subscribe = function (handler) {
+        handlers.push(handler);
+      };
+      return new Proxy(target, {
+        set(_, prop, value) {
+          const success = Reflect.set(target, prop, value);
+          if (success) {
+            handlers.forEach((handler) => handler(prop, value));
+          }
+          return success;
+        },
+      });
+    }
+
+    let user = {};
+
+    const content = document.getElementById("content");
+
+    user = Observable(user);
+
+    user.subscribe((k, v) => {
+      content.textContent = k + ":" + v;
+    });
+
+    user.name = "scj";
+
+    setInterval(function () {
+      user.age = Math.round(Math.random() * 100);
+    }, 2000);
+  </script>
+</html>

@@ -67,3 +67,7 @@ fromEvent(window, "beforeunload").subscribe(() => {
 ```
 
 <iframe data-src="https://liaojunjun.github.io/nice/root/rxjs/broadcast_demo.html" width="100%" height="50"></iframe>
+
+1. proxy 监听对象的更改，并回调
+
+<iframe data-src="https://liaojunjun.github.io/nice/root/rxjs/broadcast_demo_2.html" width="100%" height="50"></iframe>
